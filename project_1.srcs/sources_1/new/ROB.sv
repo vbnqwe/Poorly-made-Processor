@@ -41,9 +41,6 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg started; //Initial condition stuff (shouldnt be necessary??)
     
     //Flags for when things complete
-    reg registers_allocated;
-    reg oldest_complete;
-    reg work_complete = registers_allocated & oldest_complete;
     wire ready_to_commit [8];
     reg [3:0] allocation_failure; //for i = 1 to 4, if ith bit is 0, that means that newest + i register is in use
 
@@ -61,19 +58,26 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     initial begin
         newest = 7'b0;
         oldest = 7'h7f;
+        for(int i = 0; i < SIZE; i++) begin
+            valid_entry[i] = 0;
+            completed_entry[i] = 0;
+        end
     end
     
     
     always @(posedge clk) begin
-        registers_allocated = 0;
-        oldest_complete = 0;
         oldest_prev = oldest;
         newest_prev = newest;
     end
     
     assign no_available = |allocation_failure;
+    assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
     
     
+    
+    /*
+    Generate logic used for physical register allocation
+    */
     genvar c;
     generate
         for(c = 0; c < 4; c = c + 1) begin
@@ -81,7 +85,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 if(x > c) begin
                     if((newest_prev + 1 + c) >= SIZE) begin
                         //check if entry is valid at (newest + 1) % SIZE
-                        if(valid_entry[(newest + 1 + c) % SIZE] == 0) begin
+                        if(valid_entry[(newest_prev + 1 + c) % SIZE] == 0) begin
                             //assign at (newest + 1) % SIZE 
                             valid_entry[(newest_prev + 1 + c) % SIZE] = 1;
                             completed_entry[(newest_prev + 1 + c) % SIZE] = 0;
@@ -95,7 +99,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     end 
                     else begin
                         //check if entry is valid at newest + 1
-                        if(valid_entry[newest + 1 + c] == 0) begin
+                        if(valid_entry[newest_prev + 1 + c] == 0) begin
                             //assign at newest + 1
                             valid_entry[newest_prev + 1 + c] = 1;
                             completed_entry[newest_prev + 1 + c] = 0;
@@ -108,8 +112,9 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                         end
                     end
                 end
-                else 
+                else begin
                     allocation_failure[c] = 0; //can't use resources you don't need
+                end
             end
         end
     endgenerate

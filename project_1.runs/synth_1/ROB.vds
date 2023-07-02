@@ -2,8 +2,8 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Sat Jul  1 19:06:55 2023
-# Process ID: 5020
+# Start of session at: Sun Jul  2 03:40:06 2023
+# Process ID: 16168
 # Current directory: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1
 # Command line: vivado.exe -log ROB.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ROB.tcl
 # Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ROB.vds
@@ -11,24 +11,44 @@
 # Running On: LAPTOP-6SVIBHS9, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 4, Host memory: 16952 MB
 #-----------------------------------------------------------
 source ROB.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/utils_1/imports/synth_1/ROB.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/utils_1/imports/synth_1/ROB.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
 Command: synth_design -top ROB -part xc7k70tfbv676-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 2556
-WARNING: [Synth 8-6901] identifier 'count' is used before its declaration [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv:30]
+INFO: [Synth 8-7075] Helper process launched with PID 3204
+WARNING: [Synth 8-6901] identifier 'd' is used before its declaration [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv:28]
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1294.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'ROB' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:22]
 INFO: [Synth 8-6155] done synthesizing module 'ROB' (0#1) [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:22]
-WARNING: [Synth 8-6014] Unused sequential element registers_allocated_reg was removed.  [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:46]
-WARNING: [Synth 8-6014] Unused sequential element oldest_complete_reg was removed.  [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:46]
-WARNING: [Synth 8-6014] Unused sequential element valid_entry_reg was removed. 
-WARNING: [Synth 8-6014] Unused sequential element completed_entry_reg was removed. 
-WARNING: [Synth 8-6014] Unused sequential element dest_reg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[0].completed_entry_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[0].dest_reg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[1].completed_entry_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[1].dest_reg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[2].completed_entry_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[2].dest_reg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[3].completed_entry_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element genblk1[3].dest_reg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element oldest_prev_reg was removed.  [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:69]
+WARNING: [Synth 8-4767] Trying to implement RAM ' ' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM dissolved into registers
+WARNING: [Synth 8-4767] Trying to implement RAM 'genblk1[1].valid_entry_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM "genblk1[1].valid_entry_reg" dissolved into registers
 WARNING: [Synth 8-3848] Net r1_out[0] in module/entity ROB does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:31]
 WARNING: [Synth 8-3848] Net r1_out[1] in module/entity ROB does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:31]
 WARNING: [Synth 8-3848] Net r1_out[2] in module/entity ROB does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:31]
@@ -139,21 +159,21 @@ WARNING: [Synth 8-7129] Port r1_out[3][29] in module ROB is either unconnected o
 WARNING: [Synth 8-7129] Port r1_out[3][28] in module ROB is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1294.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1294.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7k70tfbv676-1
----------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7k70tfbv676-1
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1294.438 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1294.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:14 . Memory (MB): peak = 1294.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
@@ -161,12 +181,17 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
+	   2 Input    9 Bit       Adders := 3     
 	   2 Input    8 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 1     
 +---Registers : 
-	                7 Bit    Registers := 2     
-	                1 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                1 Bit    Registers := 132   
 +---Muxes : 
-	   2 Input    1 Bit        Muxes := 1     
+	   2 Input  128 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 3     
+	   2 Input    7 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 95    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -185,20 +210,20 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:39 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Timing Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:39 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Technology Mapping : Time (s): cpu = 00:00:39 ; elapsed = 00:00:39 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -216,37 +241,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished IO Insertion : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -259,38 +284,49 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+------+------+
-|      |Cell  |Count |
-+------+------+------+
-|1     |OBUF  |     1|
-|2     |OBUFT |   256|
-+------+------+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     1|
+|3     |LUT2   |     8|
+|4     |LUT3   |    11|
+|5     |LUT4   |    30|
+|6     |LUT5   |   161|
+|7     |LUT6   |   280|
+|8     |FDRE   |   139|
+|9     |IBUF   |     4|
+|10    |OBUF   |     1|
+|11    |OBUFT  |   256|
++------+-------+------+
 
 Report Instance Areas: 
 +------+---------+-------+------+
 |      |Instance |Module |Cells |
 +------+---------+-------+------+
-|1     |top      |       |   257|
+|1     |top      |       |   892|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 703 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
-Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Synthesis finished with 0 errors, 0 critical warnings and 709 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
+Synthesis Optimization Complete : Time (s): cpu = 00:00:45 ; elapsed = 00:00:45 . Memory (MB): peak = 1322.574 ; gain = 28.496
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1322.574 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1294.438 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1322.574 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete, checksum: 2f490b3f
+Synth Design complete, checksum: 7f0ec5a4
 INFO: [Common 17-83] Releasing license: Synthesis
-13 Infos, 115 Warnings, 0 Critical Warnings and 0 Errors encountered.
+19 Infos, 121 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:42 . Memory (MB): peak = 1294.438 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:49 ; elapsed = 00:00:48 . Memory (MB): peak = 1322.574 ; gain = 28.496
 INFO: [Common 17-1381] The checkpoint 'C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ROB.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file ROB_utilization_synth.rpt -pb ROB_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Jul  1 19:07:43 2023...
+INFO: [Common 17-206] Exiting Vivado at Sun Jul  2 03:41:01 2023...

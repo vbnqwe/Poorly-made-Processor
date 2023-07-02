@@ -21,20 +21,24 @@
 
 
 module delay_test(
-        input clk,
-        input a,
-        input b,
-        output c
+        input clk
+        , output [2:0] out
     );
     
-    reg d;
+    assign out = d;
     
+    reg [2:0] d;
+    reg [2:0] d_prev;
   
     
     always @(posedge clk) begin
-        d = a & b;
+        d_prev = d;
     end
     
-    assign c = d;
+    wire con = |d;
+    wire [2:0] d1 = d_prev + 1;
+    wire [2:0] d2 = d_prev;
+    
+    assign d = con ? d1 : d2;
     
 endmodule

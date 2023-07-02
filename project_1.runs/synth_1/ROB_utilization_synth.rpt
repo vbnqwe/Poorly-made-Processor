@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.1 (win64) Build 3526262 Mon Apr 18 15:48:16 MDT 2022
-| Date         : Sat Jul  1 19:07:43 2023
+| Date         : Sun Jul  2 03:41:01 2023
 | Host         : LAPTOP-6SVIBHS9 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file ROB_utilization_synth.rpt -pb ROB_utilization_synth.pb
 | Design       : ROB
@@ -31,11 +31,11 @@ Table of Contents
 +-------------------------+------+-------+------------+-----------+-------+
 |        Site Type        | Used | Fixed | Prohibited | Available | Util% |
 +-------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*             |    0 |     0 |          0 |     41000 |  0.00 |
-|   LUT as Logic          |    0 |     0 |          0 |     41000 |  0.00 |
+| Slice LUTs*             |  456 |     0 |          0 |     41000 |  1.11 |
+|   LUT as Logic          |  456 |     0 |          0 |     41000 |  1.11 |
 |   LUT as Memory         |    0 |     0 |          0 |     13400 |  0.00 |
-| Slice Registers         |    0 |     0 |          0 |     82000 |  0.00 |
-|   Register as Flip Flop |    0 |     0 |          0 |     82000 |  0.00 |
+| Slice Registers         |  139 |     0 |          0 |     82000 |  0.17 |
+|   Register as Flip Flop |  139 |     0 |          0 |     82000 |  0.17 |
 |   Register as Latch     |    0 |     0 |          0 |     82000 |  0.00 |
 | F7 Muxes                |    0 |     0 |          0 |     20500 |  0.00 |
 | F8 Muxes                |    0 |     0 |          0 |     10250 |  0.00 |
@@ -58,7 +58,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 0     |          Yes |       Reset |            - |
+| 139   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -91,7 +91,7 @@ Table of Contents
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |  257 |     0 |          0 |       300 | 85.67 |
+| Bonded IOB                  |  261 |     0 |          0 |       300 | 87.00 |
 | Bonded IPADs                |    0 |     0 |          0 |        26 |  0.00 |
 | Bonded OPADs                |    0 |     0 |          0 |        16 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         6 |  0.00 |
@@ -118,7 +118,7 @@ Table of Contents
 +------------+------+-------+------------+-----------+-------+
 |  Site Type | Used | Fixed | Prohibited | Available | Util% |
 +------------+------+-------+------------+-----------+-------+
-| BUFGCTRL   |    0 |     0 |          0 |        32 |  0.00 |
+| BUFGCTRL   |    1 |     0 |          0 |        32 |  3.13 |
 | BUFIO      |    0 |     0 |          0 |        24 |  0.00 |
 | MMCME2_ADV |    0 |     0 |          0 |         6 |  0.00 |
 | PLLE2_ADV  |    0 |     0 |          0 |         6 |  0.00 |
@@ -152,8 +152,17 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
+| LUT6     |  280 |                 LUT |
 | OBUFT    |  256 |                  IO |
+| LUT5     |  161 |                 LUT |
+| FDRE     |  139 |        Flop & Latch |
+| LUT4     |   30 |                 LUT |
+| LUT3     |   11 |                 LUT |
+| LUT2     |    8 |                 LUT |
+| IBUF     |    4 |                  IO |
 | OBUF     |    1 |                  IO |
+| CARRY4   |    1 |          CarryLogic |
+| BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 
 

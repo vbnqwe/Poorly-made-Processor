@@ -21,12 +21,13 @@ module ROB_tb(
     
     bit expected;
     bit success;
-    bit [7:0] newest;
+    bit [7:0] newest, newest_prev;
     bit [7:0] oldest;
     bit [7:0] x;
     
     assign x = DUT.x;
-    assign newest = DUT.newest_prev;
+    assign newest_prev = DUT.newest_prev;
+    assign newest = DUT.newest;
     assign oldest = DUT.oldest_prev;
     
     initial begin
