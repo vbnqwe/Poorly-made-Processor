@@ -12,6 +12,7 @@ Inputs:
 Outputs:
     -r1_out/r2_out: data stored in physical register, will be 0 if rX_valid is low
     -no_available: flag that is thrown high if all physical registers are currently busy
+
     
 Behavior: 
     -On posedge clk, if physical register is avaiable, assign new instructions destination logical register
@@ -44,6 +45,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg registers_allocated;
     reg oldest_complete;
     reg work_complete = registers_allocated & oldest_complete;
+    wire ready_to_commit [8];
 
     //integer
     reg [N_phys_regs-1:0] x;
@@ -54,6 +56,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg completed_entry [SIZE]; //Is entry completed
     reg [31:0] data [SIZE]; //data for register
     reg [4:0] dest_reg [SIZE];
+    
     
     initial begin
         newest = 7'b0;
@@ -163,33 +166,47 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
             else begin
                 //write to registers
                 no_available = 0;
+                if(x > 0) begin
+                    //assign at newest + 1
+                    valid_entry[newest_prev + 1] = 1;
+                    completed_entry[newest_prev + 1] = 0;
+                    dest_reg[newest_prev + 1] = dest[0];
+                end
+                if(x > 1) begin
+                    //assign at newest + 2
+                    valid_entry[newest_prev + 2] = 1;
+                    completed_entry[newest_prev + 2] = 0;
+                    dest_reg[newest_prev + 2] = dest[1];
+                end
+                if(x > 2) begin
+                    //assign at newest + 3
+                    valid_entry[newest_prev + 3] = 1;
+                    completed_entry[newest_prev + 3] = 0;
+                    dest_reg[newest_prev + 3] = dest[2];
+                end
+                if(x > 3) begin
+                    //assign at newest + 4
+                    valid_entry[newest_prev + 4] = 1;
+                    completed_entry[newest_prev + 4] = 0;
+                    dest_reg[newest_prev + 4] = dest[3];
+                end
+            end
+            
+            
+            
+            //Handle removing registers ready to be stored
+            if(valid_entry[oldest_prev] & completed_entry[oldest_prev]) begin
                 
-                //assign at newest + 1
-                valid_entry[newest_prev + 1] = 1;
-                completed_entry[newest_prev + 1] = 0;
-                dest_reg[newest_prev + 1] = dest[0];
-                
-                //assign at newest + 2
-                valid_entry[newest_prev + 2] = 1;
-                completed_entry[newest_prev + 2] = 0;
-                dest_reg[newest_prev + 2] = dest[1];
-                
-                //assign at newest + 3
-                valid_entry[newest_prev + 3] = 1;
-                completed_entry[newest_prev + 3] = 0;
-                dest_reg[newest_prev + 3] = dest[2];
-                
-                //assign at newest + 4
-                valid_entry[newest_prev + 4] = 1;
-                completed_entry[newest_prev + 4] = 0;
-                dest_reg[newest_prev + 4] = dest[3];
             end
         end
-        
-        
-        //check if last 8 oldest instructions are ready IN ORDER
-        //this means that the oldest instruction must be removed first, but if the 8
-        //oldest are all ready, then write all 8. This can be expanded to more if 
-        //necessary  
     end
+    
+    //ready to commit signal will be used to choose what values are outputted to be written in RD
+    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
+    genvar c;
+    generate
+        for(c = 1; c < 8; c = c + 1) begin
+            
+        end
+    endgenerate
 endmodule

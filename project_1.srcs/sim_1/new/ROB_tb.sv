@@ -21,12 +21,12 @@ module ROB_tb(
     bit [7:0] x;
     
     assign x = DUT.x;
-    assign newest = DUT.newest;
-    assign oldest = DUT.oldest_saved;
+    assign newest = DUT.newest_prev;
+    assign oldest = DUT.oldest_prev;
     
     initial begin
         DUT.newest = 0;
-        DUT.oldest_saved = 10;
+        DUT.oldest = 10;
         num_writes = 4;
         expected = 0;
         if(expected == no_available)
@@ -37,7 +37,7 @@ module ROB_tb(
         #20;
         
         DUT.newest = 0;
-        DUT.oldest_saved = 2;
+        DUT.oldest = 2;
         num_writes = 4;
         expected = 1;
         if(expected == no_available)
@@ -49,7 +49,7 @@ module ROB_tb(
         
         DUT.newest = 126;
         num_writes = 4;
-        DUT.oldest_saved = 10;
+        DUT.oldest = 10;
         expected = 0;
         if(expected == no_available)
             $display("Success 3");
@@ -59,7 +59,7 @@ module ROB_tb(
         #20;
         
         DUT.newest = 126;
-        DUT.oldest_saved = 127;
+        DUT.oldest = 127;
         num_writes = 2;
         expected = 1;
         if(expected == no_available)
@@ -70,7 +70,7 @@ module ROB_tb(
         #20;
         
         DUT.newest = 126;
-        DUT.oldest_saved = 0;
+        DUT.oldest = 0;
         num_writes = 4;
         expected = 1;
         if(expected == no_available)
