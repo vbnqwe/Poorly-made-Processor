@@ -1,0 +1,7 @@
+Time resolution is 1 ps
+Failure 1
+Failure 2
+Failure 3
+Failure 4
+Success 5
+$stop called at time : 100 ns : File "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv" Line 82

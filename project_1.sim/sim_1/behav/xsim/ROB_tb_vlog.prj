@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../project_1.srcs/sources_1/new/rename_top.sv" \
+"../../../../project_1.srcs/sources_1/new/ROB.sv" \
+"../../../../project_1.srcs/sources_1/new/delay_test.sv" \
+"../../../../project_1.srcs/sim_1/new/del_Test.sv" \
+"../../../../project_1.srcs/sim_1/new/ROB_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
