@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1688263612">
   <File Type="PA-TCL" Name="ROB.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="ROB_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ROB_reports.tcl"/>
   <File Type="RDS-RDS" Name="ROB.vds"/>
   <File Type="RDS-UTIL" Name="ROB_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="ROB_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="ROB.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="ROB_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="ROB_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">

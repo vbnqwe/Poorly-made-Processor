@@ -10,6 +10,11 @@ module ROB_tb(
         
     );
     
+    reg no_available_hold;
+    
+    always @(posedge clk)
+        no_available_hold = no_available;
+    
     bit clk;
     wire no_available;
     bit [2:0] num_writes;
@@ -25,59 +30,56 @@ module ROB_tb(
     assign oldest = DUT.oldest_prev;
     
     initial begin
+        #20;
+    
         DUT.newest = 0;
+        DUT.valid_entry[1] = 0;
+        DUT.valid_entry[2] = 0;
+        DUT.valid_entry[3] = 0;
+        DUT.valid_entry[4] = 0;
         DUT.oldest = 10;
         num_writes = 4;
         expected = 0;
-        if(expected == no_available)
-            $display("Success 1");
-        else
-            $display("Failure 1");
-        
         #20;
         
         DUT.newest = 0;
         DUT.oldest = 2;
         num_writes = 4;
+        DUT.valid_entry[1] = 0;
+        DUT.valid_entry[2] = 1;
+        DUT.valid_entry[3] = 1;
+        DUT.valid_entry[4] = 1;
         expected = 1;
-        if(expected == no_available)
-            $display("Success 2");
-        else
-            $display("Failure 2");
-        
         #20;
         
         DUT.newest = 126;
         num_writes = 4;
         DUT.oldest = 10;
+        DUT.valid_entry[127] = 0;
+        DUT.valid_entry[0] = 0;
+        DUT.valid_entry[1] = 0;
+        DUT.valid_entry[2] = 0;
         expected = 0;
-        if(expected == no_available)
-            $display("Success 3");
-        else
-            $display("Failure 3");
-        
         #20;
         
         DUT.newest = 126;
         DUT.oldest = 127;
         num_writes = 2;
+        DUT.valid_entry[127] = 1;
+        DUT.valid_entry[0] = 1;
+        DUT.valid_entry[1] = 1;
+        DUT.valid_entry[2] = 1;
         expected = 1;
-        if(expected == no_available)
-            $display("Success 4");
-        else
-            $display("Failure 4");
-        
         #20;
         
         DUT.newest = 126;
         DUT.oldest = 0;
         num_writes = 4;
-        expected = 1;
-        if(expected == no_available)
-            $display("Success 5");
-        else
-            $display("Failure 5");
-            
+        DUT.valid_entry[127] = 0;
+        DUT.valid_entry[0] = 1;
+        DUT.valid_entry[1] = 1;
+        DUT.valid_entry[2] = 1;
+        expected = 1;            
         #20;
         $stop;
         

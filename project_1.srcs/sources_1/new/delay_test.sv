@@ -22,23 +22,19 @@
 
 module delay_test(
         input clk,
-        output [5:0] out_test
+        input a,
+        input b,
+        output c
     );
     
-    reg start;
-    initial begin
-        count = 0;
-    end
+    reg d;
     
-    reg [5:0] count;
+  
+    
     always @(posedge clk) begin
-        #10 start = 1;
+        d = a & b;
     end
     
-    always @(posedge start) begin
-        count = count + 1;
-        start = 0;
-    end
+    assign c = d;
     
-    assign out_test = count;
 endmodule

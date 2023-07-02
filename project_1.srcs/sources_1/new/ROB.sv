@@ -31,7 +31,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         input r2_valid [N_instr],
         output [31:0] r1_out [N_instr], 
         output [31:0] r2_out [N_instr],
-        output reg no_available
+        output no_available
     );   
     
     //tags
@@ -46,6 +46,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg oldest_complete;
     reg work_complete = registers_allocated & oldest_complete;
     wire ready_to_commit [8];
+    reg [3:0] allocation_failure; //for i = 1 to 4, if ith bit is 0, that means that newest + i register is in use
 
     //integer
     reg [N_phys_regs-1:0] x;
@@ -71,8 +72,147 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         newest_prev = newest;
     end
     
-    always @(posedge clk) begin
+    assign no_available = |allocation_failure;
+    
+    
+    genvar c;
+    generate
+        for(c = 0; c < 4; c = c + 1) begin
+            always @(posedge clk) begin
+                if(x > c) begin
+                    if((newest_prev + 1 + c) >= SIZE) begin
+                        //check if entry is valid at (newest + 1) % SIZE
+                        if(valid_entry[(newest + 1 + c) % SIZE] == 0) begin
+                            //assign at (newest + 1) % SIZE 
+                            valid_entry[(newest_prev + 1 + c) % SIZE] = 1;
+                            completed_entry[(newest_prev + 1 + c) % SIZE] = 0;
+                            dest_reg[(newest_prev + 1 + c) % SIZE] = dest[0];
+                            allocation_failure[c] = 0;
+                        end
+                        //(newest + 1) % SIZE is unavailable
+                        else begin
+                            allocation_failure[c] = 1;
+                        end
+                    end 
+                    else begin
+                        //check if entry is valid at newest + 1
+                        if(valid_entry[newest + 1 + c] == 0) begin
+                            //assign at newest + 1
+                            valid_entry[newest_prev + 1 + c] = 1;
+                            completed_entry[newest_prev + 1 + c] = 0;
+                            dest_reg[newest_prev + 1 + c] = dest[0];
+                            allocation_failure[c] = 0;
+                        end
+                        //newest + 1 is unavailable
+                        else begin
+                            allocation_failure[c] = 1;
+                        end
+                    end
+                end
+                else 
+                    allocation_failure[c] = 0; //can't use resources you don't need
+            end
+        end
+    endgenerate
+    
+    
+    /*always @(posedge clk) begin
+    
+        if(x > 0) begin
+            if((newest_prev + 1) >= SIZE) begin
+                //check if entry is valid at (newest + 1) % SIZE
+                if(valid_entry[(newest + 1) % SIZE] == 0) begin
+                    //assign at (newest + 1) % SIZE 
+                    valid_entry[(newest_prev + 1) % SIZE] = 1;
+                    completed_entry[(newest_prev + 1) % SIZE] = 0;
+                    dest_reg[(newest_prev + 1) % SIZE] = dest[0];
+                    allocation_failure[0] = 0;
+                end
+                //(newest + 1) % SIZE is unavailable
+                else begin
+                    allocation_failure[0] = 1;
+                end
+            end 
+            else begin
+                //check if entry is valid at newest + 1
+                if(valid_entry[newest + 1] == 0) begin
+                    //assign at newest + 1
+                    valid_entry[newest_prev + 1] = 1;
+                    completed_entry[newest_prev + 1] = 0;
+                    dest_reg[newest_prev + 1] = dest[0];
+                    allocation_failure[0] = 0;
+                end
+                //newest + 1 is unavailable
+                else begin
+                    allocation_failure[0] = 1;
+                end
+            end
+        end
+        else 
+            allocation_failure[0] = 0; //can't use resources you don't need
+            
+        if(x > 1) begin
+            if((newest_prev + 2) >= SIZE) begin
+                //assign at (newest + 2) % SIZE 
+                valid_entry[(newest_prev + 2) % SIZE] = 1;
+                completed_entry[(newest_prev + 2) % SIZE] = 0;
+                dest_reg[(newest_prev + 2)] = dest[1];
+            end 
+            else begin
+                //assign at newest + 2
+                valid_entry[newest_prev + 2] = 1;
+                completed_entry[newest_prev + 2] = 0;
+                dest_reg[newest_prev + 2] = dest[1];
+            end
+        end
+        if(x > 2) begin
+            if((newest_prev + 3) >= SIZE) begin
+                //assign at (newest + 3) % SIZE 
+                valid_entry[(newest_prev + 3) % SIZE] = 1;
+                completed_entry[(newest_prev + 3) % SIZE] = 0;
+                dest_reg[(newest_prev + 3) % SIZE] = dest[2];
+            end 
+            else begin
+                //assign at newest + 3
+                valid_entry[newest_prev + 3] = 1;
+                completed_entry[newest_prev + 3] = 0;
+                dest_reg[newest + 3] = dest[2];
+            end
+        end
+        if(x > 3) begin
+            if((newest_prev + 4) >= SIZE) begin
+                //assign at (newest + 4) % SIZE 
+                valid_entry[(newest_prev + 4) % SIZE] = 1; 
+                completed_entry[(newest_prev + 4) % SIZE] = 0;
+                dest_reg[(newest_prev + 4) % SIZE] = dest[3];
+            end 
+            else begin
+                //assign at newest + 4
+                valid_entry[newest_prev + 4] = 1;
+                completed_entry[newest_prev + 4] = 0;
+                dest_reg[newest_prev + 4] = dest[3];
+            end
+        end
+            
+       
+       
+       
         
+        
+        
+    
+    /*
+    //ready to commit signal will be used to choose what values are outputted to be written in RD
+    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
+    genvar c;
+    generate
+        for(c = 1; c < 8; c = c + 1) begin
+            
+        end
+    endgenerate*/
+endmodule
+
+/*
         //allocate physical registers for new instructions
         //wrap around needed
         if((newest_prev + x) >= SIZE) begin
@@ -153,6 +293,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
             end
             //allocate data
             
+            
             //change newest pointer
         end
         //no wrap around
@@ -191,22 +332,6 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     dest_reg[newest_prev + 4] = dest[3];
                 end
             end
-            
-            
-            
-            //Handle removing registers ready to be stored
-            if(valid_entry[oldest_prev] & completed_entry[oldest_prev]) begin
-                
+
             end
-        end
-    end
-    
-    //ready to commit signal will be used to choose what values are outputted to be written in RD
-    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
-    genvar c;
-    generate
-        for(c = 1; c < 8; c = c + 1) begin
-            
-        end
-    endgenerate
-endmodule
+        end */
