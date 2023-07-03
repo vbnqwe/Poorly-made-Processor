@@ -21,24 +21,24 @@
 
 
 module delay_test(
-        input clk
+        input clk,
+        input a
         , output [2:0] out
     );
     
-    assign out = d;
+    reg [2:0] x;
     
-    reg [2:0] d;
-    reg [2:0] d_prev;
-  
+    assign out = x;
     
-    always @(posedge clk) begin
-        d_prev = d;
-    end
     
-    wire con = |d;
-    wire [2:0] d1 = d_prev + 1;
-    wire [2:0] d2 = d_prev;
-    
-    assign d = con ? d1 : d2;
+    assign x[0] = a;
+    genvar d;
+    generate
+        for(d = 1; d < 3; d = d + 1) begin
+            always_comb begin
+                x[d] = x[d-1] & a;
+            end
+        end
+    endgenerate
     
 endmodule

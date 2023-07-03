@@ -12,6 +12,8 @@ Inputs:
 Outputs:
     -r1_out/r2_out: data stored in physical register, will be 0 if rX_valid is low
     -no_available: flag that is thrown high if all physical registers are currently busy
+    -committed: table of 8 entries where up to all 8 to none at all may be ready to be committed to ARF
+    -num_commits: number of correct entries that are commits in committed output, eg if 3, then first 3 entries are commits
 
     
 Behavior: 
@@ -30,7 +32,9 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         input r2_valid [N_instr],
         output [31:0] r1_out [N_instr], 
         output [31:0] r2_out [N_instr],
-        output no_available
+        output no_available,
+        output [31:0] committed [8],
+        output [3:0] num_commits
     );   
     
     //tags
@@ -41,7 +45,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg started; //Initial condition stuff (shouldnt be necessary??)
     
     //Flags for when things complete
-    wire ready_to_commit [8];
+    reg ready_to_commit [8];
     reg [3:0] allocation_failure; //for i = 1 to 4, if ith bit is 0, that means that newest + i register is in use
 
     //integer
@@ -57,7 +61,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     
     initial begin
         newest = 7'b0;
-        oldest = 7'h7f;
+        oldest = 7'b0;
         for(int i = 0; i < SIZE; i++) begin
             valid_entry[i] = 0;
             completed_entry[i] = 0;
@@ -118,5 +122,45 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
             end
         end
     endgenerate
+    
+    
+    
+    //Generate ready_to_commit signals, which are used to determine what entries can be committed.
+    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
+    genvar d;
+    generate
+        for(d = 1; d < 8; d = d + 1) begin
+            always_comb begin
+                //wrap around
+                if((oldest_prev + d) >= SIZE) begin
+                    //prior entry also wraps around
+                    if((oldest_prev + d - 1) >= SIZE) begin
+                        ready_to_commit[d] = ready_to_commit[(d - 1 + oldest_prev) % SIZE] & valid_entry[(oldest_prev + d) % SIZE] + completed_entry[(oldest_prev + d) % SIZE];
+                    end
+                    //prior entry does not wrap around
+                    else begin
+                        ready_to_commit[d] = ready_to_commit[d - 1 + oldest_prev] & valid_entry[(oldest_prev + d) % SIZE] & completed_entry[(oldest_prev + d) % SIZE];
+                    end
+                end
+                //no wrap around
+                else begin
+                    ready_to_commit[d] = ready_to_commit[d - 1 + oldest_prev] & valid_entry[oldest_prev + d] & completed_entry[oldest_prev + d];
+                end
+            end
+        end
+    endgenerate
+    
+    genvar e;
+    generate
+        for(e = 0; e < 8; e = e + 1)begin
+            always @(posedge clk) begin
+                if(ready_to_commit[e]) begin
+                
+                end
+            end
+        end    
+    endgenerate
+    
+    
 endmodule
 

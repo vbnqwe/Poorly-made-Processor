@@ -25,9 +25,22 @@ module del_Test(
     );
     
     bit clk;
-    wire [5:0] out_test;
+    bit a;
+    wire [2:0] out_test;
     
-    delay_test DUT ( .clk(clk), .out_test(out_test));
+    delay_test DUT ( .clk(clk), .a(a), .out(out_test));
+    
+    initial begin
+        a = 1;
+        
+        #30;
+        a =0;
+        #2;
+        a = 1;
+        
+        #20;
+        $stop;
+    end
     
     always begin
         clk = 1;
