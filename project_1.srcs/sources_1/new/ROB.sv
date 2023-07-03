@@ -13,6 +13,7 @@ Outputs:
     -r1_out/r2_out: data stored in physical register, will be 0 if rX_valid is low
     -no_available: flag that is thrown high if all physical registers are currently busy
     -committed: table of 8 entries where up to all 8 to none at all may be ready to be committed to ARF
+    -committed_dest: destination register in ARF of commit
     -num_commits: number of correct entries that are commits in committed output, eg if 3, then first 3 entries are commits
 
     
@@ -33,7 +34,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [31:0] r1_out [N_instr], 
         output [31:0] r2_out [N_instr],
         output no_available,
-        output [31:0] committed [8],
+        output reg [31:0] committed [8],
+        output reg [5:0] committed_dest [8],
         output [3:0] num_commits
     );   
     
@@ -41,6 +43,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg [N_phys_regs-1:0] oldest, newest;
     reg [7:0] oldest_prev;
     reg [7:0] newest_prev;
+    reg [7:0] eight_oldest [8];
     
     reg started; //Initial condition stuff (shouldnt be necessary??)
     
@@ -127,12 +130,14 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     
     //Generate ready_to_commit signals, which are used to determine what entries can be committed.
     assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
+    assign eight_oldest[0] = oldest_prev;
     genvar d;
     generate
         for(d = 1; d < 8; d = d + 1) begin
             always_comb begin
                 //wrap around
                 if((oldest_prev + d) >= SIZE) begin
+                    eight_oldest[d] = (oldest_prev + d) % SIZE;
                     //prior entry also wraps around
                     if((oldest_prev + d - 1) >= SIZE) begin
                         ready_to_commit[d] = ready_to_commit[(d - 1 + oldest_prev) % SIZE] & valid_entry[(oldest_prev + d) % SIZE] + completed_entry[(oldest_prev + d) % SIZE];
@@ -144,18 +149,23 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 end
                 //no wrap around
                 else begin
+                    eight_oldest[d] = oldest_prev + d;
                     ready_to_commit[d] = ready_to_commit[d - 1 + oldest_prev] & valid_entry[oldest_prev + d] & completed_entry[oldest_prev + d];
                 end
             end
         end
     endgenerate
     
+    assign num_commits = ready_to_commit[0] + ready_to_commit[1] + ready_to_commit[2] + ready_to_commit[3] + ready_to_commit[4] + ready_to_commit[5] + ready_to_commit[6] + ready_to_commit[7];
+    
+    
     genvar e;
     generate
         for(e = 0; e < 8; e = e + 1)begin
             always @(posedge clk) begin
                 if(ready_to_commit[e]) begin
-                
+                    committed[e] = data[eight_oldest[e]];
+                    committed_dest[e] = dest_reg[eight_oldest[e]];
                 end
             end
         end    
