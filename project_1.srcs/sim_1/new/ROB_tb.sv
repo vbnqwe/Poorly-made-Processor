@@ -56,6 +56,16 @@ module ROB_tb(
         dest[2] = 5'd3;
         dest[3] = 5'd4;
         #20;
+        DUT.completed_entry[3] = 1;
+        DUT.completed_entry[4] = 1;
+        DUT.completed_entry[5] = 1;
+        DUT.completed_entry[6] = 1;
+        DUT.completed_entry[7] = 1;
+        num_writes = 3'd0;
+        #20;
+        num_writes = 3'd1;
+        dest[0] = 5'd1;
+        #20;
         $stop;
         
     end
