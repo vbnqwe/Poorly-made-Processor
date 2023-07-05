@@ -10,39 +10,55 @@ module ROB_tb(
         
     );
     
-    bit [2:0] num_writes;
     bit clk;
+    bit [2:0] num_writes;
     bit if_reg [4];
+    bit [4:0] dest [4];
     wire no_available;
     wire [31:0] committed [8];
-    wire [5:0] committed_dest [8];
+    wire [4:0] committed_dest [8];
     wire [3:0] num_commits;
-    wire ready [8];
-    wire [2:0] test;
     
-    assign test = {DUT.valid_entry[21], DUT.completed_entry[21], DUT.ready_to_commit[0]};
+    wire [31:0] data [128];
+    wire valid_entry [128];
+    wire completed_entry [128];
+    wire [4:0] dest_reg [128];
     
-    assign ready = DUT.ready_to_commit;
+    wire [7:0] newest, newest_prev, oldest, oldest_prev;
+    
+    assign newest = DUT.newest;
+    assign newest_prev = DUT.newest_prev;
+    assign oldest = DUT.oldest;
+    assign oldest_prev = DUT.oldest_prev;
+    
+    assign data = DUT.data;
+    assign valid_entry = DUT.valid_entry;
+    assign completed_entry = DUT.completed_entry;
+    assign dest_reg = DUT.dest_reg;
+    
     
     initial begin
-        #1;
-        DUT.oldest_prev = 20;
-        DUT.valid_entry[20] = 1;
-        DUT.valid_entry[21] = 1;
-        DUT.oldest = 20;
-        DUT.completed_entry[20] = 1;
-        DUT.completed_entry[21] = 1;
-        DUT.data[20] = 20;
-        DUT.data[21] = 21;
-        #40;
-        $display(DUT.valid_entry[20]);
-        $display(DUT.completed_entry[20]);
+        num_writes = 3'd2;
+        if_reg[0] = 1;
+        if_reg[1] = 0;
+        if_reg[2] = 1;
+        if_reg[3] = 0;
+        dest[0] = 5'd2;
+        dest[2] = 5'd3;
+        #20;
+        num_writes = 3'd1;
+        if_reg[0] = 0;
+        if_reg[1] = 6;
+        if_reg[2] = 0;
+        if_reg[3] = 0;
+        dest[1] = 5'd4;
+        #20;
         $stop;
         
     end
     
     
-    ROB DUT(.clk(clk), .num_writes(num_writes), .no_available(no_available), .committed, .committed_dest, .num_commits);
+    ROB DUT(.clk, .num_writes, .if_reg, .dest, .no_available, .committed, .committed_dest, .num_commits);
     
     always begin
         clk = 0; 

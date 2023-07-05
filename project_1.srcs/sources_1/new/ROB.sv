@@ -35,7 +35,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [31:0] r2_out [N_instr],
         output no_available,
         output reg [31:0] committed [8],
-        output reg [5:0] committed_dest [8],
+        output reg [4:0] committed_dest [8],
         output [3:0] num_commits
     );   
     
@@ -64,7 +64,10 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     
     initial begin
         newest = 7'b0;
-        oldest = 7'b0;
+        //oldest = 7'b0;
+        newest_prev = 7'b0;
+        oldest_prev = 7'b0;
+        allocation_failure = 4'b0;
         for(int i = 0; i < SIZE; i++) begin
             valid_entry[i] = 0;
             completed_entry[i] = 0;
@@ -75,10 +78,11 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     always @(posedge clk) begin
         oldest_prev = oldest;
         newest_prev = newest;
+        newest = !no_available ? (newest_prev + x) : newest_prev;
     end
     
     assign no_available = |allocation_failure;
-    assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
+    //assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
     
     
     
@@ -106,6 +110,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     end 
                     else begin
                         //check if entry is valid at newest + 1
+                        $display(newest_prev);
                         if(valid_entry[newest_prev + 1 + c] == 0) begin
                             //assign at newest + 1
                             valid_entry[newest_prev + 1 + c] = 1;
@@ -129,7 +134,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     
     
     //Generate ready_to_commit signals, which are used to determine what entries can be committed.
-    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];
+    assign ready_to_commit[0] = valid_entry[oldest_prev] & completed_entry[oldest_prev];    
+    
     assign eight_oldest[0] = oldest_prev;
     genvar d;
     generate
@@ -141,17 +147,17 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     eight_oldest[d] = (oldest_prev + d) % SIZE;
                     //prior entry also wraps around
                     if((oldest_prev + d - 1) >= SIZE) begin
-                        ready_to_commit[d] = ready_to_commit[(d - 1 + oldest_prev) % SIZE] & valid_entry[(oldest_prev + d) % SIZE] + completed_entry[(oldest_prev + d) % SIZE];
+                        ready_to_commit[d] = ready_to_commit[d - 1] & valid_entry[(oldest_prev + d) % SIZE] + completed_entry[(oldest_prev + d) % SIZE];
                     end
                     //prior entry does not wrap around
                     else begin
-                        ready_to_commit[d] = ready_to_commit[d - 1 + oldest_prev] & valid_entry[(oldest_prev + d) % SIZE] & completed_entry[(oldest_prev + d) % SIZE];
+                        ready_to_commit[d] = ready_to_commit[d - 1] & valid_entry[(oldest_prev + d) % SIZE] & completed_entry[(oldest_prev + d) % SIZE];
                     end
                 end
                 //no wrap around
                 else begin
                     eight_oldest[d] = oldest_prev + d;
-                    ready_to_commit[d] = ready_to_commit[d - 1 + oldest_prev] & valid_entry[oldest_prev + d] & completed_entry[oldest_prev + d];
+                    ready_to_commit[d] = ready_to_commit[d - 1] & valid_entry[oldest_prev + d] & completed_entry[oldest_prev + d];
                 end
             end
         end
@@ -163,16 +169,27 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     genvar e;
     generate
         for(e = 0; e < 8; e = e + 1)begin
-            always @(posedge clk) begin
+            always_comb begin
                 if(ready_to_commit[e]) begin
                     committed[e] = data[eight_oldest[e]];
                     committed_dest[e] = dest_reg[eight_oldest[e]];
+                end
+            end
+            
+            always @(posedge clk) begin
+                if(ready_to_commit[e]) begin
                     valid_entry[eight_oldest[e]] = 0;
                     completed_entry[eight_oldest[e]] = 0;
                 end
             end
         end    
     endgenerate
+    
+    always_comb begin
+        oldest = 7'b0;
+        oldest = oldest_prev + num_commits;
+        
+    end
     
     
 endmodule

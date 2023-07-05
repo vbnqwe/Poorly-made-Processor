@@ -4,8 +4,7 @@ Running: C:/Xilinx/Vivado/2022.1/bin/unwrapped/win64.o/xelab.exe --incr --debug 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-5021] port 'if_reg' is not connected on this instance [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv:45]
-WARNING: [VRFC 10-3823] variable 'newest' might have multiple concurrent drivers [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv:81]
+WARNING: [VRFC 10-5021] port 'r1' is not connected on this instance [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv:61]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis

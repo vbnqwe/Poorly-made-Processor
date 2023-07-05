@@ -1,4 +1,5 @@
 Time resolution is 1 ps
-0
-0
-$stop called at time : 41 ns : File "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv" Line 40
+  0
+  0
+  2
+$stop called at time : 40 ns : File "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv" Line 56
