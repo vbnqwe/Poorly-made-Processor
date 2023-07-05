@@ -1,6 +1,21 @@
 `timescale 1ns / 1ps
 
 /*
+**Note:
+4 instructions:
+add r1 + r2 --> r3
+instruction w/o writing to register
+add r2 + r3 --> r4
+instructions w/o writing to register
+
+will be inputted into ROB as:
+add r1 + r2 --> r3
+add r2 + r3 --> r4
+instruction w/o writing to reg
+instruction w/o writing to reg
+
+Logic will be needed outside of ROB to reorder to format above, while keeping track of correct order
+
 Inputs: 
     -num_writes: number of physical registers that will be needed to be allocated
     -if_reg: low for instructions such as store where no register renaming needed, high enables renaming
@@ -66,7 +81,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         newest = 7'b0;
         //oldest = 7'b0;
         newest_prev = 7'b0;
-        oldest_prev = 7'b0;
+        oldest_prev = 7'b1;
         allocation_failure = 4'b0;
         for(int i = 0; i < SIZE; i++) begin
             valid_entry[i] = 0;
@@ -186,7 +201,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     endgenerate
     
     always_comb begin
-        oldest = 7'b0;
+        oldest = 7'b1;
         oldest = oldest_prev + num_commits;
         
     end

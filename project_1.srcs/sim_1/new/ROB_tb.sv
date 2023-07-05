@@ -39,19 +39,22 @@ module ROB_tb(
     
     initial begin
         num_writes = 3'd2;
-        if_reg[0] = 1;
-        if_reg[1] = 0;
-        if_reg[2] = 1;
-        if_reg[3] = 0;
         dest[0] = 5'd2;
-        dest[2] = 5'd3;
+        dest[1] = 5'd3;
         #20;
         num_writes = 3'd1;
-        if_reg[0] = 0;
-        if_reg[1] = 6;
-        if_reg[2] = 0;
-        if_reg[3] = 0;
-        dest[1] = 5'd4;
+        dest[0] = 5'd4;
+        #20;
+        num_writes = 3'd0;
+        dest[0] = 5'd20;
+        DUT.completed_entry[2] = 1;
+        #20;
+        DUT.completed_entry[1] = 1;
+        num_writes = 3'd4;
+        dest[0] = 5'd1;
+        dest[1] = 5'd2;
+        dest[2] = 5'd3;
+        dest[3] = 5'd4;
         #20;
         $stop;
         
