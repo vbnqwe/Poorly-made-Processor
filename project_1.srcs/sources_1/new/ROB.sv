@@ -96,7 +96,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                             //assign at (newest + 1) % SIZE 
                             valid_entry[(newest_prev + 1 + c) % SIZE] = 1;
                             completed_entry[(newest_prev + 1 + c) % SIZE] = 0;
-                            dest_reg[(newest_prev + 1 + c) % SIZE] = dest[0];
+                            dest_reg[(newest_prev + 1 + c) % SIZE] = dest[c];
                             allocation_failure[c] = 0;
                         end
                         //(newest + 1) % SIZE is unavailable
@@ -110,7 +110,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                             //assign at newest + 1
                             valid_entry[newest_prev + 1 + c] = 1;
                             completed_entry[newest_prev + 1 + c] = 0;
-                            dest_reg[newest_prev + 1 + c] = dest[0];
+                            dest_reg[newest_prev + 1 + c] = dest[c];
                             allocation_failure[c] = 0;
                         end
                         //newest + 1 is unavailable
@@ -135,6 +135,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     generate
         for(d = 1; d < 8; d = d + 1) begin
             always_comb begin
+                //handle ready_to_commit bus and eight_oldest for address storage of potential commits
                 //wrap around
                 if((oldest_prev + d) >= SIZE) begin
                     eight_oldest[d] = (oldest_prev + d) % SIZE;
@@ -166,6 +167,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 if(ready_to_commit[e]) begin
                     committed[e] = data[eight_oldest[e]];
                     committed_dest[e] = dest_reg[eight_oldest[e]];
+                    valid_entry[eight_oldest[e]] = 0;
+                    completed_entry[eight_oldest[e]] = 0;
                 end
             end
         end    

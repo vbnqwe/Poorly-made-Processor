@@ -10,89 +10,44 @@ module ROB_tb(
         
     );
     
-    reg no_available_hold;
-    
-    always @(posedge clk)
-        no_available_hold = no_available;
-    
-    bit clk;
-    wire no_available;
     bit [2:0] num_writes;
+    bit clk;
+    bit if_reg [4];
+    wire no_available;
+    wire [31:0] committed [8];
+    wire [5:0] committed_dest [8];
+    wire [3:0] num_commits;
+    wire ready [8];
+    wire [2:0] test;
     
-    bit expected;
-    bit success;
-    bit [7:0] newest, newest_prev;
-    bit [7:0] oldest;
-    bit [7:0] x;
+    assign test = {DUT.valid_entry[21], DUT.completed_entry[21], DUT.ready_to_commit[0]};
     
-    assign x = DUT.x;
-    assign newest_prev = DUT.newest_prev;
-    assign newest = DUT.newest;
-    assign oldest = DUT.oldest_prev;
+    assign ready = DUT.ready_to_commit;
     
     initial begin
-        #20;
-    
-        DUT.newest = 0;
-        DUT.valid_entry[1] = 0;
-        DUT.valid_entry[2] = 0;
-        DUT.valid_entry[3] = 0;
-        DUT.valid_entry[4] = 0;
-        DUT.oldest = 10;
-        num_writes = 4;
-        expected = 0;
-        #20;
-        
-        DUT.newest = 0;
-        DUT.oldest = 2;
-        num_writes = 4;
-        DUT.valid_entry[1] = 0;
-        DUT.valid_entry[2] = 1;
-        DUT.valid_entry[3] = 1;
-        DUT.valid_entry[4] = 1;
-        expected = 1;
-        #20;
-        
-        DUT.newest = 126;
-        num_writes = 4;
-        DUT.oldest = 10;
-        DUT.valid_entry[127] = 0;
-        DUT.valid_entry[0] = 0;
-        DUT.valid_entry[1] = 0;
-        DUT.valid_entry[2] = 0;
-        expected = 0;
-        #20;
-        
-        DUT.newest = 126;
-        DUT.oldest = 127;
-        num_writes = 2;
-        DUT.valid_entry[127] = 1;
-        DUT.valid_entry[0] = 1;
-        DUT.valid_entry[1] = 1;
-        DUT.valid_entry[2] = 1;
-        expected = 1;
-        #20;
-        
-        DUT.newest = 126;
-        DUT.oldest = 0;
-        num_writes = 4;
-        DUT.valid_entry[127] = 0;
-        DUT.valid_entry[0] = 1;
-        DUT.valid_entry[1] = 1;
-        DUT.valid_entry[2] = 1;
-        expected = 1;            
-        #20;
+        #1;
+        DUT.oldest_prev = 20;
+        DUT.valid_entry[20] = 1;
+        DUT.valid_entry[21] = 1;
+        DUT.oldest = 20;
+        DUT.completed_entry[20] = 1;
+        DUT.completed_entry[21] = 1;
+        DUT.data[20] = 20;
+        DUT.data[21] = 21;
+        #40;
+        $display(DUT.valid_entry[20]);
+        $display(DUT.completed_entry[20]);
         $stop;
         
     end
     
     
-    ROB DUT(.clk(clk), .num_writes(num_writes), .no_available(no_available));
+    ROB DUT(.clk(clk), .num_writes(num_writes), .no_available(no_available), .committed, .committed_dest, .num_commits);
     
     always begin
-        clk = 1; 
+        clk = 0; 
         #10;
-        clk = 0;
+        clk = 1;
         #10;
     end
 endmodule
