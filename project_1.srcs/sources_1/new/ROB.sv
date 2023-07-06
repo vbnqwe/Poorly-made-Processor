@@ -100,7 +100,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         num_available_stored = num_available;
     end
     
-    assign no_available = |allocation_failure;
+    assign no_available = (|allocation_failure) | (num_available < num_writes);
     //assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
     
     

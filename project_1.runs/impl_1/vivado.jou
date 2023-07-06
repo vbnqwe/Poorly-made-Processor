@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Thu Jul  6 10:44:43 2023
+# Process ID: 16040
+# Current directory: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1
+# Command line: vivado.exe -log ROB.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source ROB.tcl -notrace
+# Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1/ROB.vdi
+# Journal file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1\vivado.jou
+# Running On: LAPTOP-6SVIBHS9, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 4, Host memory: 16952 MB
+#-----------------------------------------------------------
+source ROB.tcl -notrace

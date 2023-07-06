@@ -92,6 +92,9 @@ module ROB_tb(
         
         //Attempt to allocate 4 physical registers when only 3 are available
         #20;
+        DUT.completed_entry[8] = 1;
+        #20;
+        #20;
         
         $stop;
         
