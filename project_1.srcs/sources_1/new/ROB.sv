@@ -65,6 +65,9 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     //Flags for when things complete
     reg ready_to_commit [8];
     reg [3:0] allocation_failure; //for i = 1 to 4, if ith bit is 0, that means that newest + i register is in use
+    reg [2:0] num_available; //calculates how many registers available to allocate on next cycle, from 0 to 4
+    reg [3:0] available_counter;
+    reg [2:0] num_available_stored; //store num_available on posedge
 
     //integer
     reg [N_phys_regs-1:0] x;
@@ -94,6 +97,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         oldest_prev = oldest;
         newest_prev = newest;
         newest = !no_available ? (newest_prev + x) : newest_prev;
+        num_available_stored = num_available;
     end
     
     assign no_available = |allocation_failure;
@@ -108,11 +112,11 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     generate
         for(c = 0; c < 4; c = c + 1) begin
             always @(posedge clk) begin
-                if(x > c) begin
+                if((x > c) & (num_available_stored >= num_writes)) begin
                     if((newest_prev + 1 + c) >= SIZE) begin
                         //check if entry is valid at (newest + 1) % SIZE
                         if(valid_entry[(newest_prev + 1 + c) % SIZE] == 0) begin
-                            //assign at (newest + 1) % SIZE 
+                            //assign at (newest + 1) % SIZE if no previous allocation failurs
                             valid_entry[(newest_prev + 1 + c) % SIZE] = 1;
                             completed_entry[(newest_prev + 1 + c) % SIZE] = 0;
                             dest_reg[(newest_prev + 1 + c) % SIZE] = dest[c];
@@ -125,7 +129,6 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     end 
                     else begin
                         //check if entry is valid at newest + 1
-                        $display(newest_prev);
                         if(valid_entry[newest_prev + 1 + c] == 0) begin
                             //assign at newest + 1
                             valid_entry[newest_prev + 1 + c] = 1;
@@ -200,10 +203,47 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         end    
     endgenerate
     
+    
+    //check how many available registers on next cycle up to 4 regs
+    genvar f;
+    generate
+        for(f = 0; f < 4; f = f + 1) begin
+            always_comb begin
+                if((newest + f + 1) >= SIZE) begin
+                    //check (newest + f + 1) % SIZE
+                    if(valid_entry[(newest + f + 1) % SIZE] == 0) begin
+                        available_counter[f] = 1;
+                    end else begin
+                        available_counter[f] = 0;
+                    end
+                end
+                else begin
+                    //check newest + f + 1
+                    if(valid_entry[newest + f + 1] == 0) begin
+                        available_counter[f] = 1;
+                    end else begin
+                        available_counter[f] = 0;
+                    end
+                end
+            end
+        end
+    endgenerate
+    
     always_comb begin
         oldest = 7'b1;
         oldest = oldest_prev + num_commits;
         
+        if(available_counter[0] == 0) begin
+            num_available = 3'd0;
+        end else if((available_counter[0] == 1) & (available_counter[1] == 0)) begin
+            num_available = 3'd1;
+        end else if ((available_counter[0] == 1) & (available_counter[1] == 1) & (available_counter[2] == 0)) begin
+            num_available = 3'd2;
+        end else if ((available_counter[0] == 1) & (available_counter[1] == 1) & (available_counter[2] == 1) & (available_counter[3] == 0)) begin
+            num_available = 3'd3;
+        end else begin
+            num_available = 3'd4;
+        end
     end
     
     
