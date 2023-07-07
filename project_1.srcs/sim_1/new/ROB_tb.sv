@@ -52,7 +52,7 @@ module ROB_tb(
     reg completed_entry_expected;
     
     
-    initial begin
+    /*initial begin
         num_writes = 3'd2;
         dest[0] = 5'd2;
         dest[1] = 5'd3;
@@ -99,7 +99,23 @@ module ROB_tb(
         $stop;
         
     end
-    
+   */ 
+   
+    initial begin
+        num_writes = 4;
+        dest[0] = 5'd0;
+        dest[1] = 5'd1;
+        dest[2] = 5'd2;
+        dest[3] = 5'd3;
+        #620;
+        num_writes = 5'd2;
+        #20;
+        num_writes = 5'd4;
+        #20;
+        num_writes = 5'd2;
+        #20;
+        $stop;
+    end
     
     ROB DUT(.clk, .num_writes, .if_reg, .dest, .no_available, .committed, .committed_dest, .num_commits);
     

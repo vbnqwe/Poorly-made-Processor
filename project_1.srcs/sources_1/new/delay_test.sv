@@ -3,6 +3,7 @@
 
 module delay_test(
         input a,
+        input clk,
         input [2:0] t
         , output [2:0] out
     );
@@ -13,6 +14,7 @@ module delay_test(
     assign y = t;
     
     assign out = x;
+    
     
     
     assign x[0] = t[0];

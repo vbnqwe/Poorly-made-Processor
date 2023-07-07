@@ -1,80 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1688665474">
-  <File Type="ROUTE-PWR" Name="ROB_power_routed.rpt"/>
   <File Type="PA-TCL" Name="ROB.tcl"/>
-  <File Type="BITSTR-MMI" Name="ROB.mmi"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="ROB_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="ROB_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR-SUM" Name="ROB_power_summary_routed.pb"/>
   <File Type="REPORTS-TCL" Name="ROB_reports.tcl"/>
-  <File Type="OPT-TIMING" Name="ROB_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="ROB_opt.dcp"/>
-  <File Type="OPT-DRC" Name="ROB_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="ROB.hwdef"/>
-  <File Type="PWROPT-DCP" Name="ROB_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="ROB_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="ROB_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="ROB_placed.dcp"/>
-  <File Type="PLACE-IO" Name="ROB_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="ROB_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="ROB_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="ROB_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="ROB_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="ROB_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="ROB_incremental_reuse_pre_placed.rpt"/>
-  <File Type="BG-BIN" Name="ROB.bin"/>
-  <File Type="PLACE-TIMING" Name="ROB_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="ROB_postplace_pwropt.dcp"/>
   <File Type="BITSTR-MSK" Name="ROB.msk"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="ROB_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="ROB_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="ROB_drc_physopted.rpt"/>
-  <File Type="BITSTR-RBT" Name="ROB.rbt"/>
-  <File Type="PHYSOPT-TIMING" Name="ROB_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="ROB_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="ROB_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="ROB_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="ROB_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="ROB_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="ROB_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="ROB_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="ROB_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="ROB_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="ROB_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="ROB_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="ROB_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="ROB_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="ROB_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="ROB_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="ROB_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="ROB_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="ROB_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="ROB_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="ROB_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="ROB_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="ROB_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="ROB_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="ROB_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="ROB_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="ROB_bus_skew_postroute_physopted.rpt"/>
+  <File Type="RDI-RDI" Name="ROB.vdi"/>
   <File Type="BG-BIT" Name="ROB.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="ROB_bus_skew_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="ROB_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BG-DRC" Name="ROB.drc"/>
+  <File Type="BG-BGN" Name="ROB.bgn"/>
+  <File Type="BG-BIN" Name="ROB.bin"/>
+  <File Type="BITSTR-RBT" Name="ROB.rbt"/>
   <File Type="BITSTR-NKY" Name="ROB.nky"/>
   <File Type="BITSTR-BMM" Name="ROB_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="ROB.mmi"/>
+  <File Type="BITSTR-SYSDEF" Name="ROB.sysdef"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="ROB.ltx"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="OPT-DRC" Name="ROB_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="ROB.hwdef"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="ROB_incremental_reuse_pre_placed.rpt"/>
+  <File Type="ROUTE-DCP" Name="ROB_routed.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="ROB_routed_error.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="ROB_routed_bb.dcp"/>
+  <File Type="ROUTE-TIMING-PB" Name="ROB_timing_summary_routed.pb"/>
+  <File Type="OPT-DCP" Name="ROB_opt.dcp"/>
+  <File Type="PLACE-DCP" Name="ROB_placed.dcp"/>
+  <File Type="PWROPT-DCP" Name="ROB_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="ROB_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="ROB_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="ROB_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="ROB_postroute_physopt_bb.dcp"/>
   <File Type="PDI-FILE" Name="ROB.pdi"/>
   <File Type="RCFI_FILE" Name="ROB.rcfi"/>
   <File Type="CFI_FILE" Name="ROB.cfi"/>
   <File Type="RNPI_FILE" Name="ROB.rnpi"/>
   <File Type="NPI_FILE" Name="ROB.npi"/>
   <File Type="RBD_FILE" Name="ROB.rbd"/>
-  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="ROB.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="ROB.sysdef"/>
-  <File Type="BG-BGN" Name="ROB.bgn"/>
-  <File Type="BG-DRC" Name="ROB.drc"/>
-  <File Type="RDI-RDI" Name="ROB.vdi"/>
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="ROUTE-RQS" Name="ROB_routed.rqs"/>
   <File Type="POSTROUTE-PHYSOPT-RQS" Name="ROB_postroute_physopted.rqs"/>
   <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
@@ -138,5 +99,6 @@
     <Step Id="route_design"/>
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
+    <Step Id="write_device_image"/>
   </Strategy>
 </GenRun>
