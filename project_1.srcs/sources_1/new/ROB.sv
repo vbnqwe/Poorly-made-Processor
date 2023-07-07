@@ -40,7 +40,7 @@ Behavior:
 module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr = 4)(
         input logic [2:0] num_writes,
         input clk,
-        input if_reg [N_instr], 
+        input [N_instr-1:0] if_reg, 
         input [4:0] dest [N_instr], 
         input [N_phys_regs-1:0] r1 [N_instr], 
         input [N_phys_regs-1:0] r2 [N_instr], 
@@ -108,7 +108,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     /*
     Generate logic used for physical register allocation
     */
-    genvar c;
+    /*genvar c;
     generate
         for(c = 0; c < 4; c = c + 1) begin
             always @(posedge clk) begin
@@ -144,11 +144,26 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 end
                 else begin
                     allocation_failure[c] = 0; //can't use resources you don't need
+                e
+            end
+        end
+        
+        
+    endgenerate*/
+    
+    genvar a;
+    genvar b;
+    generate
+        for(a = 0; a < 4; a = a + 1) begin
+            for(b = a + 1; b < 4; b = b + 1) begin
+                always @(posedge clk) begin 
+                    if(if_reg[b - 1]) begin
+                        
+                    end
                 end
             end
         end
     endgenerate
-    
     
     
     //Generate ready_to_commit signals, which are used to determine what entries can be committed.

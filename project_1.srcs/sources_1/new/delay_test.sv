@@ -2,29 +2,42 @@
 
 
 module delay_test(
-        input a,
+        input [3:0] if_reg,
+        input [4:0] dest [4],
         input clk,
-        input [2:0] t
-        , output [2:0] out
+        output [4:0] sorted[4]
     );
     
-    reg [2:0] x;
-    reg [2:0] y;
+    reg [4:0] temp [4];
     
-    assign y = t;
+    assign sorted = temp;
     
-    assign out = x;
-    
-    
-    
-    assign x[0] = t[0];
-    genvar d;
-    generate
-        for(d = 1; d < 3; d = d + 1) begin
-            always_comb begin
-                x[d] = x[d-1] & y[d];
-            end
+    always_comb begin
+        if(if_reg[0])
+            temp[0] = dest[0];
+        else if(!if_reg[0] & if_reg[1])
+            temp[0] = dest[1];
+        else if(!if_reg[0] & !if_reg[1] & if_reg[2]) 
+            temp[0] = dest[2];
+        else if(!if_reg[0] & !if_reg[1] & !if_reg[2] & if_reg[3]) 
+            temp[0] = dest[3];
+        
+        if(if_reg[0] & if_reg[1]) 
+            temp[1] = dest[1];
+        else if((if_reg[0] ^ if_reg[1]) & if_reg[2]) 
+            temp[1] = dest[2];
+        else if((^if_reg[2:0]) & !(if_reg[2:0]) & if_reg[3]) begin
+            temp[1] = dest[3];
         end
-    endgenerate
+        
+        if(if_reg[0] & if_reg[1] & if_reg[2])
+            temp[2] = dest[2];
+        else if(!(^if_reg[2:0]) & if_reg[3]) 
+            temp[2] = dest[3];
+        
+        if(&if_reg[3:0])
+            temp[3] = dest[3];
+    end
+    
     
 endmodule

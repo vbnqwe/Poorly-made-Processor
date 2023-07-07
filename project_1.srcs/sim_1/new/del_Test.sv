@@ -5,17 +5,15 @@ module del_Test(
 
     );
     
-    bit a;
-    bit [2:0] t;
-    wire [2:0] out_test;
+    bit [3:0] if_reg;
+    bit [4:0] dest [4];
+    bit clk;
+    wire [4:0] sorted[4];
     
-    delay_test DUT (.a(a), .t, .out(out_test));
+    delay_test DUT (.if_reg, .dest, .clk, .sorted);
     
     initial begin
-        a = 1;
-        t = 3'b111;
-        #1;
-        $stop;
+        
     end
     
 endmodule

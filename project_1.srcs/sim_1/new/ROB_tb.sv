@@ -102,6 +102,10 @@ module ROB_tb(
    */ 
    
     initial begin
+        if_reg[0] = 1;
+        if_reg[1] = 1;
+        if_reg[2] = 1;
+        if_reg[3] = 1;
         num_writes = 4;
         dest[0] = 5'd0;
         dest[1] = 5'd1;
@@ -109,10 +113,16 @@ module ROB_tb(
         dest[3] = 5'd3;
         #620;
         num_writes = 5'd2;
+        if_reg[2] = 0;
+        if_reg[3] = 0;
         #20;
         num_writes = 5'd4;
+        if_reg[2] = 1;
+        if_reg[3] = 1;
         #20;
         num_writes = 5'd2;
+        if_reg[2] = 0;
+        if_reg[3] = 0;
         #20;
         $stop;
     end
