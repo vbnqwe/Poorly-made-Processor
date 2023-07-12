@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1688665474">
-  <File Type="PA-TCL" Name="ROB.tcl"/>
-  <File Type="REPORTS-TCL" Name="ROB_reports.tcl"/>
-  <File Type="BITSTR-MSK" Name="ROB.msk"/>
-  <File Type="RDI-RDI" Name="ROB.vdi"/>
-  <File Type="BG-BIT" Name="ROB.bit"/>
-  <File Type="BG-DRC" Name="ROB.drc"/>
-  <File Type="BG-BGN" Name="ROB.bgn"/>
-  <File Type="BG-BIN" Name="ROB.bin"/>
-  <File Type="BITSTR-RBT" Name="ROB.rbt"/>
-  <File Type="BITSTR-NKY" Name="ROB.nky"/>
-  <File Type="BITSTR-BMM" Name="ROB_bd.bmm"/>
-  <File Type="BITSTR-MMI" Name="ROB.mmi"/>
-  <File Type="BITSTR-SYSDEF" Name="ROB.sysdef"/>
+<GenRun Id="impl_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689108737">
+  <File Type="PA-TCL" Name="delay_test.tcl"/>
+  <File Type="REPORTS-TCL" Name="delay_test_reports.tcl"/>
+  <File Type="BITSTR-MSK" Name="delay_test.msk"/>
+  <File Type="RDI-RDI" Name="delay_test.vdi"/>
+  <File Type="BG-BIT" Name="delay_test.bit"/>
+  <File Type="BG-DRC" Name="delay_test.drc"/>
+  <File Type="BG-BGN" Name="delay_test.bgn"/>
+  <File Type="BG-BIN" Name="delay_test.bin"/>
+  <File Type="BITSTR-RBT" Name="delay_test.rbt"/>
+  <File Type="BITSTR-NKY" Name="delay_test.nky"/>
+  <File Type="BITSTR-BMM" Name="delay_test_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="delay_test.mmi"/>
+  <File Type="BITSTR-SYSDEF" Name="delay_test.sysdef"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="ROB.ltx"/>
+  <File Type="BITSTR-LTX" Name="delay_test.ltx"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="OPT-DRC" Name="ROB_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="ROB.hwdef"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="ROB_incremental_reuse_pre_placed.rpt"/>
-  <File Type="ROUTE-DCP" Name="ROB_routed.dcp"/>
-  <File Type="ROUTE-ERROR-DCP" Name="ROB_routed_error.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="ROB_routed_bb.dcp"/>
-  <File Type="ROUTE-TIMING-PB" Name="ROB_timing_summary_routed.pb"/>
-  <File Type="OPT-DCP" Name="ROB_opt.dcp"/>
-  <File Type="PLACE-DCP" Name="ROB_placed.dcp"/>
-  <File Type="PWROPT-DCP" Name="ROB_pwropt.dcp"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="ROB_postplace_pwropt.dcp"/>
-  <File Type="PHYSOPT-DCP" Name="ROB_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="ROB_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="ROB_postroute_physopt_bb.dcp"/>
-  <File Type="PDI-FILE" Name="ROB.pdi"/>
-  <File Type="RCFI_FILE" Name="ROB.rcfi"/>
-  <File Type="CFI_FILE" Name="ROB.cfi"/>
-  <File Type="RNPI_FILE" Name="ROB.rnpi"/>
-  <File Type="NPI_FILE" Name="ROB.npi"/>
-  <File Type="RBD_FILE" Name="ROB.rbd"/>
-  <File Type="ROUTE-RQS" Name="ROB_routed.rqs"/>
-  <File Type="POSTROUTE-PHYSOPT-RQS" Name="ROB_postroute_physopted.rqs"/>
+  <File Type="OPT-HWDEF" Name="delay_test.hwdef"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="delay_test_incremental_reuse_pre_placed.rpt"/>
+  <File Type="ROUTE-DCP" Name="delay_test_routed.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="delay_test_routed_error.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="delay_test_routed_bb.dcp"/>
+  <File Type="ROUTE-TIMING-PB" Name="delay_test_timing_summary_routed.pb"/>
+  <File Type="OPT-DCP" Name="delay_test_opt.dcp"/>
+  <File Type="PLACE-DCP" Name="delay_test_placed.dcp"/>
+  <File Type="PWROPT-DCP" Name="delay_test_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="delay_test_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="delay_test_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="delay_test_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="delay_test_postroute_physopt_bb.dcp"/>
+  <File Type="PDI-FILE" Name="delay_test.pdi"/>
+  <File Type="RCFI_FILE" Name="delay_test.rcfi"/>
+  <File Type="CFI_FILE" Name="delay_test.cfi"/>
+  <File Type="RNPI_FILE" Name="delay_test.rnpi"/>
+  <File Type="NPI_FILE" Name="delay_test.npi"/>
+  <File Type="RBD_FILE" Name="delay_test.rbd"/>
+  <File Type="ROUTE-RQS" Name="delay_test_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="delay_test_postroute_physopted.rqs"/>
   <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
   <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
@@ -63,9 +62,44 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/ARF.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Decode_destination_logic.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Decode_Stage.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Fetch_stage.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/top.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="ROB"/>
+      <Option Name="TopModule" Val="delay_test"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

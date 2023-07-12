@@ -3,8 +3,13 @@
 Apr 18 2022
 16:05:34
 C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.sim/sim_1/behav/xsim/glbl.v,1649976174,verilog,,,,glbl,,uvm,,,,,,
-C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv,1688749082,systemVerilog,,,,ROB_tb,,uvm,,,,,,
-C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/del_Test.sv,1688547238,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv,,del_Test,,uvm,,,,,,
-C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv,1688665835,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv,,ROB,,uvm,,,,,,
-C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv,1688670301,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/del_Test.sv,,delay_test,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv,1689172196,systemVerilog,,,,ROB_tb,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/del_Test.sv,1688753111,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv,,del_Test,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv,1689104931,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_destination_logic.sv,,ARF,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_Stage.sv,1688844072,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Fetch_stage.sv,,Decode_Stage,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_destination_logic.sv,1688840331,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_Stage.sv,,delay_test,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Fetch_stage.sv,1689108732,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/top.sv,,Fetch_stage,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv,1689156816,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv,,ROB,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv,1688754701,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv,,,,uvm,,,,,,
 C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/rename_top.sv,1688004079,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv,,rename_top,,uvm,,,,,,
+C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/top.sv,1688844148,systemVerilog,,C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/del_Test.sv,,top,,uvm,,,,,,

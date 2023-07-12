@@ -12,7 +12,7 @@ module ROB_tb(
     
     bit clk;
     bit [2:0] num_writes;
-    bit if_reg [4];
+    bit [3:0] if_reg;
     bit [4:0] dest [4];
     bit if_read_out_put;
     wire no_available;
@@ -42,14 +42,14 @@ module ROB_tb(
     assign dest_reg = DUT.dest_reg;
     
     
-    reg [31:0] data_read [128];
+    /*reg [31:0] data_read [128];
     reg [31:0] data_expected [128];
     reg [4:0] dest_read [128];
     reg [4:0] dest_expected [128];
     reg entry_valid_read [128];
     reg entry_valid_expected [128];
     reg completed_entry_read [128];
-    reg completed_entry_expected;
+    reg completed_entry_expected;*/
     
     
     /*initial begin
@@ -101,7 +101,7 @@ module ROB_tb(
     end
    */ 
    
-    initial begin
+    /*initial begin
         if_reg[0] = 1;
         if_reg[1] = 1;
         if_reg[2] = 1;
@@ -123,6 +123,28 @@ module ROB_tb(
         num_writes = 5'd2;
         if_reg[2] = 0;
         if_reg[3] = 0;
+        #20;
+        $stop;
+    end*/
+    
+    initial begin
+        if_reg[0] = 1;
+        if_reg[1] = 1;
+        if_reg[2] = 1;
+        if_reg[3] = 1;
+        num_writes = 4;
+        dest[0] = 5'd1;
+        dest[1] = 5'd2;
+        dest[2] = 5'd3;
+        dest[3] = 5'd4;
+        #620;
+        num_writes = 2;
+        if_reg[0] = 0;
+        if_reg[1] = 0;
+        #20;
+        num_writes = 4;
+        dest[0] = 5'd1;
+        dest[1] = 5'd2;
         #20;
         $stop;
     end

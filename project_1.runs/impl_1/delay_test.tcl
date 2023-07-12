@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1/ROB.tcl"
+  variable script "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1/delay_test.tcl"
   variable category "vivado_impl"
 }
 
@@ -115,8 +115,6 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -124,7 +122,6 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param checkpoint.writeSynthRtdsInDcp 1
   set_param chipscope.maxJobs 2
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7k70tfbv676-1
@@ -138,12 +135,12 @@ OPTRACE "set parameters" START { }
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ROB.dcp
+  add_files -quiet C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/delay_test.dcp
 OPTRACE "read constraints: implementation" START { }
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }
-  link_design -top ROB -part xc7k70tfbv676-1 
+  link_design -top delay_test -part xc7k70tfbv676-1 
 OPTRACE "link_design" END { }
 OPTRACE "gray box cells" START { }
 OPTRACE "gray box cells" END { }
@@ -175,10 +172,10 @@ OPTRACE "opt_design" END { }
 OPTRACE "read constraints: opt_design_post" START { }
 OPTRACE "read constraints: opt_design_post" END { }
 OPTRACE "Opt Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force ROB_opt.dcp
+  write_checkpoint -force delay_test_opt.dcp
 OPTRACE "Opt Design: write_checkpoint" END { }
 OPTRACE "opt_design reports" START { REPORT }
-  create_report "impl_1_opt_report_drc_0" "report_drc -file ROB_drc_opted.rpt -pb ROB_drc_opted.pb -rpx ROB_drc_opted.rpx"
+  create_report "impl_1_opt_report_drc_0" "report_drc -file delay_test_drc_opted.rpt -pb delay_test_drc_opted.pb -rpx delay_test_drc_opted.rpx"
 OPTRACE "opt_design reports" END { }
   close_msg_db -file opt_design.pb
 } RESULT]
@@ -209,12 +206,12 @@ OPTRACE "place_design" END { }
 OPTRACE "read constraints: place_design_post" START { }
 OPTRACE "read constraints: place_design_post" END { }
 OPTRACE "Place Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force ROB_placed.dcp
+  write_checkpoint -force delay_test_placed.dcp
 OPTRACE "Place Design: write_checkpoint" END { }
 OPTRACE "place_design reports" START { REPORT }
-  create_report "impl_1_place_report_io_0" "report_io -file ROB_io_placed.rpt"
-  create_report "impl_1_place_report_utilization_0" "report_utilization -file ROB_utilization_placed.rpt -pb ROB_utilization_placed.pb"
-  create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file ROB_control_sets_placed.rpt"
+  create_report "impl_1_place_report_io_0" "report_io -file delay_test_io_placed.rpt"
+  create_report "impl_1_place_report_utilization_0" "report_utilization -file delay_test_utilization_placed.rpt -pb delay_test_utilization_placed.pb"
+  create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file delay_test_control_sets_placed.rpt"
 OPTRACE "place_design reports" END { }
   close_msg_db -file place_design.pb
 } RESULT]
@@ -240,7 +237,7 @@ OPTRACE "phys_opt_design" END { }
 OPTRACE "read constraints: phys_opt_design_post" START { }
 OPTRACE "read constraints: phys_opt_design_post" END { }
 OPTRACE "Post-Place Phys Opt Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force ROB_physopt.dcp
+  write_checkpoint -force delay_test_physopt.dcp
 OPTRACE "Post-Place Phys Opt Design: write_checkpoint" END { }
 OPTRACE "phys_opt_design report" START { REPORT }
 OPTRACE "phys_opt_design report" END { }
@@ -268,17 +265,17 @@ OPTRACE "route_design" END { }
 OPTRACE "read constraints: route_design_post" START { }
 OPTRACE "read constraints: route_design_post" END { }
 OPTRACE "Route Design: write_checkpoint" START { CHECKPOINT }
-  write_checkpoint -force ROB_routed.dcp
+  write_checkpoint -force delay_test_routed.dcp
 OPTRACE "Route Design: write_checkpoint" END { }
 OPTRACE "route_design reports" START { REPORT }
-  create_report "impl_1_route_report_drc_0" "report_drc -file ROB_drc_routed.rpt -pb ROB_drc_routed.pb -rpx ROB_drc_routed.rpx"
-  create_report "impl_1_route_report_methodology_0" "report_methodology -file ROB_methodology_drc_routed.rpt -pb ROB_methodology_drc_routed.pb -rpx ROB_methodology_drc_routed.rpx"
-  create_report "impl_1_route_report_power_0" "report_power -file ROB_power_routed.rpt -pb ROB_power_summary_routed.pb -rpx ROB_power_routed.rpx"
-  create_report "impl_1_route_report_route_status_0" "report_route_status -file ROB_route_status.rpt -pb ROB_route_status.pb"
-  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -max_paths 10 -report_unconstrained -file ROB_timing_summary_routed.rpt -pb ROB_timing_summary_routed.pb -rpx ROB_timing_summary_routed.rpx -warn_on_violation "
-  create_report "impl_1_route_report_incremental_reuse_0" "report_incremental_reuse -file ROB_incremental_reuse_routed.rpt"
-  create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file ROB_clock_utilization_routed.rpt"
-  create_report "impl_1_route_report_bus_skew_0" "report_bus_skew -warn_on_violation -file ROB_bus_skew_routed.rpt -pb ROB_bus_skew_routed.pb -rpx ROB_bus_skew_routed.rpx"
+  create_report "impl_1_route_report_drc_0" "report_drc -file delay_test_drc_routed.rpt -pb delay_test_drc_routed.pb -rpx delay_test_drc_routed.rpx"
+  create_report "impl_1_route_report_methodology_0" "report_methodology -file delay_test_methodology_drc_routed.rpt -pb delay_test_methodology_drc_routed.pb -rpx delay_test_methodology_drc_routed.rpx"
+  create_report "impl_1_route_report_power_0" "report_power -file delay_test_power_routed.rpt -pb delay_test_power_summary_routed.pb -rpx delay_test_power_routed.rpx"
+  create_report "impl_1_route_report_route_status_0" "report_route_status -file delay_test_route_status.rpt -pb delay_test_route_status.pb"
+  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -max_paths 10 -report_unconstrained -file delay_test_timing_summary_routed.rpt -pb delay_test_timing_summary_routed.pb -rpx delay_test_timing_summary_routed.rpx -warn_on_violation "
+  create_report "impl_1_route_report_incremental_reuse_0" "report_incremental_reuse -file delay_test_incremental_reuse_routed.rpt"
+  create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file delay_test_clock_utilization_routed.rpt"
+  create_report "impl_1_route_report_bus_skew_0" "report_bus_skew -warn_on_violation -file delay_test_bus_skew_routed.rpt -pb delay_test_bus_skew_routed.pb -rpx delay_test_bus_skew_routed.rpx"
 OPTRACE "route_design reports" END { }
 OPTRACE "route_design misc" START { }
   close_msg_db -file route_design.pb
@@ -286,7 +283,7 @@ OPTRACE "route_design misc" START { }
 if {$rc} {
 OPTRACE "route_design write_checkpoint" START { CHECKPOINT }
 OPTRACE "route_design write_checkpoint" END { }
-  write_checkpoint -force ROB_routed_error.dcp
+  write_checkpoint -force delay_test_routed_error.dcp
   step_failed route_design
   return -code error $RESULT
 } else {

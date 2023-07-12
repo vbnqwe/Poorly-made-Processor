@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ROB_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="ROB_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="680.001 ns"></ZoomEndTime>
+      <Cursor1Time time="254.564 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="200"></NameColumnWidth>
+      <ValueColumnWidth column_width="95"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="26" />
+   <wvobject fp_name="/ROB_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/num_writes" type="array">
+      <obj_property name="ElementShortName">num_writes[2:0]</obj_property>
+      <obj_property name="ObjectShortName">num_writes[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/if_reg" type="array">
+      <obj_property name="ElementShortName">if_reg[3:0]</obj_property>
+      <obj_property name="ObjectShortName">if_reg[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/dest" type="array">
+      <obj_property name="ElementShortName">dest[0:3][4:0]</obj_property>
+      <obj_property name="ObjectShortName">dest[0:3][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/if_read_out_put" type="logic">
+      <obj_property name="ElementShortName">if_read_out_put</obj_property>
+      <obj_property name="ObjectShortName">if_read_out_put</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/no_available" type="logic">
+      <obj_property name="ElementShortName">no_available</obj_property>
+      <obj_property name="ObjectShortName">no_available</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/committed" type="array">
+      <obj_property name="ElementShortName">committed[0:7][31:0]</obj_property>
+      <obj_property name="ObjectShortName">committed[0:7][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/committed_dest" type="array">
+      <obj_property name="ElementShortName">committed_dest[0:7][4:0]</obj_property>
+      <obj_property name="ObjectShortName">committed_dest[0:7][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/num_commits" type="array">
+      <obj_property name="ElementShortName">num_commits[3:0]</obj_property>
+      <obj_property name="ObjectShortName">num_commits[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/data" type="array">
+      <obj_property name="ElementShortName">data[0:127][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data[0:127][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/valid_entry" type="array">
+      <obj_property name="ElementShortName">valid_entry[0:127]</obj_property>
+      <obj_property name="ObjectShortName">valid_entry[0:127]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/completed_entry" type="array">
+      <obj_property name="ElementShortName">completed_entry[0:127]</obj_property>
+      <obj_property name="ObjectShortName">completed_entry[0:127]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/dest_reg" type="array">
+      <obj_property name="ElementShortName">dest_reg[0:127][4:0]</obj_property>
+      <obj_property name="ObjectShortName">dest_reg[0:127][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/test" type="array">
+      <obj_property name="ElementShortName">test[2:0]</obj_property>
+      <obj_property name="ObjectShortName">test[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/newest" type="array">
+      <obj_property name="ElementShortName">newest[7:0]</obj_property>
+      <obj_property name="ObjectShortName">newest[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/newest_prev" type="array">
+      <obj_property name="ElementShortName">newest_prev[7:0]</obj_property>
+      <obj_property name="ObjectShortName">newest_prev[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/oldest" type="array">
+      <obj_property name="ElementShortName">oldest[7:0]</obj_property>
+      <obj_property name="ObjectShortName">oldest[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/oldest_prev" type="array">
+      <obj_property name="ElementShortName">oldest_prev[7:0]</obj_property>
+      <obj_property name="ObjectShortName">oldest_prev[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/data_read" type="array">
+      <obj_property name="ElementShortName">data_read[0:127][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_read[0:127][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/data_expected" type="array">
+      <obj_property name="ElementShortName">data_expected[0:127][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_expected[0:127][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/dest_read" type="array">
+      <obj_property name="ElementShortName">dest_read[0:127][4:0]</obj_property>
+      <obj_property name="ObjectShortName">dest_read[0:127][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/dest_expected" type="array">
+      <obj_property name="ElementShortName">dest_expected[0:127][4:0]</obj_property>
+      <obj_property name="ObjectShortName">dest_expected[0:127][4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/entry_valid_read" type="array">
+      <obj_property name="ElementShortName">entry_valid_read[0:127]</obj_property>
+      <obj_property name="ObjectShortName">entry_valid_read[0:127]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/entry_valid_expected" type="array">
+      <obj_property name="ElementShortName">entry_valid_expected[0:127]</obj_property>
+      <obj_property name="ObjectShortName">entry_valid_expected[0:127]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/completed_entry_read" type="array">
+      <obj_property name="ElementShortName">completed_entry_read[0:127]</obj_property>
+      <obj_property name="ObjectShortName">completed_entry_read[0:127]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ROB_tb/completed_entry_expected" type="logic">
+      <obj_property name="ElementShortName">completed_entry_expected</obj_property>
+      <obj_property name="ObjectShortName">completed_entry_expected</obj_property>
+   </wvobject>
+</wave_config>

@@ -108,7 +108,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     /*
     Generate logic used for physical register allocation
     */
-    /*genvar c;
+    /*
+    genvar c;
     generate
         for(c = 0; c < 4; c = c + 1) begin
             always @(posedge clk) begin
@@ -144,12 +145,54 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 end
                 else begin
                     allocation_failure[c] = 0; //can't use resources you don't need
-                e
+                end
+            end
+        end 
+    endgenerate*/
+    
+    
+    reg [2:0] offset [4];
+    assign offset[0] = 0;
+    assign offset[1] = if_reg[0];
+    assign offset[2] = if_reg[1] + if_reg[0];
+    assign offset[3] = if_reg[2] + if_reg[1] + if_reg[0];
+    genvar c;
+    generate
+        for(c = 0; c < 4; c = c + 1) begin
+            always @(posedge clk) begin
+                if((num_available_stored >= num_writes) & if_reg[c]) begin
+                    if((newest_prev + 1 + offset[c]) >= SIZE) begin
+                        //check if entry is valid at (newest + 1) % SIZE
+                        if(valid_entry[(newest_prev + 1 + offset[c]) % SIZE] == 0) begin
+                            //assign at (newest + 1) % SIZE if no previous allocation failurs
+                            valid_entry[(newest_prev + 1 + offset[c]) % SIZE] = 1;
+                            completed_entry[(newest_prev + 1 + offset[c]) % SIZE] = 0;
+                            dest_reg[(newest_prev + 1 + offset[c]) % SIZE] = dest[c];
+                            allocation_failure[c] = 0;
+                        end
+                        //(newest + 1) % SIZE is unavailable
+                        else begin
+                            allocation_failure[c] = 1;
+                        end
+                    end 
+                    else begin
+                        //check if entry is valid at newest + 1
+                        if(valid_entry[newest_prev + 1 + offset[c]] == 0) begin
+                            //assign at newest + 1
+                            valid_entry[newest_prev + 1 + offset[c]] = 1;
+                            completed_entry[newest_prev + 1 + offset[c]] = 0;
+                            dest_reg[newest_prev + 1 + offset[c]] = dest[c];
+                            allocation_failure[c] = 0;
+                        end
+                        //newest + 1 is unavailable
+                        else begin
+                            allocation_failure[c] = 1;
+                        end
+                    end
+                end
             end
         end
-        
-        
-    endgenerate*/
+    endgenerate
     
     genvar a;
     genvar b;
