@@ -29,6 +29,7 @@ Outputs:
     -no_available: flag that is thrown high if all physical registers are currently busy
     -committed: table of 8 entries where up to all 8 to none at all may be ready to be committed to ARF
     -committed_dest: destination register in ARF of commit
+    -committed_source: the physical register address, if the 
     -num_commits: number of correct entries that are commits in committed output, eg if 3, then first 3 entries are commits
 
     
@@ -51,6 +52,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output no_available,
         output reg [31:0] committed [8],
         output reg [4:0] committed_dest [8],
+        output reg [6:0] committed_source [8],
         output [3:0] num_commits
     );   
     
@@ -249,6 +251,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 if(ready_to_commit[e]) begin
                     committed[e] = data[eight_oldest[e]];
                     committed_dest[e] = dest_reg[eight_oldest[e]];
+                    committed_source[e] = eight_oldest[e];
                 end
             end
             

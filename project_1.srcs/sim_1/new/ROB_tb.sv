@@ -143,8 +143,12 @@ module ROB_tb(
         if_reg[1] = 0;
         #20;
         num_writes = 4;
-        dest[0] = 5'd1;
-        dest[1] = 5'd2;
+        if_reg[0] = 1;
+        if_reg[1] = 1;
+        #20;
+        num_writes = 2;
+        if_reg[0] = 0;
+        if_reg[1] = 0;
         #20;
         $stop;
     end

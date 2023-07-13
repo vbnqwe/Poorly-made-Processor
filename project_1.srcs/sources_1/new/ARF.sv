@@ -1,5 +1,13 @@
 `timescale 1ns / 1ps
 /*
+Destcription:
+    -Reads r1 and r2 assynchronously
+    -On posedge of clk, will commit/write to register file
+    -On posedge of clk, will set the destination register of the new instructions in rename stage to have an
+        editable tag
+    -Tag of destination register will be assynchronously written
+    
+    
 Inputs:
     -rX/rX_valid: if rX_valid[i] is high, then will read out rX[i]
     -dest/dest_valid: same as rX/rX_valid, but with additional logic for connecting to ROB
@@ -22,6 +30,10 @@ module ARF(
     reg [31:0] core [32];
     reg [4:0] rob_tag [32];
     reg rob_tag_valid [32];
+    reg just_allocated [32]; //In the case a commit takes too long
+    reg [4:0] dest_to_write [4];
+    
+    
     
     //assynchronous read
     genvar a;
@@ -33,6 +45,16 @@ module ARF(
         end 
     endgenerate
     
-    //synchronous write
+    genvar b;
+    generate 
+        for(b = 0; b < 4; b = b + 1) begin
+            always @(posedge clk) begin
+                dest_to_write[b] = dest[4];
+                if(dest_valid[b]) begin
+                    
+                end
+            end
+        end
+    endgenerate
     
 endmodule
