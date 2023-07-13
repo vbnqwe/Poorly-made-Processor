@@ -2,12 +2,12 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Tue Jul 11 13:53:00 2023
-# Process ID: 12188
+# Start of session at: Wed Jul 12 22:59:23 2023
+# Process ID: 8272
 # Current directory: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1
-# Command line: vivado.exe -log delay_test.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source delay_test.tcl -notrace
-# Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1/delay_test.vdi
+# Command line: vivado.exe -log ARF.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source ARF.tcl -notrace
+# Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1/ARF.vdi
 # Journal file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/impl_1\vivado.jou
 # Running On: LAPTOP-6SVIBHS9, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 4, Host memory: 16952 MB
 #-----------------------------------------------------------
-source delay_test.tcl -notrace
+source ARF.tcl -notrace

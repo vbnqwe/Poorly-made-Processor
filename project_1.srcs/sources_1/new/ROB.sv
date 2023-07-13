@@ -26,6 +26,7 @@ Inputs:
     
 Outputs:
     -r1_out/r2_out: data stored in physical register, will be 0 if rX_valid is low
+    -allocated: address of physical register, needs to be updated in ARF tag
     -no_available: flag that is thrown high if all physical registers are currently busy
     -committed: table of 8 entries where up to all 8 to none at all may be ready to be committed to ARF
     -committed_dest: destination register in ARF of commit
@@ -50,6 +51,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [31:0] r1_out [N_instr], 
         output [31:0] r2_out [N_instr],
         output no_available,
+        output reg [6:0] allocated [4],
         output reg [31:0] committed [8],
         output reg [4:0] committed_dest [8],
         output reg [6:0] committed_source [8],
@@ -171,6 +173,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                             completed_entry[(newest_prev + 1 + offset[c]) % SIZE] = 0;
                             dest_reg[(newest_prev + 1 + offset[c]) % SIZE] = dest[c];
                             allocation_failure[c] = 0;
+                            allocated[c] = (newest_prev + 1 + offset[c]) % SIZE;
                         end
                         //(newest + 1) % SIZE is unavailable
                         else begin
@@ -185,6 +188,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                             completed_entry[newest_prev + 1 + offset[c]] = 0;
                             dest_reg[newest_prev + 1 + offset[c]] = dest[c];
                             allocation_failure[c] = 0;
+                            allocated[c] = (newest_prev + 1 + offset[c]);
                         end
                         //newest + 1 is unavailable
                         else begin

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689108737" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
-  <File Type="PA-TCL" Name="delay_test.tcl"/>
-  <File Type="REPORTS-TCL" Name="delay_test_reports.tcl"/>
-  <File Type="RDS-RDS" Name="delay_test.vds"/>
-  <File Type="RDS-DCP" Name="delay_test.dcp"/>
+<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689227869" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
+  <File Type="PA-TCL" Name="ARF.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="ARF_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="ARF_reports.tcl"/>
+  <File Type="RDS-RDS" Name="ARF.vds"/>
+  <File Type="RDS-UTIL" Name="ARF_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="ARF_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="ARF.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="ARF_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="ARF_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">
@@ -64,7 +69,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="delay_test"/>
+      <Option Name="TopModule" Val="ARF"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
