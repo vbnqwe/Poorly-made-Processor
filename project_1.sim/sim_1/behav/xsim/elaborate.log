@@ -1,15 +1,15 @@
 Vivado Simulator v2022.1
 Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2022.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot ROB_tb_behav xil_defaultlib.ROB_tb xil_defaultlib.glbl -log elaborate.log 
+Running: C:/Xilinx/Vivado/2022.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot ARF_tb_behav xil_defaultlib.ARF_tb xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-5021] port 'r1' is not connected on this instance [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv:91]
+WARNING: [VRFC 10-5021] port 'r1' is not connected on this instance [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ARF_tb.sv:17]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.ROB
-Compiling module xil_defaultlib.ROB_tb
+Compiling module xil_defaultlib.ARF
+Compiling module xil_defaultlib.ARF_tb
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot ROB_tb_behav
+Built simulation snapshot ARF_tb_behav

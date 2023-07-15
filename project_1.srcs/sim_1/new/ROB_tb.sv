@@ -24,9 +24,13 @@ module ROB_tb;
     wire [4:0] dest_reg [128];
     wire [6:0] allocated [4];
     
-    bit [2:0] test;
+    wire [2:0] num_available_stored;
     
-    assign test = DUT.num_available;
+    assign num_available_stored = DUT.num_available_stored;
+    
+    bit [2:0] num_available;
+    
+    assign num_available = DUT.num_available;
     
     wire [7:0] newest, newest_prev, oldest, oldest_prev;
     
@@ -80,6 +84,13 @@ module ROB_tb;
         num_writes = 4;
         if_reg[0] = 1;
         if_reg[1] = 1;
+        #20;
+        DUT.completed_entry[1] = 1;
+        DUT.completed_entry[2] = 1;
+        DUT.completed_entry[3] = 1;
+        DUT.completed_entry[4] = 1;
+        #20;
+        //can write 4 here
         #20;
         num_writes = 2;
         if_reg[0] = 0;

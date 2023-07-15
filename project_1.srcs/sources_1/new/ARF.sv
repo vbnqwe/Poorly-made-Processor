@@ -44,8 +44,9 @@ module ARF(
     
     genvar a;
     generate
+        //logic here is redunant, remove at some point when you have time
         for(a = 0; a < 32; a = a + 1) begin
-            always @(posedge clk) begin
+            always_comb begin
                 if((((a == logical_dest[0]) & logical_dest_valid[0]) | ((a == logical_dest[1]) & logical_dest_valid[1]) | ((a == logical_dest[2]) & logical_dest_valid[2]) | ((a == logical_dest[3]) & logical_dest_valid[3])) & !no_available) begin
                     set_tag[a] = 1;
                 end else 
@@ -67,9 +68,12 @@ module ARF(
         
         //VERY IMPORTANT TO SEE: TO ENSURE THAT TAG CAN BE READ ON NEXT CYCLE THIS IS WRITTEN ON NEGEDGE
         //THIS MIGHT BE TOO SLOW SO LOOK FOR ALTERNATIVE SOLUTIONS
+        //See github issue for potential solution
         for(b = 0; b < 32; b = b + 1) begin
-            always @(negedge clk) begin
-                tag[b] = intermediate_tag[b];
+            always @(posedge clk) begin
+                if(!no_available) begin
+                    tag[b] = intermediate_tag[b];
+                end
             end
         end
     endgenerate

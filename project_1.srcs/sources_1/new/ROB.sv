@@ -50,12 +50,13 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         input r2_valid [N_instr],
         output [31:0] r1_out [N_instr], 
         output [31:0] r2_out [N_instr],
-        output no_available,
+        output reg no_available,
         output reg [6:0] allocated [4],
         output reg [31:0] committed [8],
         output reg [4:0] committed_dest [8],
         output reg [6:0] committed_source [8],
-        output [3:0] num_commits
+        output [3:0] num_commits,
+        output [2:0] num_available_out //just num available, used for ARF
     );   
     
     //tags
@@ -104,10 +105,11 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         num_available_stored = num_available;
     end
     
-    assign no_available = (|allocation_failure) | (num_available < num_writes);
+    assign num_available_out = num_available;
+    
+    assign no_available = /*(|allocation_failure) | */(num_available != 4);
     //assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
-    
-    
+
     
     /*
     Generate logic used for physical register allocation
@@ -164,7 +166,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     generate
         for(c = 0; c < 4; c = c + 1) begin
             always @(posedge clk) begin
-                if((num_available_stored >= num_writes) & if_reg[c]) begin
+                if((num_available_stored == 4) & if_reg[c]) begin
                     if((newest_prev + 1 + offset[c]) >= SIZE) begin
                         //check if entry is valid at (newest + 1) % SIZE
                         if(valid_entry[(newest_prev + 1 + offset[c]) % SIZE] == 0) begin
