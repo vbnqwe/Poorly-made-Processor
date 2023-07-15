@@ -1,7 +1,7 @@
-Running: xsim.dir/ARF_tb_behav/xsimk.exe -simmode gui -wdb ARF_tb_behav.wdb -simrunnum 0 -socket 60151
+Running: xsim.dir/ARF_tb_behav/xsimk.exe -simmode gui -wdb ARF_tb_behav.wdb -simrunnum 0 -socket 56100
 Design successfully loaded
-Design Loading Memory Usage: 7152 KB (Peak: 7152 KB)
+Design Loading Memory Usage: 7172 KB (Peak: 7172 KB)
 Design Loading CPU Usage: 15 ms
 Simulation completed
-Simulation Memory Usage: 7608 KB (Peak: 7608 KB)
-Simulation CPU Usage: 15 ms
+Simulation Memory Usage: 7760 KB (Peak: 7760 KB)
+Simulation CPU Usage: 30 ms
