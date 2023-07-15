@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.1 (win64) Build 3526262 Mon Apr 18 15:48:16 MDT 2022
-| Date         : Wed Jul 12 23:00:15 2023
+| Date         : Thu Jul 13 19:06:38 2023
 | Host         : LAPTOP-6SVIBHS9 running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -report_unconstrained -file ARF_timing_summary_routed.rpt -pb ARF_timing_summary_routed.pb -rpx ARF_timing_summary_routed.rpx -warn_on_violation
 | Design       : ARF
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-         NA           NA                     NA                   NA           NA           NA                     NA                   NA           NA           NA                      NA                    NA  
+        inf        0.000                      0                    1          inf        0.000                      0                    1           NA           NA                      NA                    NA  
 
 
 There are no user specified timing constraints.
@@ -194,11 +194,80 @@ Path Group    From Clock    To Clock
 
 Path Group    From Clock    To Clock    
 ----------    ----------    --------    
+(none)                                    
 
 
 ------------------------------------------------------------------------------------------------
 | Timing Details
 | --------------
 ------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------
+Path Group:  (none)
+From Clock:  
+  To Clock:  
+
+Max Delay             1 Endpoint
+Min Delay             1 Endpoint
+--------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 b
+                            (input port)
+  Destination:            c
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        5.393ns  (logic 3.318ns (61.520%)  route 2.075ns (38.480%))
+  Logic Levels:           3  (IBUF=1 LUT2=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    P18                                               0.000     0.000 r  b (IN)
+                         net (fo=0)                   0.000     0.000    b
+    P18                  IBUF (Prop_ibuf_I_O)         0.819     0.819 r  b_IBUF_inst/O
+                         net (fo=1, routed)           0.833     1.651    b_IBUF
+    SLICE_X0Y1           LUT2 (Prop_lut2_I1_O)        0.053     1.704 r  c_OBUF_inst_i_1/O
+                         net (fo=1, routed)           1.242     2.947    c_OBUF
+    R18                  OBUF (Prop_obuf_I_O)         2.446     5.393 r  c_OBUF_inst/O
+                         net (fo=0)                   0.000     5.393    c
+    R18                                                               r  c (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 b
+                            (input port)
+  Destination:            c
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        2.045ns  (logic 1.386ns (67.771%)  route 0.659ns (32.229%))
+  Logic Levels:           3  (IBUF=1 LUT2=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    P18                                               0.000     0.000 r  b (IN)
+                         net (fo=0)                   0.000     0.000    b
+    P18                  IBUF (Prop_ibuf_I_O)         0.083     0.083 r  b_IBUF_inst/O
+                         net (fo=1, routed)           0.352     0.435    b_IBUF
+    SLICE_X0Y1           LUT2 (Prop_lut2_I1_O)        0.028     0.463 r  c_OBUF_inst_i_1/O
+                         net (fo=1, routed)           0.307     0.770    c_OBUF
+    R18                  OBUF (Prop_obuf_I_O)         1.275     2.045 r  c_OBUF_inst/O
+                         net (fo=0)                   0.000     2.045    c
+    R18                                                               r  c (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
 
 

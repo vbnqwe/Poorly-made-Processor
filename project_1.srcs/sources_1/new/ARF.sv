@@ -16,58 +16,42 @@ Outputs:
 */
 
 module ARF(
+        input [4:0] logical_dest [4],
+        input [3:0] logical_dest_valid,
         input clk,
-        input [4:0] r1 [4],
-        input [4:0] r2 [4],
-        input [3:0] r1_valid,
-        input [3:0] r2_valid,
-        input [4:0] dest [4],
-        input [6:0] physical_reg [4],
-        input no_available,
-        input [3:0] dest_valid,
-        output [4:0] r1_out [4],
-        output [4:0] r2_out [4]  
+        input [6:0] physical_dest [4],
+        input no_available
     );
     
-    reg [31:0] core [32];
-    reg [4:0] rob_tag [32];
-    reg rob_tag_valid [32];
-    reg just_allocated [32]; //In the case a commit takes too long
-    reg [4:0] dest_to_write [4];
+    reg [31:0] core [32]; //data storage
+    reg [6:0] tag [32];
+    reg set_tag [32]; //if high, tag at index can be changed
+    reg valid [32]; //if data in ARF entry is valid
     
     
-    reg [2:0] offset [4];
-    assign offset[0] = 0;
-    assign offset[1] = dest_valid[0];
-    assign offset[2] = dest_valid[1] + dest_valid[0];
-    assign offset[3] = dest_valid[2] + dest_valid[1] + dest_valid[0];
-    
-    
-    //assynchronous read
     genvar a;
     generate
-        for(a = 0; a < 4; a = a + 1) begin
-            assign r1_out[a] = core[r1[a]];
-            assign r2_out[a] = core[r2[a]];
-            assign dest[a] = rob_tag[a];
-        end 
-    endgenerate
-    
-    //set what logical registers to set physical register tags
-    genvar b;
-    generate 
-        for(b = 0; b < 4; b = b + 1) begin
+        for(a = 0; a < 32; a = a + 1) begin
             always @(posedge clk) begin
-                dest_to_write[b] = dest[4];
-            end
-            
-            always_comb begin
-                //if registers were allocated, dest_valid[b] is used for ordering purposes
-                if(dest_valid[b] & !no_available) begin
-                    rob_tag[dest[b]] = physical_reg[b];
-                end
+                if(((a == logical_dest[0]) & logical_dest_valid[0]) | ((a == logical_dest[1]) & logical_dest_valid[1]) | ((a == logical_dest[2]) & logical_dest_valid[2]) | ((a == logical_dest[3]) & logical_dest_valid[3])) begin
+                    set_tag[a] = 1;
+                end else 
+                    set_tag[a] = 0;
             end
         end
     endgenerate
+    
+    genvar b;
+    generate
+        for(b = 0; b < 4; b = b + 1) begin
+            always_comb begin
+                if(set_tag[logical_dest[a]] & !no_available)
+                    tag[logical_dest[a]] = physical_dest[a];
+            end
+        end
+    endgenerate
+    
+    
+    
     
 endmodule

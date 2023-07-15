@@ -2,8 +2,8 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Wed Jul 12 22:57:55 2023
-# Process ID: 10848
+# Start of session at: Thu Jul 13 19:04:34 2023
+# Process ID: 21284
 # Current directory: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1
 # Command line: vivado.exe -log ARF.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ARF.tcl
 # Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ARF.vds
@@ -11,7 +11,6 @@
 # Running On: LAPTOP-6SVIBHS9, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 4, Host memory: 16952 MB
 #-----------------------------------------------------------
 source ARF.tcl -notrace
-create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:12 . Memory (MB): peak = 1284.375 ; gain = 0.000
 Command: read_checkpoint -auto_incremental -incremental C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/utils_1/imports/synth_1/ROB.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/utils_1/imports/synth_1/ROB.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -19,153 +18,40 @@ Command: synth_design -top ARF -part xc7k70tfbv676-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 11588
+INFO: [Synth 8-7075] Helper process launched with PID 9584
 CRITICAL WARNING: [Synth 8-9873] overwriting previous definition of module 'delay_test' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_destination_logic.sv:70]
 INFO: [Synth 8-9937] previous definition of design element 'delay_test' is here [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv:43]
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Starting Synthesize : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'ARF' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-6104] Input port 'dest' has an internal driver [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-6104] Input port 'dest' has an internal driver [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-6104] Input port 'dest' has an internal driver [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-6104] Input port 'dest' has an internal driver [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-324] index 4 out of range [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:61]
-WARNING: [Synth 8-324] index 4 out of range [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:61]
-WARNING: [Synth 8-324] index 4 out of range [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:61]
-WARNING: [Synth 8-324] index 4 out of range [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:61]
 INFO: [Synth 8-6155] done synthesizing module 'ARF' (0#1) [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-87] always_comb on 'genblk2[0].rob_tag_reg[0]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-87] always_comb on 'genblk2[0].rob_tag_reg[1]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-87] always_comb on 'genblk2[0].rob_tag_reg[2]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-87] always_comb on 'genblk2[0].rob_tag_reg[3]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-87] always_comb on 'genblk2[1].rob_tag_reg[0]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[1].rob_tag_reg[1]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[1].rob_tag_reg[2]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[1].rob_tag_reg[3]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[2].rob_tag_reg[0]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[2].rob_tag_reg[1]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[2].rob_tag_reg[2]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[2].rob_tag_reg[3]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[3].rob_tag_reg[0]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[3].rob_tag_reg[1]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[3].rob_tag_reg[2]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-87] always_comb on 'genblk2[3].rob_tag_reg[3]' did not result in combinational logic [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-4767] Trying to implement RAM ' ' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
-	1: Unable to determine number of words or word size in RAM. 
-	2: No valid read/write found for RAM. 
-RAM dissolved into registers
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-3848] Net core in module/entity ARF does not have driver. [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:32]
-WARNING: [Synth 8-7129] Port clk in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[3] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[2] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[1] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[0] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[3] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[2] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[1] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[0] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[0][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[0][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[1][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[1][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[2][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[2][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[3][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[3][5] in module ARF is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Synthesize : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7k70tfbv676-1
+---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7k70tfbv676-1
----------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1284.375 ; gain = 0.000
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-Start Preparing Guide Design
----------------------------------------------------------------------------------
-CRITICAL WARNING: [Synth 8-6895] The reference checkpoint C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/utils_1/imports/synth_1/ROB.dcp is not suitable for use with incremental synthesis for this design. Please regenerate the checkpoint for this design with -incremental_synth switch in the same Vivado session that synth_design has been run. Synthesis will continue with the default flow
----------------------------------------------------------------------------------
-Finished Doing Graph Differ : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Preparing Guide Design : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[0].rob_tag_reg[0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[0].rob_tag_reg[1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[0].rob_tag_reg[2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[0].rob_tag_reg[3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[1].rob_tag_reg[0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[1].rob_tag_reg[1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[1].rob_tag_reg[2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[1].rob_tag_reg[3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[2].rob_tag_reg[0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[2].rob_tag_reg[1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[2].rob_tag_reg[2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[2].rob_tag_reg[3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[3].rob_tag_reg[0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[3].rob_tag_reg[1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[3].rob_tag_reg[2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
-WARNING: [Synth 8-327] inferring latch for variable 'genblk2[3].rob_tag_reg[3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:67]
----------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 1284.375 ; gain = 0.000
----------------------------------------------------------------------------------
-
-
-Incremental Synthesis Report Summary:
-
-1. Incremental synthesis run: no
-
-   Reason for not running incremental synthesis : 
-
-
-INFO: [Synth 8-7130] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
-+---Muxes : 
-	   3 Input    5 Bit        Muxes := 16    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -183,158 +69,21 @@ No constraint files found.
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-7129] Port clk in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[3] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[2] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[1] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r1_valid[0] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[3] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[2] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[1] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port r2_valid[0] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[0][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[0][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[1][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[1][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[2][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[2][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[3][6] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-7129] Port physical_reg[3][5] in module ARF is either unconnected or has no load
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[0][4]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][4] with 1st driver pin 'genblk2[0].rob_tag_reg[0][4]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][4] with 2nd driver pin 'dest[0][4]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[0][3]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][3] with 1st driver pin 'genblk2[0].rob_tag_reg[0][3]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][3] with 2nd driver pin 'dest[0][3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[0][2]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][2] with 1st driver pin 'genblk2[0].rob_tag_reg[0][2]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][2] with 2nd driver pin 'dest[0][2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[0][1]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][1] with 1st driver pin 'genblk2[0].rob_tag_reg[0][1]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][1] with 2nd driver pin 'dest[0][1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[0][0]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][0] with 1st driver pin 'genblk2[0].rob_tag_reg[0][0]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[0][0] with 2nd driver pin 'dest[0][0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[1][4]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][4] with 1st driver pin 'genblk2[0].rob_tag_reg[1][4]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][4] with 2nd driver pin 'dest[1][4]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[1][3]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][3] with 1st driver pin 'genblk2[0].rob_tag_reg[1][3]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][3] with 2nd driver pin 'dest[1][3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[1][2]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][2] with 1st driver pin 'genblk2[0].rob_tag_reg[1][2]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][2] with 2nd driver pin 'dest[1][2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[1][1]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][1] with 1st driver pin 'genblk2[0].rob_tag_reg[1][1]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][1] with 2nd driver pin 'dest[1][1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[1][0]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][0] with 1st driver pin 'genblk2[0].rob_tag_reg[1][0]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[1][0] with 2nd driver pin 'dest[1][0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[2][4]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][4] with 1st driver pin 'genblk2[0].rob_tag_reg[2][4]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][4] with 2nd driver pin 'dest[2][4]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[2][3]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][3] with 1st driver pin 'genblk2[0].rob_tag_reg[2][3]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][3] with 2nd driver pin 'dest[2][3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[2][2]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][2] with 1st driver pin 'genblk2[0].rob_tag_reg[2][2]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][2] with 2nd driver pin 'dest[2][2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[2][1]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][1] with 1st driver pin 'genblk2[0].rob_tag_reg[2][1]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][1] with 2nd driver pin 'dest[2][1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[2][0]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][0] with 1st driver pin 'genblk2[0].rob_tag_reg[2][0]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[2][0] with 2nd driver pin 'dest[2][0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[3][4]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][4] with 1st driver pin 'genblk2[0].rob_tag_reg[3][4]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][4] with 2nd driver pin 'dest[3][4]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[3][3]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][3] with 1st driver pin 'genblk2[0].rob_tag_reg[3][3]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][3] with 2nd driver pin 'dest[3][3]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[3][2]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][2] with 1st driver pin 'genblk2[0].rob_tag_reg[3][2]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][2] with 2nd driver pin 'dest[3][2]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[3][1]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][1] with 1st driver pin 'genblk2[0].rob_tag_reg[3][1]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][1] with 2nd driver pin 'dest[3][1]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[0].rob_tag_reg[3][0]) is unused and will be removed from module ARF.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][0] with 1st driver pin 'genblk2[0].rob_tag_reg[3][0]/Q' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:52]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin dest[3][0] with 2nd driver pin 'dest[3][0]' [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv:18]
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[0][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[0][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[0][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[0][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[0][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[1][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[1][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[1][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[1][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[1][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[2][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[2][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[2][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[2][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[2][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[3][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[3][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[3][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[3][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[1].rob_tag_reg[3][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[0][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[0][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[0][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[0][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[0][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[1][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[1][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[1][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[1][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[1][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[2][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[2][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[2][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[2][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[2][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[3][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[3][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[3][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[3][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[2].rob_tag_reg[3][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[0][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[0][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[0][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[0][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[0][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[1][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[1][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[1][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[1][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[1][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[2][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[2][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[2][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[2][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[2][0]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[3][4]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[3][3]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[3][2]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[3][1]) is unused and will be removed from module ARF.
-WARNING: [Synth 8-3332] Sequential element (genblk2[3].rob_tag_reg[3][0]) is unused and will be removed from module ARF.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:40 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:40 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:40 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Technology Mapping : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -352,37 +101,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -398,35 +147,37 @@ Report Cell Usage:
 +------+-----+------+
 |      |Cell |Count |
 +------+-----+------+
-|1     |OBUF |    40|
+|1     |LUT2 |     1|
+|2     |IBUF |     2|
+|3     |OBUF |     1|
 +------+-----+------+
 
 Report Instance Areas: 
 +------+---------+-------+------+
 |      |Instance |Module |Cells |
 +------+---------+-------+------+
-|1     |top      |       |    40|
+|1     |top      |       |     4|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 42 critical warnings and 188 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
-Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:45 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Synthesis finished with 0 errors, 1 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1294.871 ; gain = 0.000
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1294.871 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1284.375 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1294.871 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete, checksum: 3ca5804c
+Synth Design complete, checksum: ec45265c
 INFO: [Common 17-83] Releasing license: Synthesis
-16 Infos, 188 Warnings, 42 Critical Warnings and 0 Errors encountered.
+17 Infos, 1 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:48 . Memory (MB): peak = 1284.375 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:55 ; elapsed = 00:00:58 . Memory (MB): peak = 1294.871 ; gain = 0.000
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
 INFO: [Common 17-1381] The checkpoint 'C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ARF.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file ARF_utilization_synth.rpt -pb ARF_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Jul 12 22:59:15 2023...
+INFO: [Common 17-206] Exiting Vivado at Thu Jul 13 19:05:40 2023...

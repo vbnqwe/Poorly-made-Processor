@@ -2,8 +2,8 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Wed Jul 12 22:57:55 2023
-# Process ID: 10848
+# Start of session at: Thu Jul 13 19:04:34 2023
+# Process ID: 21284
 # Current directory: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1
 # Command line: vivado.exe -log ARF.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ARF.tcl
 # Log file: C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.runs/synth_1/ARF.vds

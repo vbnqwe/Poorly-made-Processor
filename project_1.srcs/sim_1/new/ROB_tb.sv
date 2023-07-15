@@ -6,9 +6,7 @@ Things to test:
     -Condition of when to write regs, such as when there are no physical registers available
 */
 
-module ROB_tb(
-        
-    );
+module ROB_tb;
     
     bit clk;
     bit [2:0] num_writes;
@@ -24,6 +22,7 @@ module ROB_tb(
     wire valid_entry [128];
     wire completed_entry [128];
     wire [4:0] dest_reg [128];
+    wire [6:0] allocated [4];
     
     bit [2:0] test;
     
@@ -77,7 +76,7 @@ module ROB_tb(
         $stop;
     end
     
-    ROB DUT(.clk, .num_writes, .if_reg, .dest, .no_available, .committed, .committed_dest, .num_commits);
+    ROB DUT(.clk, .num_writes, .if_reg, .dest, .no_available, .committed, .committed_dest, .num_commits, .allocated);
     
     always begin
         clk = 0; 
@@ -85,5 +84,7 @@ module ROB_tb(
         clk = 1;
         #10;
     end
+    
+    
     
 endmodule

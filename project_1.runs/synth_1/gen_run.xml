@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689227869" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689300270" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
   <File Type="PA-TCL" Name="ARF.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="ARF_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ARF_reports.tcl"/>
   <File Type="RDS-RDS" Name="ARF.vds"/>
   <File Type="RDS-UTIL" Name="ARF_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="ARF_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="ARF.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="ARF_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="ARF_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">
@@ -26,13 +23,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/delay_test.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/ARF.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -61,6 +51,13 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/top.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ARF.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

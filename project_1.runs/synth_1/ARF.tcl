@@ -70,7 +70,9 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 2
+set_param checkpoint.writeSynthRtdsInDcp 1
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7k70tfbv676-1
 
@@ -89,11 +91,11 @@ read_verilog -library xil_defaultlib -sv {
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/rename_top.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/delay_test.sv
-  C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_destination_logic.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Decode_Stage.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Fetch_stage.sv
   C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/top.sv
+  C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
