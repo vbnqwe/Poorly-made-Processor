@@ -46,10 +46,9 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         input [4:0] dest [N_instr], 
         input [N_phys_regs-1:0] r1 [N_instr], 
         input [N_phys_regs-1:0] r2 [N_instr], 
-        input r1_valid [N_instr], 
-        input r2_valid [N_instr],
-        output [31:0] r1_out [N_instr], 
+        output [31:0] r1_out [4], 
         output [31:0] r2_out [N_instr],
+        output [3:0] r1_ready, r2_ready,
         output reg no_available,
         output reg [6:0] allocated [4],
         output reg [31:0] committed [8],
@@ -313,6 +312,15 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         end
     end
     
+    genvar g;
+    generate 
+        for(g = 0; g < 4; g = g + 1) begin
+            assign r1_out[g] = data[r1[g]];
+            assign r2_out[g] = data[r2[g]];
+            assign r1_ready[g] = valid_entry[r1[g]];
+            assign r2_ready[g] = valid_entry[r2[g]];
+        end 
+    endgenerate
     
 endmodule
 

@@ -12,11 +12,24 @@ module rename_top(
         output [3:0] physical_dest_valid,
         output [31:0] r1_out [4],
         output [31:0] r2_out [4],
+        output [3:0] r1_ready, r2_ready,
+        output [6:0] r1_source [4],
+        output [6:0] r2_source [4],
         output stall_internal
     );
     
     wire [6:0] allocated [4];
     wire no_available;
+    
+    
+    wire [31:0] r1_out_ARF [4];
+    wire [31:0] r2_out_ARF [4];
+    wire [31:0] r1_out_ROB [4];
+    wire [31:0] r2_out_ROB [4];
+    
+    wire [6:0] r1_tag [4];
+    wire [6:0] r2_tag [4];
+    
 
     
     ARF reg_file(
@@ -25,12 +38,14 @@ module rename_top(
         .clk (clk),
         .physical_dest (allocated),
         .no_available (no_available),       
-        .r1 (),          
-        .r2 (),           
-        .r1_out (),    
-        .r2_out (),
+        .r1 (r1),          
+        .r2 (r2),           
+        .r1_out (r1_out_ARF),    
+        .r2_out (r2_out_ARF),
         .r1_ready (),
-        .r2_ready ()
+        .r2_ready (),
+        .r1_tag (r1_tag),
+        .r2_tag (r2_tag)
     );
     
     
@@ -39,12 +54,12 @@ module rename_top(
         .clk (),
         .if_reg (), 
         .dest (), 
-        .r1 (), 
-        .r2 (), 
-        .r1_valid (), 
-        .r2_valid (),
-        .r1_out (), 
-        .r2_out (),
+        .r1 (r1_tag), 
+        .r2 (r2_tag), 
+        .r1_ready (), 
+        .r2_ready (),
+        .r1_out (r1_out_ROB), 
+        .r2_out (r2_out_ROB),
         .no_available (no_available),
         .allocated (allocated),
         .committed (),
