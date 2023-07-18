@@ -29,6 +29,12 @@ module ARF_tb(
         physical_dest[1] = 1;
         physical_dest[2] = 2;
         #20;
+        logical_dest_valid = 4'b1001;
+        physical_dest[0] = 3;
+        physical_dest[3] = 4;
+        #20;
+        logical_dest_valid = 4'b0010;
+        physical_dest[2] = 5;
         #20;
         $stop;
     end
