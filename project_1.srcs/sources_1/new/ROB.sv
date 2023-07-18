@@ -55,6 +55,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output reg [4:0] committed_dest [8],
         output reg [6:0] committed_source [8],
         output [3:0] num_commits,
+        output [7:0] committed_valid,
         output [2:0] num_available_out //just num available, used for ARF
     );   
     
@@ -252,6 +253,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     genvar e;
     generate
         for(e = 0; e < 8; e = e + 1)begin
+            assign committed_valid[e] = ready_to_commit[e];
             always_comb begin
                 if(ready_to_commit[e]) begin
                     committed[e] = data[eight_oldest[e]];
