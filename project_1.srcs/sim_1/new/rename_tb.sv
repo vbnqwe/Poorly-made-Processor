@@ -20,6 +20,7 @@ module rename_tb(
     wire [6:0] r2_source [4];
     wire stall_internal;
     
+    
     rename_top DUT(
         .clk, 
         .num_writes, 
@@ -38,7 +39,8 @@ module rename_tb(
     );
     
     initial begin
-    
+        num_writes = 4;
+        
     end
     
     always begin
