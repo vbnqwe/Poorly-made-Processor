@@ -5,7 +5,6 @@
   <File Type="ROUTE-PWR-SUM" Name="ARF_power_summary_routed.pb"/>
   <File Type="REPORTS-TCL" Name="ARF_reports.tcl"/>
   <File Type="BITSTR-MSK" Name="ARF.msk"/>
-  <File Type="ROUTE-CLK" Name="ARF_clock_utilization_routed.rpt"/>
   <File Type="RDI-RDI" Name="ARF.vdi"/>
   <File Type="BG-BIT" Name="ARF.bit"/>
   <File Type="BG-DRC" Name="ARF.drc"/>
@@ -17,34 +16,16 @@
   <File Type="BITSTR-MMI" Name="ARF.mmi"/>
   <File Type="ROUTE-METHODOLOGY-DRC" Name="ARF_methodology_drc_routed.rpt"/>
   <File Type="BITSTR-SYSDEF" Name="ARF.sysdef"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="ARF_methodology_drc_routed.pb"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
   <File Type="BITSTR-LTX" Name="ARF.ltx"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="OPT-DRC" Name="ARF_drc_opted.rpt"/>
   <File Type="OPT-HWDEF" Name="ARF.hwdef"/>
-  <File Type="PLACE-IO" Name="ARF_io_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="ARF_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="ARF_utilization_placed.pb"/>
-  <File Type="ROUTE-RQS" Name="ARF_routed.rqs"/>
-  <File Type="PLACE-CTRL" Name="ARF_control_sets_placed.rpt"/>
   <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="ARF_incremental_reuse_pre_placed.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
-  <File Type="ROUTE-DRC" Name="ARF_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="ARF_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="ARF_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="ARF_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="ARF_route_status.pb"/>
   <File Type="ROUTE-DCP" Name="ARF_routed.dcp"/>
   <File Type="ROUTE-ERROR-DCP" Name="ARF_routed_error.dcp"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="ARF_routed_bb.dcp"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="ARF_timing_summary_routed.rpt"/>
   <File Type="ROUTE-TIMING-PB" Name="ARF_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="ARF_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-BUS-SKEW" Name="ARF_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="ARF_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="ARF_bus_skew_routed.rpx"/>
   <File Type="OPT-DCP" Name="ARF_opt.dcp"/>
   <File Type="PLACE-DCP" Name="ARF_placed.dcp"/>
   <File Type="PWROPT-DCP" Name="ARF_pwropt.dcp"/>
@@ -52,15 +33,34 @@
   <File Type="PHYSOPT-DCP" Name="ARF_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="ARF_postroute_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="ARF_postroute_physopt_bb.dcp"/>
-  <File Type="ROUTE-DRC-RPX" Name="ARF_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="ARF_methodology_drc_routed.rpx"/>
   <File Type="PDI-FILE" Name="ARF.pdi"/>
   <File Type="RCFI_FILE" Name="ARF.rcfi"/>
   <File Type="CFI_FILE" Name="ARF.cfi"/>
   <File Type="RNPI_FILE" Name="ARF.rnpi"/>
   <File Type="NPI_FILE" Name="ARF.npi"/>
   <File Type="RBD_FILE" Name="ARF.rbd"/>
+  <File Type="PLACE-CTRL" Name="ARF_control_sets_placed.rpt"/>
+  <File Type="ROUTE-RQS" Name="ARF_routed.rqs"/>
   <File Type="POSTROUTE-PHYSOPT-RQS" Name="ARF_postroute_physopted.rqs"/>
+  <File Type="ROUTE-DRC" Name="ARF_drc_routed.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
+  <File Type="OPT-DRC" Name="ARF_drc_opted.rpt"/>
+  <File Type="PLACE-UTIL" Name="ARF_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="ARF_utilization_placed.pb"/>
+  <File Type="PLACE-IO" Name="ARF_io_placed.rpt"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="ARF_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="ARF_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="ARF_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="ARF_route_status.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="ARF_power_routed.rpx"/>
+  <File Type="ROUTE-DRC-RPX" Name="ARF_drc_routed.rpx"/>
+  <File Type="ROUTE-DRC-PB" Name="ARF_drc_routed.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="ARF_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="ARF_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-CLK" Name="ARF_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="ARF_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="ARF_bus_skew_routed.rpx"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="ARF_bus_skew_routed.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">

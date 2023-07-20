@@ -27,6 +27,7 @@ module ARF(
         input clk,
         input [6:0] physical_dest [4],
         input no_available,
+        input stall_external,
         input [4:0] r1 [4],
         input [4:0] r2 [4],
         input [31:0] committed [8],
@@ -39,6 +40,7 @@ module ARF(
         output [6:0] r2_tag [4]
     );
     
+    
     reg [31:0] core [32]; //data storage
     reg [6:0] tag [32];
     wire [6:0] tag_wire [32];
@@ -46,13 +48,18 @@ module ARF(
     reg set_tag_prev [32];
     reg valid [32]; //if data in ARF entry is valid
     
+    reg [6:0] tag_to_write [4];
+    reg [4:0] prev_dest1 [4];
+    reg [4:0] prev_dest [4];
+    reg [3:0] prev_valid;
+    
     assign tag_wire = tag;
         
     int i;
     initial begin
         for(i = 0; i < 32; i++) begin
             set_tag[i] = 0;
-            valid[i] = 0;
+            valid[i] = 1;
         end
     end
     
@@ -113,40 +120,95 @@ module ARF(
        assign core_not[d] = core[committed_dest[d]];
        assign valid_not[d] = valid[committed_dest[d]];
     end
+   
     
     always @(posedge clk) begin
+        prev_valid <= logical_dest_valid;
+        prev_dest1[0] <= logical_dest[0];
+        prev_dest1[1] <= logical_dest[1];
+        prev_dest1[2] <= logical_dest[2];
+        prev_dest1[3] <= logical_dest[3];
+ 
+    
         //Commit occurs first
-        core[committed_dest[0]] = committed_valid[0] ? committed[0] : core_not[0];
-        core[committed_dest[1]] = committed_valid[1] ? committed[1] : core_not[1];
-        core[committed_dest[2]] = committed_valid[2] ? committed[2] : core_not[2];
-        core[committed_dest[3]] = committed_valid[3] ? committed[3] : core_not[3];
-        core[committed_dest[4]] = committed_valid[4] ? committed[4] : core_not[4];
-        core[committed_dest[5]] = committed_valid[5] ? committed[5] : core_not[5];
-        core[committed_dest[6]] = committed_valid[6] ? committed[6] : core_not[6];
-        core[committed_dest[7]] = committed_valid[7] ? committed[7] : core_not[7];    
-        valid[committed_dest[0]] = committed_valid[0] ? 1 : valid_not[0];  
-        valid[committed_dest[1]] = committed_valid[1] ? 1 : valid_not[1];  
-        valid[committed_dest[2]] = committed_valid[2] ? 1 : valid_not[2];  
-        valid[committed_dest[3]] = committed_valid[3] ? 1 : valid_not[3];  
-        valid[committed_dest[4]] = committed_valid[4] ? 1 : valid_not[4];  
-        valid[committed_dest[5]] = committed_valid[5] ? 1 : valid_not[5];  
-        valid[committed_dest[6]] = committed_valid[6] ? 1 : valid_not[6];  
-        valid[committed_dest[7]] = committed_valid[7] ? 1 : valid_not[7];   
+        core[committed_dest[0]] <= committed_valid[0] ? committed[0] : core_not[0];
+        core[committed_dest[1]] <= committed_valid[1] ? committed[1] : core_not[1];
+        core[committed_dest[2]] <= committed_valid[2] ? committed[2] : core_not[2];
+        core[committed_dest[3]] <= committed_valid[3] ? committed[3] : core_not[3];
+        core[committed_dest[4]] <= committed_valid[4] ? committed[4] : core_not[4];
+        core[committed_dest[5]] <= committed_valid[5] ? committed[5] : core_not[5];
+        core[committed_dest[6]] <= committed_valid[6] ? committed[6] : core_not[6];
+        core[committed_dest[7]] <= committed_valid[7] ? committed[7] : core_not[7];    
+        valid[committed_dest[0]] <= committed_valid[0] ? 1 : valid_not[0];  
+        valid[committed_dest[1]] <= committed_valid[1] ? 1 : valid_not[1];  
+        valid[committed_dest[2]] <= committed_valid[2] ? 1 : valid_not[2];  
+        valid[committed_dest[3]] <= committed_valid[3] ? 1 : valid_not[3];  
+        valid[committed_dest[4]] <= committed_valid[4] ? 1 : valid_not[4];  
+        valid[committed_dest[5]] <= committed_valid[5] ? 1 : valid_not[5];  
+        valid[committed_dest[6]] <= committed_valid[6] ? 1 : valid_not[6];  
+        valid[committed_dest[7]] <= committed_valid[7] ? 1 : valid_not[7];   
         
         //Allocation occurs second, as to overwrite commits if necessary
-        tag[logical_dest[0]] = (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? physical_dest[0] : tag_wire[logical_dest[0]];
-        tag[logical_dest[1]] = (logical_dest_valid[1] & !no_available & set_tag_prev[logical_dest[1]] & highest_priority[1]) ? physical_dest[1] : tag_wire[logical_dest[1]];
-        tag[logical_dest[2]] = (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? physical_dest[2] : tag_wire[logical_dest[2]];
-        tag[logical_dest[3]] = (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? physical_dest[3] : tag_wire[logical_dest[3]];
-        valid[logical_dest[0]] = (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? 0 : valid[logical_dest[0]];
-        valid[logical_dest[1]] = (logical_dest_valid[1] & !no_available & set_tag_prev[logical_dest[1]] & highest_priority[1]) ? 0 : valid[logical_dest[1]];
-        valid[logical_dest[2]] = (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? 0 : valid[logical_dest[2]];
-        valid[logical_dest[3]] = (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? 0 : valid[logical_dest[3]];
+        /*tag[logical_dest[0]] <= (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? physical_dest[0] : tag_wire[logical_dest[0]];
+        tag[logical_dest[1]] <= (logical_dest_valid[1] & !no_available & set_tag_prev[logical_dest[1]] & highest_priority[1]) ? physical_dest[1] : tag_wire[logical_dest[1]];
+        tag[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? physical_dest[2] : tag_wire[logical_dest[2]];
+        tag[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? physical_dest[3] : tag_wire[logical_dest[3]];
+        */
+        if(!no_available) begin
+            tag[prev_dest1[0]] <= tag_to_write[0];
+            tag[prev_dest1[1]] <= tag_to_write[1];
+            tag[prev_dest1[2]] <= tag_to_write[2];
+            tag[prev_dest1[3]] <= tag_to_write[3];
+        end
+        valid[logical_dest[0]] <= (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? 0 : valid[logical_dest[0]];
+        valid[logical_dest[1]] <= (logical_dest_valid[1] & !no_available & set_tag_prev[logical_dest[1]] & highest_priority[1]) ? 0 : valid[logical_dest[1]];
+        valid[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? 0 : valid[logical_dest[2]];
+        valid[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? 0 : valid[logical_dest[3]];
+        
     end
     
-    
-    
-    
-    
+    always_comb begin
+        if(prev_valid[3]) begin
+            tag_to_write[3] = physical_dest[3];
+        end else begin
+            tag_to_write[3] = tag[prev_dest1[3]];
+        end
+        
+        if(prev_valid[2]) begin
+            if((prev_dest1[2] == prev_dest1[3]) & prev_valid[3]) begin
+                tag_to_write[2] = physical_dest[3];
+            end else begin
+                tag_to_write[2] = physical_dest[2];
+            end
+        end else begin
+            tag_to_write[2] = tag[prev_dest1[2]];
+        end
+        
+        if(prev_valid[1]) begin
+            if((prev_dest1[1] == prev_dest1[3]) & prev_valid[3]) begin
+                tag_to_write[1] = physical_dest[3];
+            end else if((prev_dest1[1] == prev_dest1[2]) & prev_valid[2]) begin
+                tag_to_write[1] = physical_dest[2];
+            end else begin
+                tag_to_write[1] = physical_dest[1];
+            end
+        end else begin
+            tag_to_write[1] = tag[prev_dest1[1]];
+        end
+        
+        if(prev_valid[0]) begin
+            if((prev_dest1[0] == prev_dest1[3]) & prev_valid[3]) begin
+                tag_to_write[0] = physical_dest[3];
+            end else if((prev_dest1[0] == prev_dest1[2]) & prev_valid[2]) begin
+                tag_to_write[0] = physical_dest[2];
+            end else if((prev_dest1[0] == prev_dest1[1]) & prev_valid[1]) begin
+                tag_to_write[0] = physical_dest[1];
+            end else begin
+                tag_to_write[0] = physical_dest[0];
+            end
+        end else begin
+            tag_to_write[0] = tag[prev_dest1[0]];
+        end
+    end
     
 endmodule

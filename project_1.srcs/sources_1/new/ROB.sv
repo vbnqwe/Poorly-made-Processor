@@ -42,6 +42,7 @@ Behavior:
 module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr = 4)(
         input logic [2:0] num_writes,
         input clk,
+        input stall_external,
         input [N_instr-1:0] if_reg, 
         input [4:0] dest [N_instr], 
         input [N_phys_regs-1:0] r1 [N_instr], 
@@ -58,6 +59,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [7:0] committed_valid,
         output [2:0] num_available_out //just num available, used for ARF
     );   
+    
     
     //tags
     reg [N_phys_regs-1:0] oldest, newest;

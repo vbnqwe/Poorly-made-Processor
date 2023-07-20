@@ -21,6 +21,7 @@ module rename_top(
     
     wire [6:0] allocated [4];
     wire no_available;
+    wire if_stall;
     
     
     wire [31:0] r1_out_ARF [4];
@@ -36,6 +37,8 @@ module rename_top(
     wire [4:0] committed_dest [8];
     wire [7:0] committed_valid;
     
+    
+    
 
     
     ARF reg_file(
@@ -43,7 +46,8 @@ module rename_top(
         .logical_dest_valid (dest_valid),
         .clk (clk),
         .physical_dest (allocated),
-        .no_available (no_available),       
+        .no_available (no_available),  
+        .stall_external(stall_external),     
         .r1 (r1),          
         .r2 (r2),           
         .committed (committed),
@@ -62,6 +66,7 @@ module rename_top(
         .num_writes (num_writes),
         .clk (clk),
         .if_reg (dest_valid), 
+        .stall_external(stall_external),
         .dest (dest), 
         .r1 (r1_tag), 
         .r2 (r2_tag), 
