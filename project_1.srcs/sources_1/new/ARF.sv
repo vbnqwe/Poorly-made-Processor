@@ -163,10 +163,10 @@ module ARF(
             tag[prev_dest1[2]] <= tag_to_write[2];
             tag[prev_dest1[3]] <= tag_to_write[3];
         end
-        valid[logical_dest[0]] <= (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? 0 : valid[logical_dest[0]];
-        valid[logical_dest[1]] <= (logical_dest_valid[1] & !no_available & set_tag_prev[logical_dest[1]] & highest_priority[1]) ? 0 : valid[logical_dest[1]];
-        valid[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? 0 : valid[logical_dest[2]];
-        valid[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? 0 : valid[logical_dest[3]];
+        valid[logical_dest[0]] <= (logical_dest_valid[0] & !no_available & !stall_external/* & set_tag_prev[logical_dest[0]]*/) ? 0 : valid[logical_dest[0]];
+        valid[logical_dest[1]] <= (logical_dest_valid[1] & !no_available & !stall_external/* & set_tag_prev[logical_dest[1]]*/) ? 0 : valid[logical_dest[1]];
+        valid[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & !stall_external/* & set_tag_prev[logical_dest[2]]*/) ? 0 : valid[logical_dest[2]];
+        valid[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & !stall_external/* & set_tag_prev[logical_dest[3]]*/) ? 0 : valid[logical_dest[3]];
         
     end
     
