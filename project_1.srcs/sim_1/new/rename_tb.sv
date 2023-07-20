@@ -90,6 +90,19 @@ module rename_tb(
         num_writes = 0;
         dest_valid = 4'b0;
         #20;
+        num_writes = 4;
+        dest_valid = 4'b1111;
+        dest[0] = 5'd1;
+        dest[1] = 5'd2;
+        dest[2] = 5'd3;
+        dest[3] = 5'd4;
+        #600;
+        num_writes = 1;
+        dest_valid = 4'b1;
+        dest[0] = 5'd5;
+        #20;
+        DUT.buffer.completed_entry[1] = 1;
+        #40;
         $stop;
     end
     

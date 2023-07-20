@@ -3,9 +3,9 @@
   <File Type="PA-TCL" Name="ARF.tcl"/>
   <File Type="REPORTS-TCL" Name="ARF_reports.tcl"/>
   <File Type="RDS-RDS" Name="ARF.vds"/>
-  <File Type="RDS-DCP" Name="ARF.dcp"/>
   <File Type="RDS-UTIL" Name="ARF_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="ARF_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="ARF.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">
