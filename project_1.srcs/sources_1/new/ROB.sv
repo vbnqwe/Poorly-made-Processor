@@ -100,7 +100,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     end
     
     
-    always @(posedge clk) begin
+    always @(posedge (clk & !stall_external)) begin
         oldest_prev = oldest;
         newest_prev = newest;
         newest = !no_available ? (newest_prev + x) : newest_prev;
@@ -167,7 +167,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     genvar c;
     generate
         for(c = 0; c < 4; c = c + 1) begin
-            always @(posedge clk) begin
+            always @(posedge (clk & !stall_external)) begin
                 if((num_available_stored == 4) & if_reg[c]) begin
                     if((newest_prev + 1 + offset[c]) >= SIZE) begin
                         //check if entry is valid at (newest + 1) % SIZE
@@ -204,19 +204,6 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         end
     endgenerate
     
-    genvar a;
-    genvar b;
-    generate
-        for(a = 0; a < 4; a = a + 1) begin
-            for(b = a + 1; b < 4; b = b + 1) begin
-                always @(posedge clk) begin 
-                    if(if_reg[b - 1]) begin
-                        
-                    end
-                end
-            end
-        end
-    endgenerate
     
     
     //Generate ready_to_commit signals, which are used to determine what entries can be committed.
@@ -264,7 +251,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                 end
             end
             
-            always @(posedge clk) begin
+            always @(posedge (clk & !stall_external)) begin
                 if(ready_to_commit[e]) begin
                     valid_entry[eight_oldest[e]] = 0;
                     completed_entry[eight_oldest[e]] = 0;

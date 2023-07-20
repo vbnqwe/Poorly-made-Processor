@@ -6,6 +6,8 @@ module rename_tb(
     );
     
     bit clk;
+    bit clk2;
+    bit x;
     bit [2:0] num_writes;
     bit [4:0] dest[4];
     bit [4:0] r1 [4];
@@ -42,7 +44,7 @@ module rename_tb(
     assign tag_to_write = DUT.reg_file.tag_to_write;
         
     rename_top DUT(
-        .clk, 
+        .clk(clk), 
         .num_writes, 
         .dest, 
         .r1, 
@@ -65,14 +67,17 @@ module rename_tb(
         dest[2] = 5'd3;
         dest[3] = 5'd4;
         stall_external = 0;
+        x = 1;
         dest_valid = 4'b1111;
         #20;
+        stall_external = 1;
         dest[0] = 5'd5;
         dest[2] = 5'd6;
         num_writes = 2;
         dest_valid = 4'b0101;
-        stall_external = 1;
+        x = 0;
         #20;
+        x = 1;
         stall_external = 0;
         dest[1] = 5'd7;
         dest[3] = 5'd8;
@@ -87,6 +92,8 @@ module rename_tb(
         #20;
         $stop;
     end
+    
+    assign clk2 = clk & x;
     
     always begin
         clk = 0;

@@ -53,6 +53,8 @@ module ARF(
     reg [4:0] prev_dest [4];
     reg [3:0] prev_valid;
     
+    reg prev_stall;     
+    
     assign tag_wire = tag;
         
     int i;
@@ -83,7 +85,7 @@ module ARF(
                     set_tag[a] = 0;
             end
             
-            always @(posedge clk) begin
+            always @(posedge (clk & !stall_external)) begin
                 set_tag_prev[a] = set_tag[a];
                 set_tag[a] = 0;
             end
@@ -122,12 +124,13 @@ module ARF(
     end
    
     
-    always @(posedge clk) begin
+    always @(posedge (clk /*& !stall_external*/)) begin
         prev_valid <= logical_dest_valid;
         prev_dest1[0] <= logical_dest[0];
         prev_dest1[1] <= logical_dest[1];
         prev_dest1[2] <= logical_dest[2];
         prev_dest1[3] <= logical_dest[3];
+        prev_stall <= stall_external | no_available;
  
     
         //Commit occurs first
@@ -154,7 +157,7 @@ module ARF(
         tag[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & set_tag_prev[logical_dest[2]] & highest_priority[2]) ? physical_dest[2] : tag_wire[logical_dest[2]];
         tag[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & set_tag_prev[logical_dest[3]] & highest_priority[3]) ? physical_dest[3] : tag_wire[logical_dest[3]];
         */
-        if(!no_available) begin
+        if(!prev_stall) begin
             tag[prev_dest1[0]] <= tag_to_write[0];
             tag[prev_dest1[1]] <= tag_to_write[1];
             tag[prev_dest1[2]] <= tag_to_write[2];
