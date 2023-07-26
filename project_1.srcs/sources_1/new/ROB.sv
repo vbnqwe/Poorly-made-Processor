@@ -50,6 +50,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [31:0] r1_out [4], 
         output [31:0] r2_out [N_instr],
         output [3:0] r1_ready, r2_ready,
+        output [3:0] r1_complete, r2_complete,
         output [6:0] prev_newest,
         output reg no_available,
         output reg [6:0] allocated [4],
@@ -312,6 +313,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
             assign r2_out[g] = data[r2[g]];
             assign r1_ready[g] = valid_entry[r1[g]];
             assign r2_ready[g] = valid_entry[r2[g]];
+            assign r1_complete[g] = completed_entry[r1[g]];
+            assign r2_complete[g] = completed_entry[r1[g]];
         end 
     endgenerate
     

@@ -8,14 +8,14 @@ If rX_rewritten is high, that means that this register's location has been chang
 updating the value, meaning that rather than reading from the ARF/ARF tag in ROB, it will need to read from the r1_rob_val 
 tag instead as this will be the correct destination.
 */
-module read_logic(
+module read_logic_module(
         input [4:0] dest [4],
         input [4:0] r1 [4],
         input [4:0] r2 [4],
         input [3:0] dest_valid,
         input [6:0] newest,
-        output reg r1_rob_val [4],
-        output reg r2_rob_val [4],
+        output reg [6:0] r1_rob_val [4],
+        output reg [6:0] r2_rob_val [4],
         output reg [3:0] r1_rewritten,
         output reg [3:0] r2_rewritten
     );
