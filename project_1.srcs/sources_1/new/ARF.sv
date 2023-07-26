@@ -37,7 +37,9 @@ module ARF(
         output [31:0] r2_out [4],
         output [3:0] r1_ready, r2_ready,
         output [6:0] r1_tag [4],
-        output [6:0] r2_tag [4]
+        output [6:0] r2_tag [4],
+        output [6:0] all_tags [32],
+        output all_valid [32]
     );
     
     
@@ -56,6 +58,8 @@ module ARF(
     reg prev_stall;     
     
     assign tag_wire = tag;
+    assign all_tags = tag;
+    assign all_valid = valid;
         
     int i;
     initial begin

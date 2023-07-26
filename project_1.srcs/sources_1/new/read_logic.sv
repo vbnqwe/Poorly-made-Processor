@@ -2,103 +2,142 @@
 
 
 /*
-This module will be used to calculate the expected location of where to a register from in the ROB. It is just a module to
-hold a bunch of combinational logic, to make the rest of the code easier to read.
-If rX_rewritten is high, that means that this register's location has been changed as a prior instruction from this cycle is 
-updating the value, meaning that rather than reading from the ARF/ARF tag in ROB, it will need to read from the r1_rob_val 
-tag instead as this will be the correct destination.
+This module will be used to calculate the location of where to access each source register. Making it into a seperate module
+may increase logic cell cost, but it does make the code nicer so \_(.`/ )_/
 */
 module read_logic_module(
+        input clk,
         input [4:0] dest [4],
         input [4:0] r1 [4],
         input [4:0] r2 [4],
         input [3:0] dest_valid,
         input [6:0] newest,
-        output reg [6:0] r1_rob_val [4],
-        output reg [6:0] r2_rob_val [4],
-        output reg [3:0] r1_rewritten,
-        output reg [3:0] r2_rewritten
+        input [6:0] tags [32],
+        input valid_bits [32],
+        output reg [6:0] r1_read_from [4],
+        output reg [6:0] r2_read_from [4],
+        output reg [3:0] r1_ARF_or_ROB,
+        output reg [3:0] r2_ARF_or_ROB
     );
     
-    reg [2:0] num_writes;
-    assign num_writes = dest_valid[0] + dest_valid[1] + dest_valid[2] + dest_valid[3];
+    reg [6:0] tag [32];
+    reg valid [32];
+    
+    
+    //store last state of tags/valid bits
+    always @(posedge clk) begin
+        tag <= tags;
+        valid <= valid_bits;
+    end
+
     
     always_comb begin
-        //no prior instructions to rewrite to
-        r1_rob_val[0] = 0;
-        r2_rob_val[0] = 0;
-        r1_rewritten[0] = 0;
-        r2_rewritten[0] = 0;
         
-        //check if dest[0] is equal to rX[1], if it is, calculate new tag
+        //if reading from same address as writing to you need to read from this address
+        if(valid[r1[0]]) begin
+            r1_read_from[0] = r1[0];
+            r1_ARF_or_ROB[0] = 1;
+        end else begin
+            r1_read_from[0] = tag[r1[0]];
+            r1_ARF_or_ROB[0] = 0;
+        end
+    
+        if(valid[r2[0]]) begin
+            r2_read_from[0] = r1[0];
+            r2_ARF_or_ROB[0] = 1;
+        end else begin
+            r2_read_from[0] = tag[r2[0]];
+            r2_ARF_or_ROB[0] = 0;
+        end
+    
+    
+    
         if((dest[0] == r1[1]) & dest_valid[0]) begin
-            r1_rob_val[1] = (newest + 1) % 128;
-            r1_rewritten[1] = 1;
+            r1_read_from[1] = (newest + 1) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if(valid[r1[1]]) begin
+            r1_read_from[1] = r1[1];
+            r1_ARF_or_ROB = 1;
         end else begin
-            r1_rewritten[1] = 0;
-            r1_rob_val[1] = 0;
+            r1_read_from[1] = tag[r1[1]];
+            r1_ARF_or_ROB = 0;
         end
+        
         if((dest[0] == r2[1]) & dest_valid[0]) begin
-            r2_rob_val[1] = (newest + 1) % 128;
-            r2_rewritten[1] = 1;
+            r2_read_from[1] = (newest + 1) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if(valid[r2[1]]) begin
+            r2_read_from[1] = r2[1];
+            r2_ARF_or_ROB = 1;
         end else begin
-            r2_rewritten[1] = 0;
-            r2_rob_val[1] = 0;
+            r2_read_from[1] = tag[r2[1]];
+            r2_ARF_or_ROB = 0;
         end
         
-        //check if dest[1] is equal to rX[2], if it is, check if 1 or 2 writes have happened (dest_valid[0 and 1])
-        //else check if dest[0] is equal to rX[2], if it is, check if dest_valid[0] is true
-        //else rewritten is low
+        
+        
         if((dest[1] == r1[2]) & dest_valid[1]) begin
-            r1_rob_val[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r1_rewritten[2] = 1;
-        end else if ((dest[0] == r1[2]) & dest_valid[0]) begin
-            r1_rob_val[2] = (newest + 1) % 128;
-            r1_rewritten[2] = 1;
+            r1_read_from[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if ((dest[0] == r1[2]) & dest_valid[0])begin
+            r1_read_from[2] = (newest + dest_valid[0]) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if (valid[r1[2]]) begin
+            r1_read_from[2] = r1[2];
+            r1_ARF_or_ROB = 1;
         end else begin
-            r1_rob_val[2] = 0;
-            r1_rewritten[2] = 0;
-        end
-        if((dest[1] == r2[2]) & dest_valid[1]) begin
-            r2_rob_val[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r2_rewritten[2] = 1;
-        end else if ((dest[0] == r2[2]) & dest_valid[0]) begin
-            r2_rob_val[2] = (newest + 1) % 128;
-            r2_rewritten[2] = 1;
-        end else begin
-            r2_rob_val[2] = 0;
-            r2_rewritten[2] = 0;
+            r1_read_from[2] = tag[r1[2]];
+            r1_ARF_or_ROB = 0;
         end
         
-        //check if dest[2] is equal to rX[3]
-        //else check if dest[1] is equal to rX[3]
-        //else check if dest[0] is equal to rX[3]
-        //else rewritten is low
-        if((dest[2] == r1[3]) & dest_valid[2]) begin
-            r1_rob_val[3] = (newest + dest_valid[2] + dest_valid[1] + dest_valid[0]) % 128;
-            r1_rewritten[3] = 1;
-        end else if ((dest[1] == r1[3]) & dest_valid[1]) begin
-            r1_rob_val[3] = (newest + dest_valid[1] + dest_valid[0]) % 128;
-            r1_rewritten[3] = 1;
-        end else if ((dest[0] == r1[3]) & dest_valid[0]) begin
-            r1_rob_val[3] = (newest + dest_valid[0]) % 128;
-            r1_rewritten[3] = 1;
+        if((dest[1] == r2[2]) & dest_valid[1]) begin
+            r2_read_from[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if ((dest[0] == r2[2]) & dest_valid[0])begin
+            r2_read_from[2] = (newest + dest_valid[0]) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if (valid[r2[2]]) begin
+            r2_read_from[2] = r2[2];
+            r2_ARF_or_ROB = 1;
         end else begin
-            r1_rob_val[3] = 0;
-            r1_rewritten[3] = 0;
+            r2_read_from[2] = tag[r2[2]];
+            r2_ARF_or_ROB = 0;
         end
-        if((dest[2] == r2[3]) & dest_valid[2]) begin
-            r2_rob_val[3] = (newest + dest_valid[2] + dest_valid[1] + dest_valid[0]) % 128;
-            r2_rewritten[3] = 1;
-        end else if ((dest[1] == r2[3]) & dest_valid[1]) begin
-            r2_rob_val[3] = (newest + dest_valid[1] + dest_valid[0]) % 128;
-            r2_rewritten[3] = 1;
-        end else if ((dest[0] == r2[3]) & dest_valid[0]) begin
-            r2_rob_val[3] = (newest + dest_valid[0]) % 128;
-            r2_rewritten[3] = 1;
+        
+        
+        
+        if((dest[2] == r1[3]) & dest_valid[2]) begin
+            r1_read_from[3] = (newest + dest_valid[0] + dest_valid[1] + dest_valid[2]) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if ((dest[1] == r1[3]) & dest_valid[1]) begin
+            r1_read_from[3] = (newest + dest_valid[0] + dest_valid[1]) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if ((dest[0] == r1[3]) & dest_valid[0]) begin
+            r1_read_from[3] = (newest + dest_valid[0]) % 128;
+            r1_ARF_or_ROB = 0;
+        end else if (valid[r1[3]]) begin
+            r1_read_from[3] = r1[3];
+            r1_ARF_or_ROB = 1;
         end else begin
-            r2_rob_val[3] = 0;
-            r2_rewritten[3] = 0;
+            r1_read_from[3] = tag[r1[3]];
+            r1_ARF_or_ROB = 0;
+        end
+        
+        if((dest[2] == r2[3]) & dest_valid[2]) begin
+            r2_read_from[3] = (newest + dest_valid[0] + dest_valid[1] + dest_valid[2]) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if ((dest[1] == r2[3]) & dest_valid[1]) begin
+            r2_read_from[3] = (newest + dest_valid[0] + dest_valid[1]) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if ((dest[0] == r2[3]) & dest_valid[0]) begin
+            r2_read_from[3] = (newest + dest_valid[0]) % 128;
+            r2_ARF_or_ROB = 0;
+        end else if (valid[r2[3]]) begin
+            r2_read_from[3] = r2[3];
+            r2_ARF_or_ROB = 1;
+        end else begin
+            r2_read_from[3] = tag[r2[3]];
+            r2_ARF_or_ROB = 0;
         end
     end
     
