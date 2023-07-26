@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689300270" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
-  <File Type="PA-TCL" Name="ARF.tcl"/>
-  <File Type="REPORTS-TCL" Name="ARF_reports.tcl"/>
-  <File Type="RDS-RDS" Name="ARF.vds"/>
-  <File Type="RDS-UTIL" Name="ARF_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="ARF_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="ARF.dcp"/>
+<GenRun Id="synth_1" LaunchPart="xc7k70tfbv676-1" LaunchTime="1689877380" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/ROB.dcp">
+  <File Type="PA-TCL" Name="rename_top.tcl"/>
+  <File Type="REPORTS-TCL" Name="rename_top_reports.tcl"/>
+  <File Type="RDS-RDS" Name="rename_top.vds"/>
+  <File Type="RDS-UTIL" Name="rename_top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="rename_top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="rename_top.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/rename_top.sv">
@@ -16,20 +16,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/ROB.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/delay_test.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/Decode_destination_logic.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -64,9 +50,30 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/test.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Reservation_Station.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Reservation_Station_Bundle.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="ARF"/>
+      <Option Name="TopModule" Val="rename_top"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

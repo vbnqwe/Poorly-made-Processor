@@ -77,10 +77,13 @@ module rename_tb(
         dest_valid = 4'b0101;
         x = 0;
         #20;
+        dest[0] = 5'd8;
+        dest[2] = 5'd9;
+        #20;
         x = 1;
         stall_external = 0;
         dest[1] = 5'd7;
-        dest[3] = 5'd8;
+        dest[3] = 5'd31;
         dest_valid = 4'b1010;
         #20;
         dest[0] = 5'd1;

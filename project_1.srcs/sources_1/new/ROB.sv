@@ -50,6 +50,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         output [31:0] r1_out [4], 
         output [31:0] r2_out [N_instr],
         output [3:0] r1_ready, r2_ready,
+        output [6:0] prev_newest,
         output reg no_available,
         output reg [6:0] allocated [4],
         output reg [31:0] committed [8],
@@ -66,6 +67,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     reg [7:0] oldest_prev;
     reg [7:0] newest_prev;
     reg [7:0] eight_oldest [8];
+    assign prev_newest = newest_prev; 
     
     reg started; //Initial condition stuff (shouldnt be necessary??)
     

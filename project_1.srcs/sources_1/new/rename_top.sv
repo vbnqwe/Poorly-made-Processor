@@ -22,6 +22,7 @@ module rename_top(
     wire [6:0] allocated [4];
     wire no_available;
     wire if_stall;
+    wire [6:0] prev_newest;
     
     
     wire [31:0] r1_out_ARF [4];
@@ -37,7 +38,25 @@ module rename_top(
     wire [4:0] committed_dest [8];
     wire [7:0] committed_valid;
     
+    wire [6:0] r1_rob_val [4];
+    wire [6:0] r2_rob_val [4];
+    wire [3:0] r1_rewritten;
+    wire [3:0] r2_rewritten;
     
+    wire [6:0] r1_target_pre_write [4];
+    wire [6:0] r2_target_pre_write [4];
+    wire [3:0] r1_ARF_or_ROB_pre_write;
+    wire [3:0] r2_ARF_or_ROB_pre_write;
+    wire [3:0] r1_ROB_ready;
+    wire [3:0] r2_ROB_ready;
+    
+    genvar a;
+    generate
+        for(a = 0; a < 4; a = a + 1) begin
+            //assign r1_target_pre_write[a] = r1_ready[a] ? r1_out_ARF : r1_out_ROB;
+            
+        end
+    endgenerate
     
 
     
@@ -81,6 +100,19 @@ module rename_top(
         .committed_source (),
         .num_commits (),
         .committed_valid (committed_valid),
-        .num_available_out ()//just num available, used for ARF
+        .num_available_out (),//just num available, used for ARF
+        .prev_newest (prev_newest)
+    );
+    
+    rlm read_logic(
+        .dest (dest),
+        .r1 (r1),
+        .r2 (r2),
+        .dest_valid (dest_valid),
+        .newest (prev_newest),
+        .r1_rob_val (r1_rob_val),
+        .r2_rob_val (r2_rob_val),
+        .r1_rewritten (r1_rewritten),
+        .r2_rewritten (r2_rewritten)
     );
 endmodule
