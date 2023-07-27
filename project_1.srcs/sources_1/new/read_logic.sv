@@ -54,90 +54,90 @@ module read_logic_module(
     
         if((dest[0] == r1[1]) & dest_valid[0]) begin
             r1_read_from[1] = (newest + 1) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[1] = 0;
         end else if(valid[r1[1]]) begin
             r1_read_from[1] = r1[1];
-            r1_ARF_or_ROB = 1;
+            r1_ARF_or_ROB[1] = 1;
         end else begin
             r1_read_from[1] = tag[r1[1]];
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[1] = 0;
         end
         
         if((dest[0] == r2[1]) & dest_valid[0]) begin
             r2_read_from[1] = (newest + 1) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[1] = 0;
         end else if(valid[r2[1]]) begin
             r2_read_from[1] = r2[1];
-            r2_ARF_or_ROB = 1;
+            r2_ARF_or_ROB[1] = 1;
         end else begin
             r2_read_from[1] = tag[r2[1]];
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[1] = 0;
         end
         
         
         
         if((dest[1] == r1[2]) & dest_valid[1]) begin
             r1_read_from[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[2] = 0;
         end else if ((dest[0] == r1[2]) & dest_valid[0])begin
             r1_read_from[2] = (newest + dest_valid[0]) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[2] = 0;
         end else if (valid[r1[2]]) begin
             r1_read_from[2] = r1[2];
-            r1_ARF_or_ROB = 1;
+            r1_ARF_or_ROB[2] = 1;
         end else begin
             r1_read_from[2] = tag[r1[2]];
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[2] = 0;
         end
         
         if((dest[1] == r2[2]) & dest_valid[1]) begin
             r2_read_from[2] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[2] = 0;
         end else if ((dest[0] == r2[2]) & dest_valid[0])begin
             r2_read_from[2] = (newest + dest_valid[0]) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[2] = 0;
         end else if (valid[r2[2]]) begin
             r2_read_from[2] = r2[2];
-            r2_ARF_or_ROB = 1;
+            r2_ARF_or_ROB[2] = 1;
         end else begin
             r2_read_from[2] = tag[r2[2]];
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[2] = 0;
         end
         
         
         
         if((dest[2] == r1[3]) & dest_valid[2]) begin
             r1_read_from[3] = (newest + dest_valid[0] + dest_valid[1] + dest_valid[2]) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[3] = 0;
         end else if ((dest[1] == r1[3]) & dest_valid[1]) begin
             r1_read_from[3] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[3] = 0;
         end else if ((dest[0] == r1[3]) & dest_valid[0]) begin
             r1_read_from[3] = (newest + dest_valid[0]) % 128;
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[3] = 0;
         end else if (valid[r1[3]]) begin
             r1_read_from[3] = r1[3];
-            r1_ARF_or_ROB = 1;
+            r1_ARF_or_ROB[3] = 1;
         end else begin
             r1_read_from[3] = tag[r1[3]];
-            r1_ARF_or_ROB = 0;
+            r1_ARF_or_ROB[3] = 0;
         end
         
         if((dest[2] == r2[3]) & dest_valid[2]) begin
             r2_read_from[3] = (newest + dest_valid[0] + dest_valid[1] + dest_valid[2]) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[3] = 0;
         end else if ((dest[1] == r2[3]) & dest_valid[1]) begin
             r2_read_from[3] = (newest + dest_valid[0] + dest_valid[1]) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[3] = 0;
         end else if ((dest[0] == r2[3]) & dest_valid[0]) begin
             r2_read_from[3] = (newest + dest_valid[0]) % 128;
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[3] = 0;
         end else if (valid[r2[3]]) begin
             r2_read_from[3] = r2[3];
-            r2_ARF_or_ROB = 1;
+            r2_ARF_or_ROB[3] = 1;
         end else begin
             r2_read_from[3] = tag[r2[3]];
-            r2_ARF_or_ROB = 0;
+            r2_ARF_or_ROB[3] = 0;
         end
     end
     

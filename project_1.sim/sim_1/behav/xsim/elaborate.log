@@ -10,6 +10,7 @@ Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.ARF
 Compiling module xil_defaultlib.ROB
+Compiling module xil_defaultlib.read_logic_module
 Compiling module xil_defaultlib.rename_top
 Compiling module xil_defaultlib.rename_tb
 Compiling module xil_defaultlib.glbl

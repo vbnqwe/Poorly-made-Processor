@@ -50,6 +50,18 @@ module rename_top(
     wire [3:0] r1_ARF_or_ROB;
     wire [3:0] r2_ARF_or_ROB;
     
+    reg [4:0] r1_saved [4];
+    reg [4:0] r2_saved [4];
+    reg [4:0] dest_saved [4];
+    reg [3:0] dest_valid_saved;
+    
+    always @(posedge clk) begin
+        r1_saved <= r1;
+        r2_saved <= r2;
+        dest_saved <= dest;
+        dest_valid_saved <= dest_valid;
+    end
+    
     genvar a;
     generate
         for(a = 0; a < 4; a = a + 1) begin
@@ -115,10 +127,10 @@ module rename_top(
     
     read_logic_module RLM(
         .clk (clk),
-        .dest (dest),
-        .r1 (r1),
-        .r2 (r1),
-        .dest_valid (dest_valid),
+        .dest (dest_saved),
+        .r1 (r1_saved),
+        .r2 (r2_saved),
+        .dest_valid (dest_valid_saved),
         .newest (prev_newest),
         .tags (all_tags),
         .valid_bits (all_valid),

@@ -17,7 +17,7 @@ module rename_tb(
     
     wire [6:0] physical_dest [4];
     wire [3:0] physical_dest_valid;
-    wire [3:0] r1_ready, r2_ready;
+    wire [3:0] r1_ready_out, r2_ready_out;
     wire [6:0] r1_source [4];
     wire [6:0] r2_source [4];
     wire stall_internal;
@@ -32,6 +32,15 @@ module rename_tb(
     wire [6:0] allocated [4];
     wire [4:0] prev_dest [4];
     wire [6:0] tag_to_write [4];
+    
+    wire [6:0] tags_rlm [32];
+    wire valid_rlm [32];
+    assign tags_rlm = DUT.RLM.tag;
+    assign valid_rlm = DUT.RLM.valid;
+    
+    wire [3:0] r1_ARF_or_ROB, r2_ARF_or_ROB;
+    assign r1_ARF_or_ROB = DUT.RLM.r1_ARF_or_ROB;
+    assign r2_ARF_or_ROB = DUT.RLM.r2_ARF_or_ROB;
     
     assign tag = DUT.reg_file.tag;
     assign valid_arf = DUT.reg_file.valid;
@@ -53,19 +62,28 @@ module rename_tb(
         .stall_external, 
         .physical_dest, 
         .physical_dest_valid, 
-        .r1_ready,
-        .r2_ready,
+        .r1_ready_out,
+        .r2_ready_out,
         .r1_source,
         .r2_source,
         .stall_internal
     );
     
     initial begin
+        r1[0] = 5'd1;
+        r1[1] = 5'd1;
+        r1[2] = 5'd2;
+        r1[3] = 5'd1;
+        
+        r2[0] = 5'd3;
+        r2[1] = 5'd2;
+        r2[2] = 5'd1;
+        r2[3] = 5'd1;
         num_writes = 4;
         dest[0] = 5'd1;
         dest[1] = 5'd2;
-        dest[2] = 5'd3;
-        dest[3] = 5'd4;
+        dest[2] = 5'd1;
+        dest[3] = 5'd1;
         stall_external = 0;
         x = 1;
         dest_valid = 4'b1111;
