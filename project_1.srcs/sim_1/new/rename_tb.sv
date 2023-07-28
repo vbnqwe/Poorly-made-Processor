@@ -33,15 +33,18 @@ module rename_tb(
     wire [4:0] prev_dest [4];
     wire [6:0] tag_to_write [4];
     
-    wire [6:0] tags_rlm [32];
-    wire valid_rlm [32];
-    assign tags_rlm = DUT.RLM.tag;
-    assign valid_rlm = DUT.RLM.valid;
-    
     wire [3:0] r1_ARF_or_ROB, r2_ARF_or_ROB;
     assign r1_ARF_or_ROB = DUT.RLM.r1_ARF_or_ROB;
     assign r2_ARF_or_ROB = DUT.RLM.r2_ARF_or_ROB;
+    wire [6:0] r1_pot_tag [4];
+    wire [6:0] r2_pot_tag [4];
+    assign r1_pot_tag = DUT.RLM.r1_read_from;
+    assign r2_pot_tag = DUT.RLM.r2_read_from;
     
+    wire [3:0] r1_ready_t, r2_ready_t;
+    assign r1_ready_t = DUT.r1_ready;
+    assign r2_ready_t = DUT.r2_ready;
+        
     assign tag = DUT.reg_file.tag;
     assign valid_arf = DUT.reg_file.valid;
     assign valid_rob = DUT.buffer.valid_entry;
@@ -88,6 +91,7 @@ module rename_tb(
         x = 1;
         dest_valid = 4'b1111;
         #20;
+        $stop;
         stall_external = 1;
         dest[0] = 5'd5;
         dest[2] = 5'd6;

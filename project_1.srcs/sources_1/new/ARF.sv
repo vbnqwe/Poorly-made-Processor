@@ -37,9 +37,7 @@ module ARF(
         output [31:0] r2_out [4],
         output [3:0] r1_ready, r2_ready,
         output [6:0] r1_tag [4],
-        output [6:0] r2_tag [4],
-        output [6:0] all_tags [32],
-        output all_valid [32]
+        output [6:0] r2_tag [4]
     );
     
     
@@ -58,8 +56,8 @@ module ARF(
     reg prev_stall;     
     
     assign tag_wire = tag;
-    assign all_tags = tag;
-    assign all_valid = valid;
+
+    
         
     int i;
     initial begin
@@ -171,7 +169,6 @@ module ARF(
         valid[logical_dest[1]] <= (logical_dest_valid[1] & !no_available & !stall_external/* & set_tag_prev[logical_dest[1]]*/) ? 0 : valid[logical_dest[1]];
         valid[logical_dest[2]] <= (logical_dest_valid[2] & !no_available & !stall_external/* & set_tag_prev[logical_dest[2]]*/) ? 0 : valid[logical_dest[2]];
         valid[logical_dest[3]] <= (logical_dest_valid[3] & !no_available & !stall_external/* & set_tag_prev[logical_dest[3]]*/) ? 0 : valid[logical_dest[3]];
-        
     end
     
     always_comb begin
