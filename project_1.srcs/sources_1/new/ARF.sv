@@ -33,11 +33,11 @@ module ARF(
         input [31:0] committed [8],
         input [4:0] committed_dest [8],
         input [7:0] committed_valid,
-        output [31:0] r1_out [4],
-        output [31:0] r2_out [4],
-        output [3:0] r1_ready, r2_ready,
-        output [6:0] r1_tag [4],
-        output [6:0] r2_tag [4]
+        output reg [31:0] r1_out [4],
+        output reg [31:0] r2_out [4],
+        output reg [3:0] r1_ready, r2_ready,
+        output reg [6:0] r1_tag [4],
+        output reg [6:0] r2_tag [4]
     );
     
     
@@ -55,6 +55,13 @@ module ARF(
     
     reg prev_stall;     
     
+    
+    //Since tag is written on subsequent cycle and data is only written on commits, that means that only valid
+    //is change on posedge, while the rest of data is stored normally
+    reg victim_valid [32];
+    
+    
+    
     assign tag_wire = tag;
 
     
@@ -64,18 +71,20 @@ module ARF(
         for(i = 0; i < 32; i++) begin
             set_tag[i] = 0;
             valid[i] = 1;
+            tag[i] = 0;
         end
     end
     
     genvar a;
     generate
         for(a = 0; a < 4; a = a + 1) begin
-            assign r1_tag[a] = core[r1[a]];
+            
+            /*assign r1_tag[a] = core[r1[a]];
             assign r2_tag[a] = core[r2[a]];
             assign r1_ready[a] = valid[r1[a]];
             assign r2_ready[a] = valid[r2[a]];
             assign r1_tag[a] = tag[r1[a]];
-            assign r2_tag[a] = tag[r2[a]];
+            assign r2_tag[a] = tag[r2[a]];*/
         end
     
         //logic here is redunant, remove at some point when you have time
@@ -98,8 +107,8 @@ module ARF(
         for(a = 0; a < 4; a = a + 1) begin
             assign r1_out[a] = core[r1[a]];
             assign r2_out[a] = core[r2[a]];
-            assign r1_ready[a] = valid[r1[a]];
-            assign r2_ready[a] = valid[r2[a]];
+            assign r1_ready[a] = victim_valid[r1[a]];
+            assign r2_ready[a] = victim_valid[r2[a]];
             assign r1_tag[a] = tag[r1[a]];
             assign r2_tag[a] = tag[r2[a]];
         end
@@ -127,6 +136,7 @@ module ARF(
    
     
     always @(posedge (clk /*& !stall_external*/)) begin
+        victim_valid <= valid;
         prev_valid <= logical_dest_valid;
         prev_dest1[0] <= logical_dest[0];
         prev_dest1[1] <= logical_dest[1];
@@ -152,6 +162,7 @@ module ARF(
         valid[committed_dest[5]] <= committed_valid[5] ? 1 : valid_not[5];  
         valid[committed_dest[6]] <= committed_valid[6] ? 1 : valid_not[6];  
         valid[committed_dest[7]] <= committed_valid[7] ? 1 : valid_not[7];   
+        
         
         //Allocation occurs second, as to overwrite commits if necessary
         /*tag[logical_dest[0]] <= (logical_dest_valid[0] & !no_available & set_tag_prev[logical_dest[0]] & highest_priority[0]) ? physical_dest[0] : tag_wire[logical_dest[0]];

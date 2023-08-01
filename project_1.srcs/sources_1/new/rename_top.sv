@@ -47,8 +47,8 @@ module rename_top(
     wire [4:0] r2_read_from_ARF [4];
     wire [6:0] r1_read_from_ROB [4];
     wire [6:0] r2_read_from_ROB [4];
-    wire [3:0] r1_ARF_or_ROB;
-    wire [3:0] r2_ARF_or_ROB;
+    wire [3:0] r1_dest_overwrite;
+    wire [3:0] r2_dest_overwrite;
     
     assign r1_read_from_ARF = r1;
     assign r2_read_from_ARF = r2;
@@ -56,11 +56,14 @@ module rename_top(
     genvar a;
     generate
         for(a = 0; a < 4; a = a + 1) begin
-            assign r1_read_from_ROB[a] = r1_ARF_or_ROB[a] ? r1_tag[a] : r1_read_from[a];
-            assign r2_read_from_ROB[a] = r2_ARF_or_ROB[a] ? r2_tag[a] : r2_read_from[a];
+            assign r1_read_from_ROB[a] = r1_dest_overwrite[a] ? r1_tag[a] : r1_read_from[a];
+            assign r2_read_from_ROB[a] = r2_dest_overwrite[a] ? r2_tag[a] : r2_read_from[a];
+            
+            assign r1_ready_out[a] = r1_dest_overwrite[a] & (r1_ready[a] | r1_complete_ROB[a]);
+            assign r2_ready_out[a] = r2_dest_overwrite[a] & (r2_ready[a] | r2_complete_ROB[a]);
             
             always_comb begin
-                if(!r1_ARF_or_ROB[a]) begin
+                if(!r1_dest_overwrite[a]) begin
                     r1_source[a] = r1_read_from[a];
                 end else if (r1_ready[a]) begin
                     r1_source[a] = r1[a];
@@ -68,7 +71,7 @@ module rename_top(
                     r1_source[a] = r1_tag[a];
                 end
                 
-                if(!r2_ARF_or_ROB[a]) begin
+                if(!r2_dest_overwrite[a]) begin
                     r2_source[a] = r2_read_from[a];
                 end else if (r2_ready[a]) begin
                     r2_source[a] = r2[a];
@@ -135,7 +138,7 @@ module rename_top(
         .newest (prev_newest),
         .r1_read_from (r1_read_from),
         .r2_read_from (r2_read_from),
-        .r1_ARF_or_ROB (r1_ARF_or_ROB),
-        .r2_ARF_or_ROB (r2_ARF_or_ROB)
+        .r1_ARF_or_ROB (r1_dest_overwrite),
+        .r2_ARF_or_ROB (r2_dest_overwrite)
     );
 endmodule
