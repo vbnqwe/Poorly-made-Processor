@@ -99,7 +99,8 @@ module rename_tb(
         dest_valid = 4'hf;
         stall_external = 0;
 
-        #120;
+        #40;
+                DUT.buffer.completed_entry[1] = 1;
         dest[0] = 5'd5;
         dest[1] = 5'd6;
         dest[2] = 5'd7;
@@ -125,7 +126,7 @@ module rename_tb(
         stall_external = 0;
         x = 1;
         dest_valid = 4'b1111;
-        #20;
+        #40;
         stall_external = 1;
         dest[0] = 5'd5;
         dest[2] = 5'd6;
