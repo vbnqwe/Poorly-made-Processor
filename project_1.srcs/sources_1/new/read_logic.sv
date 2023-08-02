@@ -5,6 +5,7 @@
 This module will be used to calculate the location of where to access each source register. Making it into a seperate module
 may increase logic cell cost, but it does make the code nicer so \_(.`/ )_/
 */
+
 module read_logic_module(
         input clk,
         input [4:0] dest_in [4],
