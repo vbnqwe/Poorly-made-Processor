@@ -61,6 +61,12 @@ module rename_tb(
     assign allocated = DUT.allocated;
     assign prev_dest = DUT.reg_file.prev_dest;
     assign tag_to_write = DUT.reg_file.tag_to_write;
+    
+    
+    wire [4:0] prev_dest1 [4];
+    assign prev_dest1 = DUT.reg_file.prev_dest1;
+    wire [6:0] tag_to_write [4];
+    assign tag_to_write = DUT.reg_file.tag_to_write;
 
         
     rename_top DUT(
@@ -80,89 +86,99 @@ module rename_tb(
         .stall_internal
     );
     
-    initial begin
-        r1[0] = 5'd1;
-        r1[1] = 5'd1;
-        r1[2] = 5'd2;
-        r1[3] = 5'd1;
-        
-        r2[0] = 5'd3;
-        r2[1] = 5'd2;
-        r2[2] = 5'd1;
-        r2[3] = 5'd1;
+    assign num_writes = dest_valid[0] + dest_valid[1] + dest_valid[2] + dest_valid[3];
     
-        num_writes = 4;
-        dest[0] = 5'd1;
-        dest[1] = 5'd2;
-        dest[2] = 5'd1;
-        dest[3] = 5'd1;
-        dest_valid = 4'hf;
+    initial begin
         stall_external = 0;
-
-        #40;
-                DUT.buffer.completed_entry[1] = 1;
-        dest[0] = 5'd5;
-        dest[1] = 5'd6;
+        dest[0] = 5'd9;
+        dest[1] = 5'd12;
+        dest[2] = 5'd9;
+        dest[3] = 5'd11;
+        dest_valid[0] = 0;
+        dest_valid[1] = 1;
+        dest_valid[2] = 0;
+        dest_valid[3] = 1;
+        r1[0] = 5'd3;
+        r1[1] = 5'd22;
+        r1[2] = 5'd17;
+        r1[3] = 5'd19;
+        r2[0] = 5'd30;
+        r2[1] = 5'd14;
+        r2[2] = 5'd17;
+        r2[3] = 5'd6;
+        #20;
+        
+        dest[0] = 5'd7;
+        dest[1] = 5'd30;
         dest[2] = 5'd7;
         dest[3] = 5'd8;
+        dest_valid[0] = 1;
+        dest_valid[1] = 0;
+        dest_valid[2] = 0;
+        dest_valid[3] = 1;
+        r1[0] = 5'd12;
+        r1[1] = 5'd13;
+        r1[2] = 5'd30;
+        r1[3] = 5'd3;
+        r2[0] = 5'd30;
+        r2[1] = 5'd28;
+        r2[2] = 5'd19;
+        r2[3] = 5'd27;
         #20;
-        $stop;
-    
-    
-        r1[0] = 5'd1;
-        r1[1] = 5'd2;
-        r1[2] = 5'd3;
-        r1[3] = 5'd4;
         
-        r2[0] = 5'd1;
-        r2[1] = 5'd2;
-        r2[2] = 5'd3;
-        r2[3] = 5'd4;
-        num_writes = 4;
-        dest[0] = 5'd1;
-        dest[1] = 5'd2;
-        dest[2] = 5'd1;
-        dest[3] = 5'd1;
-        stall_external = 0;
-        x = 1;
-        dest_valid = 4'b1111;
-        #40;
-        stall_external = 1;
-        dest[0] = 5'd5;
-        dest[2] = 5'd6;
-        num_writes = 2;
-        dest_valid = 4'b0101;
-        x = 0;
+        dest[0] = 5'd31;
+        dest[1] = 5'd24;
+        dest[2] = 5'd11;
+        dest[3] = 5'd27;
+        dest_valid[0] = 0;
+        dest_valid[1] = 1;
+        dest_valid[2] = 0;
+        dest_valid[3] = 1;
+        r1[0] = 5'd3;
+        r1[1] = 5'd5;
+        r1[2] = 5'd28;
+        r1[3] = 5'd19;
+        r2[0] = 5'd26;
+        r2[1] = 5'd31;
+        r2[2] = 5'd22;
+        r2[3] = 5'd13;
         #20;
-        dest[0] = 5'd8;
-        dest[2] = 5'd9;
+        
+        dest[0] = 5'd28;
+        dest[1] = 5'd22;
+        dest[2] = 5'd26;
+        dest[3] = 5'd22;
+        dest_valid[0] = 1;
+        dest_valid[1] = 1;
+        dest_valid[2] = 1;
+        dest_valid[3] = 1;
+        r1[0] = 5'd27;
+        r1[1] = 5'd16;
+        r1[2] = 5'd22;
+        r1[3] = 5'd30;
+        r2[0] = 5'd14;
+        r2[1] = 5'd14;
+        r2[2] = 5'd18;
+        r2[3] = 5'd29;
         #20;
-        x = 1;
-        stall_external = 0;
-        dest[1] = 5'd7;
-        dest[3] = 5'd31;
-        dest_valid = 4'b1010;
+        
+        dest[0] = 5'd13;
+        dest[1] = 5'd0;
+        dest[2] = 5'd16;
+        dest[3] = 5'd2;
+        dest_valid[0] = 1;
+        dest_valid[1] = 1;
+        dest_valid[2] = 0;
+        dest_valid[3] = 0;
+        r1[0] = 5'd15;
+        r1[1] = 5'd6;
+        r1[2] = 5'd23;
+        r1[3] = 5'd22;
+        r2[0] = 5'd20;
+        r2[1] = 5'd16;
+        r2[2] = 5'd18;
+        r2[3] = 5'd2;
         #20;
-        dest[0] = 5'd1;
-        dest[1] = 5'd2;
-        dest_valid = 4'b0011;
-        #20;
-        num_writes = 0;
-        dest_valid = 4'b0;
-        #20;
-        num_writes = 4;
-        dest_valid = 4'b1111;
-        dest[0] = 5'd1;
-        dest[1] = 5'd2;
-        dest[2] = 5'd3;
-        dest[3] = 5'd4;
-        #600;
-        num_writes = 1;
-        dest_valid = 4'b1;
-        dest[0] = 5'd5;
-        #20;
-        DUT.buffer.completed_entry[1] = 1;
-        #40;
         $stop;
     end
     

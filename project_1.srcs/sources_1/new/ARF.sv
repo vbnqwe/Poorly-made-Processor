@@ -186,7 +186,16 @@ module ARF(
         if(prev_valid[3]) begin
             tag_to_write[3] = physical_dest[3];
         end else begin
-            tag_to_write[3] = tag[prev_dest1[3]];
+            //check if this overwrites any previous writes
+            if(prev_valid[2] & (prev_dest1[2] == prev_dest1[3])) begin
+                tag_to_write[3] = tag_to_write[2];
+            end else if(prev_valid[1] & (prev_dest1[1] == prev_dest1[3])) begin
+                tag_to_write[3] = tag_to_write[1];
+            end else if(prev_valid[0] & (prev_dest1[0] == prev_dest1[3])) begin
+                tag_to_write[3] = tag_to_write[0];
+            end else begin
+                tag_to_write[3] = tag[prev_dest1[3]];
+            end
         end
         
         if(prev_valid[2]) begin
@@ -196,7 +205,13 @@ module ARF(
                 tag_to_write[2] = physical_dest[2];
             end
         end else begin
-            tag_to_write[2] = tag[prev_dest1[2]];
+            if(prev_valid[1] & (prev_dest1[1] == prev_dest1[2])) begin
+                tag_to_write[2] = physical_dest[1];
+            end else if (prev_valid[0] & (prev_dest1[0] == prev_dest1[2])) begin
+                tag_to_write[2] = physical_dest[0];
+            end else begin
+                tag_to_write[2] = tag[prev_dest1[2]];
+            end
         end
         
         if(prev_valid[1]) begin
@@ -208,7 +223,11 @@ module ARF(
                 tag_to_write[1] = physical_dest[1];
             end
         end else begin
-            tag_to_write[1] = tag[prev_dest1[1]];
+            if(prev_valid[0] & (prev_dest1[1] == prev_dest1[0])) begin
+                tag_to_write[1] = physical_dest[0];
+            end else begin
+                tag_to_write[1] = tag[prev_dest1[1]];
+            end
         end
         
         if(prev_valid[0]) begin
