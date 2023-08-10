@@ -24,7 +24,7 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Supe
 INFO: [VRFC 10-311] analyzing module ARF_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename_tb.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module rename_tb
-WARNING: [VRFC 10-3248] data object 'tag_to_write' is already declared [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename_tb.sv:68]
-WARNING: [VRFC 10-9364] second declaration of 'tag_to_write' is ignored [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename_tb.sv:68]
+WARNING: [VRFC 10-3248] data object 'tag_to_write' is already declared [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename_tb.sv:74]
+WARNING: [VRFC 10-9364] second declaration of 'tag_to_write' is ignored [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename_tb.sv:74]
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/RLM_tb.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module RLM_tb

@@ -14,6 +14,9 @@ module rename_tb(
     bit [4:0] r2 [4];
     bit [3:0] dest_valid;
     bit stall_external;
+    bit [6:0] completed [4];
+    bit [31:0] data_completed [4];
+    bit [3:0] completed_valid;
     
     wire [6:0] physical_dest [4];
     wire [3:0] physical_dest_valid;
@@ -25,7 +28,7 @@ module rename_tb(
     wire [6:0] tag [32];
     wire valid_arf [32];
     wire valid_rob [128];
-    wire completed [128];
+    wire completed_1 [128];
     wire [4:0] dest_rob [128];
     wire [4:0] committed_dest [8];
     
@@ -55,12 +58,15 @@ module rename_tb(
     assign tag = DUT.reg_file.tag;
     assign valid_arf = DUT.reg_file.valid;
     assign valid_rob = DUT.buffer.valid_entry;
-    assign completed = DUT.buffer.completed_entry;
+    assign completed_1 = DUT.buffer.completed_entry;
     assign dest_rob = DUT.buffer.dest_reg;
     assign committed_dest = DUT.reg_file.committed_dest;
     assign allocated = DUT.allocated;
     assign prev_dest = DUT.reg_file.prev_dest;
     assign tag_to_write = DUT.reg_file.tag_to_write;
+    
+    wire [31:0] total_data [32];
+    assign total_data = DUT.reg_file.core;
     
     
     wire [4:0] prev_dest1 [4];
@@ -83,12 +89,16 @@ module rename_tb(
         .r2_ready_out,
         .r1_source,
         .r2_source,
-        .stall_internal
+        .stall_internal,
+        .completed_valid,
+        .data_completed,
+        .completed
     );
     
     assign num_writes = dest_valid[0] + dest_valid[1] + dest_valid[2] + dest_valid[3];
     
     initial begin
+        completed_valid = 4'b0;
         stall_external = 0;
         dest[0] = 5'd9;
         dest[1] = 5'd12;
@@ -108,6 +118,9 @@ module rename_tb(
         r2[3] = 5'd6;
         #20;
         
+        completed_valid = 4'b0010;
+        completed[1] = 7'd1;
+        data_completed[1] = 32'd12;
         dest[0] = 5'd7;
         dest[1] = 5'd30;
         dest[2] = 5'd7;
@@ -126,6 +139,7 @@ module rename_tb(
         r2[3] = 5'd27;
         #20;
         
+        completed_valid = 4'b0;
         dest[0] = 5'd31;
         dest[1] = 5'd24;
         dest[2] = 5'd11;
@@ -134,7 +148,7 @@ module rename_tb(
         dest_valid[1] = 1;
         dest_valid[2] = 0;
         dest_valid[3] = 1;
-        r1[0] = 5'd3;
+        r1[0] = 5'd12;
         r1[1] = 5'd5;
         r1[2] = 5'd28;
         r1[3] = 5'd19;

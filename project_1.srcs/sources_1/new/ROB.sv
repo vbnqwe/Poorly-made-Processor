@@ -46,7 +46,10 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
         input [N_instr-1:0] if_reg, 
         input [4:0] dest [N_instr], 
         input [N_phys_regs-1:0] r1 [N_instr], 
-        input [N_phys_regs-1:0] r2 [N_instr], 
+        input [N_phys_regs-1:0] r2 [N_instr],
+        input [N_phys_regs-1:0] completed [N_instr],
+        input [31:0] completed_data [N_instr],
+        input [3:0] completed_valid,
         output [31:0] r1_out [4], 
         output [31:0] r2_out [N_instr],
         output [3:0] r1_ready, r2_ready,
@@ -204,6 +207,13 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
                     end
                 end
             end
+            
+            always @(negedge clk) begin
+                if(completed_valid[c]) begin
+                    data[completed[c]] = completed_data[c];
+                    completed_entry[completed[c]] = 1;
+                end
+            end
         end
     endgenerate
     
@@ -256,8 +266,8 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
             
             always @(posedge (clk & !stall_external)) begin
                 if(ready_to_commit[e]) begin
-                    valid_entry[eight_oldest[e]] = 0;
-                    completed_entry[eight_oldest[e]] = 0;
+                    valid_entry[eight_oldest[e]] <= 0;
+                    completed_entry[eight_oldest[e]] <= 0;
                 end
             end
         end    
