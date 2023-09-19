@@ -8,6 +8,8 @@ Destcription:
     -Tag of destination register will be assynchronously written
     
     
+    
+    TODO UPDATE THESE THIS IS IMPORTANT
 Inputs:
     -rX: read out register at address rX
     -dest/dest_valid: dest is logical register destination, dest_valid specifies if tag will need to be set

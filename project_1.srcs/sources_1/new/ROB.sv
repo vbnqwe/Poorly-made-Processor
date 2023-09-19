@@ -40,7 +40,6 @@ Behavior:
 */
 
 module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr = 4)(
-        input logic [2:0] num_writes,
         input clk,
         input stall_external,
         input [N_instr-1:0] if_reg, 
@@ -84,7 +83,7 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
 
     //integer
     reg [N_phys_regs-1:0] x;
-    assign x = {4'b0, num_writes};
+    assign x = if_reg[0] + if_reg[1] + if_reg[2] + if_reg[3];
     
     //data storage
     reg valid_entry [SIZE]; //Is entry being used in pipeline
@@ -116,53 +115,6 @@ module ROB #(parameter SIZE = 128, parameter N_phys_regs = 7, parameter N_instr 
     assign num_available_out = num_available;
     
     assign no_available = /*(|allocation_failure) | */(num_available != 4);
-    //assign newest = !no_available ? (newest_prev + x) : newest_prev; //shouldn't cause any issues but I don't trust this
-
-    
-    /*
-    Generate logic used for physical register allocation
-    */
-    /*
-    genvar c;
-    generate
-        for(c = 0; c < 4; c = c + 1) begin
-            always @(posedge clk) begin
-                if((x > c) & (num_available_stored >= num_writes)) begin
-                    if((newest_prev + 1 + c) >= SIZE) begin
-                        //check if entry is valid at (newest + 1) % SIZE
-                        if(valid_entry[(newest_prev + 1 + c) % SIZE] == 0) begin
-                            //assign at (newest + 1) % SIZE if no previous allocation failurs
-                            valid_entry[(newest_prev + 1 + c) % SIZE] = 1;
-                            completed_entry[(newest_prev + 1 + c) % SIZE] = 0;
-                            dest_reg[(newest_prev + 1 + c) % SIZE] = dest[c];
-                            allocation_failure[c] = 0;
-                        end
-                        //(newest + 1) % SIZE is unavailable
-                        else begin
-                            allocation_failure[c] = 1;
-                        end
-                    end 
-                    else begin
-                        //check if entry is valid at newest + 1
-                        if(valid_entry[newest_prev + 1 + c] == 0) begin
-                            //assign at newest + 1
-                            valid_entry[newest_prev + 1 + c] = 1;
-                            completed_entry[newest_prev + 1 + c] = 0;
-                            dest_reg[newest_prev + 1 + c] = dest[c];
-                            allocation_failure[c] = 0;
-                        end
-                        //newest + 1 is unavailable
-                        else begin
-                            allocation_failure[c] = 1;
-                        end
-                    end
-                end
-                else begin
-                    allocation_failure[c] = 0; //can't use resources you don't need
-                end
-            end
-        end 
-    endgenerate*/
     
     
     reg [2:0] offset [4];

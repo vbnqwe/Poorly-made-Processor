@@ -30,3 +30,4 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Supe
 INFO: [VRFC 10-311] analyzing module RLM_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/Rename_tb_f.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Rename_tb_f
+WARNING: [VRFC 10-3380] identifier 'stall_internal' is used before its declaration [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/Rename_tb_f.sv:16]

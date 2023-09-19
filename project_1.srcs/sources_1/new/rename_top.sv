@@ -3,22 +3,23 @@
 
 module rename_top(
         input clk,
-        input [2:0] num_writes,
         input [4:0] dest [4],
         input [4:0] r1 [4],
         input [4:0] r2 [4],
         input [3:0] dest_valid,
         input stall_external,
-        input [6:0] completed [4],
-        input [31:0] data_completed [4],
-        input [3:0] completed_valid,
-        output [6:0] physical_dest [4],
-        output [3:0] physical_dest_valid,
+        input [6:0] completed [4], //register addresses for values to store
+        input [31:0] data_completed [4], //values to store in registers
+        input [3:0] completed_valid, //if values need to be stored or are garbage
+        output [6:0] physical_dest [4], //physical destination of new instruction sent to issue
+        output [3:0] physical_dest_valid, //if physical destination needed
         output [31:0] r1_out [4],
         output [31:0] r2_out [4],
-        output [3:0] r1_ready_out, r2_ready_out,
-        output reg [6:0] r1_source [4],
+        output [3:0] r1_ready_out, r2_ready_out, //if data for r1 and r2 is correct
+        output reg [6:0] r1_source [4], //address of where r1 was read from 
         output reg [6:0] r2_source [4],
+        output [3:0] r1_ROB_or_ARF, r2_ROB_or_ARF, //if 1, that means ready in ARF, if 0, that means readying in ROB
+        //note that if rX_ready_out is 0, that means is ready in neither
         output stall_internal
     );
     
@@ -65,6 +66,9 @@ module rename_top(
             assign r1_ready_out[a] = r1_dest_overwrite[a] & (r1_ready[a] | r1_complete_ROB[a]);
             assign r2_ready_out[a] = r2_dest_overwrite[a] & (r2_ready[a] | r2_complete_ROB[a]);
             
+            assign r1_ROB_or_ARF[a] = r1_ready[a];
+            assign r2_ROB_or_ARF[a] = r2_ready[a];
+            
             always_comb begin
                 if(!r1_dest_overwrite[a]) begin
                     r1_source[a] = r1_read_from[a];
@@ -108,7 +112,6 @@ module rename_top(
     
     
     ROB buffer(
-        .num_writes (num_writes),
         .clk (clk),
         .if_reg (dest_valid), 
         .stall_external(stall_external),
