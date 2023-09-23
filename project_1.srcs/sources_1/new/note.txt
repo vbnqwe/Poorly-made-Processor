@@ -1,0 +1,14 @@
+create 2 queue data  structures
+	-a1 will be for storing data of instruction
+	-a2 will be for storing how many cycles until commit
+
+On each cycle:
+	-decrement a2 values all by 1
+	-pick up to 4 which have 0 cycles left
+		-if more than 4 ready, set remainder to have 1 cycle left (aka stall)
+	-set completed registers to the 4 values picked along with their respective address
+	-add new instructions visited into the a1 and a2 queues
+	-repeat
+
+End when queue is empty and all instructions have been visited
+

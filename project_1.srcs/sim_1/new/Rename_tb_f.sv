@@ -55,9 +55,11 @@ module Rename_tb_f;
     reg [31:0] instruction_counter;
     reg [31:0] finished_instruction_counter;
     
-    reg [31:0] write_back_cycles_left [NUM_INSTRUCTIONS];
-    reg [31:0] write_back_queue [NUM_INSTRUCTIONS];
-    reg [31:0] queue_pointer;
+    reg [31:0] queue_data [NUM_INSTRUCTIONS];
+    reg queue_data_valid [NUM_INSTRUCTIONS]; //if value has been put into queue
+    reg queue_data_completed [NUM_INSTRUCTIONS]; //if values has been put out of queue
+    reg [31:0] queue_cycles_left [NUM_INSTRUCTIONS]; 
+    reg [31:0] num_completed;
     
     Test_storage_module tsm();
     
@@ -71,23 +73,43 @@ module Rename_tb_f;
     assign r2_c = tsm.r2_c;
     assign rf_c = tsm.rf_c;
     
+    initial begin 
+        for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
+            queue_data_valid[i] = 0;
+            queue_data_completed[i] = 0;
+            queue_cycles_left[i] = 0;
+            queue_data[i] = return_data_t[i];
+        end 
+        
+        num_completed = 0;
+    end
+    
+    reg [2:0] count;
     
     always @(posedge clk) begin
-        instruction_counter <= stall_internal ? instruction_counter : instruction_counter + 4;
+        instruction_counter = stall_internal ? instruction_counter : instruction_counter + 4;
         
-        if(instruction_counter > NUM_INSTRUCTIONS) begin
+        if(num_completed == NUM_INSTRUCTIONS)begin
             $stop;
         end
         
-        for(int j = 0; j < NUM_INSTRUCTIONS; j = j + 1) begin
-            
-            if(write_back_cycles_left[j] == 1) begin //write back case
-                write_back_cycles_left[j] = write_back_cycles_left[j] - 1;
-                
-            end else if(write_back_cycles_left[j] != 32'b0) begin //decrement case
-                write_back_cycles_left[j] = write_back_cycles_left[j] - 1;
-            end 
+        for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
+            if(queue_cycles_left[i] > 0) begin
+                queue_cycles_left[i]--;
+            end
         end
+        count = 0;
+        for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
+            if((queue_data_valid[i] == 1) & (queue_data_completed[i] == 0)) begin
+                if(queue_cycles_left[i] == 0) begin
+                    count++;
+                end
+            end
+        end
+        
+        
+        
+        
     end
     
 
