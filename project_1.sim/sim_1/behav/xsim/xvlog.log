@@ -12,12 +12,16 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Supe
 INFO: [VRFC 10-311] analyzing module ARF
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Reservation_Station.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Reservation_Station
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Reservation_Station_Bundle.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module Reservation_Station_Bundle
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/read_logic.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module read_logic_module
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Test_storage_module.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Test_storage_module
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/issue_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module issue_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/RSH.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RSH
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/RSH_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RSH_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ROB_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ARF_tb.sv" into library xil_defaultlib

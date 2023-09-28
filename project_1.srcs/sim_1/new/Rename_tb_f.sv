@@ -61,6 +61,10 @@ module Rename_tb_f;
     reg [31:0] queue_cycles_left [NUM_INSTRUCTIONS]; 
     reg [31:0] num_completed;
     
+    reg [31:0] to_commit [NUM_INSTRUCTIONS];
+    reg [31:0] to_commit_next [NUM_INSTRUCTIONS];
+    reg [31:0] to_commit_valid;
+    
     Test_storage_module tsm();
     
     assign dest_t = tsm.dest_t;
@@ -74,23 +78,35 @@ module Rename_tb_f;
     assign rf_c = tsm.rf_c;
     
     initial begin 
+        #0.1;
         for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
-            queue_data_valid[i] = 0;
+            queue_data_valid[i] = 1;
             queue_data_completed[i] = 0;
-            queue_cycles_left[i] = 0;
+            queue_cycles_left[i] = num_cycles_t[i];
             queue_data[i] = return_data_t[i];
         end 
         
         num_completed = 0;
+        #40;
+        $stop;
     end
     
-    reg [2:0] count;
+    integer count;
     
     always @(posedge clk) begin
         instruction_counter = stall_internal ? instruction_counter : instruction_counter + 4;
         
         if(num_completed == NUM_INSTRUCTIONS)begin
             $stop;
+        end
+        
+        if(to_commit_valid > 4) begin
+        
+        end else begin
+            for(int i = 0; i < 4; i++) begin
+                to_commit = to_commit_next;
+            end
+            to_commit_valid = 0;
         end
         
         for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
@@ -102,15 +118,16 @@ module Rename_tb_f;
         for(int i = 0; i < NUM_INSTRUCTIONS; i = i + 1) begin
             if((queue_data_valid[i] == 1) & (queue_data_completed[i] == 0)) begin
                 if(queue_cycles_left[i] == 0) begin
+                    if((count <= 4)) begin
+                        to_commit[count] = queue_data[i];
+                        queue_data_completed[i] = 1;
+                    end
                     count++;
                 end
             end
         end
-        
-        
-        
-        
     end
+    
     
 
     rename_top DUT(

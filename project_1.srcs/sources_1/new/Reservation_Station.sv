@@ -2,6 +2,7 @@
 
 
 module Reservation_Station(
+        input clk,
         input set,
         input [6:0] dest, r1, r2,
         input [31:0] r1_val, r2_val,
