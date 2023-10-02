@@ -44,6 +44,8 @@ module issue_top(
         for(i = 0; i < 20; i = i + 1) begin : identifier 
             assign if_using[i] = ((RS_to_use[0] == i) & RS_valid[0]) | ((RS_to_use[1] == i) & RS_valid[1]) | 
                 ((RS_to_use[2] == i) & RS_valid[2]) | ((RS_to_use[3] == i) & RS_valid[3]);
+                
+                
             RS Reservation_Station(
                 .set(if_using[i])
             );
