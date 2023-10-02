@@ -34,7 +34,7 @@ module ARF2(
     wire [3:0] top_commit; //signal used to determine if the ith commit needs to be committed
     //if you write r1 in all 4 instructions, you only care about the last commit
     
-    wire [31:0] if_overwritten; //
+    wire [31:0] if_overwritten; 
     wire [3:0] if_r1_backup;
     wire [3:0] if_r2_backup;
     
