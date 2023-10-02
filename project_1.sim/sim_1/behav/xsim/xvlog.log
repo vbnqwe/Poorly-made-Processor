@@ -12,6 +12,7 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Supe
 INFO: [VRFC 10-311] analyzing module ARF
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Reservation_Station.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Reservation_Station
+WARNING: [VRFC 10-9336] redeclaration of ANSI port 'r1_val' is not allowed [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Reservation_Station.sv:22]
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/read_logic.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module read_logic_module
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/Test_storage_module.sv" into library xil_defaultlib
@@ -22,6 +23,14 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Supe
 INFO: [VRFC 10-311] analyzing module RSH
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/RSH_tb.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module RSH_tb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/rename_top_2.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rename_top_2
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/RAT2.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RAT2
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ARF2.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ARF2
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sources_1/new/ROB2.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ROB2
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ROB_tb.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module ROB_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ARF_tb.sv" into library xil_defaultlib
@@ -35,3 +44,5 @@ INFO: [VRFC 10-311] analyzing module RLM_tb
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/Rename_tb_f.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module Rename_tb_f
 WARNING: [VRFC 10-3380] identifier 'stall_internal' is used before its declaration [C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/Rename_tb_f.sv:16]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/ARF2_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ARF2_tb

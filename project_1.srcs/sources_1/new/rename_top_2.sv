@@ -4,6 +4,7 @@
 //this means that branches will allocate a register unnecessarily
 
 module rename_top_2(
+        input clk,
         //standard instruction inputs
         input [4:0] dest [4], //destination logical register
         input [4:0] r1 [4], 
@@ -20,6 +21,7 @@ module rename_top_2(
         input [3:0] prv, //prediction result valid: if pred value is valid or garbage
         input [3:0] pred, //prediction: if a branch was correctly evaluated
         input [5:0] pred_id, //used to match to branch_id 
+        //data outputs
         output [5:0] phys_dest [4], //physical register to write to at end of instruction
         output [31:0] r1_data [4],
         output [31:0] r2_data [4],
