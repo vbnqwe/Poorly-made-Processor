@@ -18,9 +18,9 @@ module ARF2(
         input [4:0] commit_address [4],
         input [31:0] commit_data [4],
         input [3:0] commit_valid,
-        output [31:0] r1_data [4],
-        output [31:0] r2_data [4],
-        output [3:0] r1_data_valid, r2_data_valid
+        output reg [31:0] r1_data [4],
+        output reg [31:0] r2_data [4],
+        output reg [3:0] r1_data_valid, r2_data_valid
     );
     
     reg [31:0] register_data [32];
@@ -34,7 +34,7 @@ module ARF2(
     wire [3:0] top_commit; //signal used to determine if the ith commit needs to be committed
     //if you write r1 in all 4 instructions, you only care about the last commit
     
-    wire [31:0] if_overwritten; 
+    
     wire [3:0] if_r1_backup;
     wire [3:0] if_r2_backup;
     
@@ -48,15 +48,21 @@ module ARF2(
                     register_data_valid[commit_address[i]] <= 1;
                 end
                 
+                //what was the reason for this?
                 backup_data[i] <= register_data[new_dest[i]];
-                $display(i);
                 backup_valid[i] <= register_data_valid[new_dest[i]];
                 backup_address[i] <= new_dest[i];
             end   
                 
-            
+            assign r1_data[i] = register_data[r1[i]];
+            assign r2_data[i] = register_data[r2[i]];
+            assign r1_data_valid[i] = register_data_valid[r1[i]];
+            assign r2_data_valid[i] = register_data_valid[r2[i]];
         end
     endgenerate
+    
+    
+    
     
     //generate top_commit signals
     assign top_commit[0] = !((commit_valid[1] & (commit_address[1] == commit_address[0])) | (commit_valid[2] & 

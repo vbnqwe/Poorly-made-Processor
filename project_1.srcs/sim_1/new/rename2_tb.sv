@@ -1,9 +1,13 @@
 `timescale 1ns / 1ps
 
 /*
-DIFFERENTIATE FROM COMPLETED AND COMMITTED YOU FUCKED UP HERE
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Main purpose of this testbench is to test if the rename stage can properly order instructions. A random set of instructions
+is generated in an external program, along with the expect final output of the register file and the data and order of all 
+commits (note that when instructions complete vary between the two, but it if rename stage works shouldn't be an issue).
+Down the line will be editted for branch prediction and external pipeline stalls, but at the moment I just want this to 
+work normally.
 */
+
 module rename2_tb(
         
     );
@@ -101,8 +105,8 @@ module rename2_tb(
     reg [31:0] queue [NUM_INSTRUCTIONS];
     reg [4:0] queue_write_back [NUM_INSTRUCTIONS];
     reg [31:0] queue_back_pointer;
-    reg [31:0] to_commit_counter;
-    reg [31:0] to_commit_this_cycle [4];
+    reg [31:0] complete_counter;
+    reg [31:0] to_complete_this_cycle [4];
         
     assign dest_in = tb.dest;
     assign r1_in = tb.r1;
@@ -133,34 +137,40 @@ module rename2_tb(
     end
     
     /*on clock pulse:
-        -decrement cycles left for each instruction in queue 
-        -commit new instructions
+        -decrement cycles left for each instruction in queue -done
+        -queue up to 4 instructions for write back -done
+        -all other complete instructions should be set to 1 cycle left -done
         -add new instructions to queue
         -check if queue is empty
             -if empty throw flag high
     */ 
-    always @(posedge clk) begin
-        to_commit_counter = 0;
+    always @(posedge clk) begin       
+        complete_counter = 0;
         
-        //decrements all instructions in queue, prepares up to 4 to commit
+        //decrements all instructions in queue, prepares up to 4 to write back
         for(int i = 0; i < queue_back_pointer; i = i + 1) begin
             if(cycle_queue[i] > 0) begin
                 cycle_queue[i] = cycle_queue[i] - 1;
                 if(cycle_queue[i] == 0) begin
-                    to_commit_counter = to_commit_counter + 1;
-                    if(to_commit_counter <= 4) begin
-                        //if possible to commit this cycle, commit
-                        to_commit_this_cycle[to_commit_counter - 1] = i;
+                    complete_counter = complete_counter + 1;
+                    if(complete_counter <= 4) begin
+                        //if possible to write back this cycle, write back
+                        to_complete_this_cycle[complete_counter - 1] = i;
                     end else begin
-                        //if not possible, don't commit
+                        //if not possible, don't write back
                         cycle_queue[i] = 1;
                     end
                 end
             end
         end
         
-       
+        for(int i = 0; i < 4; i = i + 1) begin
+            
+        end
         
+        //add new instructions to queue
+        for(int i = 0; i < 4; i = i + 1) begin
         
+        end
     end
 endmodule
