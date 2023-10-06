@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log Test_storage_module.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Test_storage_module.tcl
+EAStep vivado -log ROB2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source ROB2.tcl

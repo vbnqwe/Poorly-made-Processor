@@ -1,4 +1,3 @@
 Time resolution is 1 ps
 WARNING: Too many words specified in data file C:\Users\vbogd\Documents\Superscalar-Risc-V\project_1.srcs\resources\starting_data.txt
 WARNING: Too many words specified in data file C:\Users\vbogd\Documents\Superscalar-Risc-V\project_1.srcs\resources\final_reg_file.txt
-$stop called at time : 2 ns : File "C:/Users/vbogd/Documents/Superscalar-Risc-V/project_1.srcs/sim_1/new/rename2_tb.sv" Line 107
